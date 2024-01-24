@@ -1,0 +1,123 @@
+#home-container {
+  padding-top: 15%;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  box-sizing: border-box;
+  overflow: hidden;
+  .info-cont {
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-left: 5%;
+    width: 50%;
+    .front-d {
+      z-index: 100;
+      font-weight: bold;
+      width: 100%;
+      font-size: 60px;
+      letter-spacing: 10px;
+      margin: 0;
+      color: #ffffff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      .developer {
+        letter-spacing: 30px;
+      }
+    }
+    .desc {
+      margin: 0;
+      font-size: 30px;
+      width: 48%;
+      display: flex;
+      justify-content: center;
+      text-align: center;
+      font-weight: lighter;
+      color: #ffffff;
+    }
+  }
+  .social-icons {
+    z-index: 100;
+    position: absolute;
+    display: flex;
+    column-gap: 30%;
+    right: 9%;
+    .social-icon:nth-child(1) {
+      animation: moveIcons 5s linear infinite alternate;
+    }
+    .social-icon:nth-child(2) {
+      animation: moveIcons 4s linear infinite alternate;
+    }
+    .social-icon:nth-child(3) {
+      animation: moveIcons 3s linear infinite alternate;
+    }
+    .social-icon {
+      width: 40px;
+      &:hover {
+        cursor: pointer;
+        animation-play-state: paused;
+      }
+    }
+  }
+  .see-more-cont {
+    z-index: 100;
+    position: absolute;
+    left: 50%;
+    top: 90%;
+    transform: translateX(-50%);
+    width: 300px;
+    height: 300px;
+    background-color: #202020;
+    border: 15px solid #202020;
+    border-radius: 100%;
+    display: flex;
+    justify-content: center;
+    box-shadow: inset 0 10px 10px #262626, inset 10px 0 10px #262626,
+      0 -10px 10px #141414, -10px 0 10px #141414, 0 10px 10px #141414,
+      10px 0 10px #141414, inset 0 -10px 10px #262626,
+      inset -10px 0 10px #262626;
+    .see-more {
+      display: flex;
+      flex-direction: column;
+      margin: 0;
+      margin-top: 30px;
+      font-size: 25px;
+      font-weight: normal;
+      color: #ffffff;
+      transition: all 0.2s ease;
+      .active {
+        display: block;
+        width: 100%;
+        height: 2px;
+        background: #000000;
+        box-shadow: 0 0 3px #0085ff;
+        overflow: hidden;
+        transition: all 0.2s ease;
+      }
+      &:hover {
+        cursor: pointer;
+        transform: scale(1.1);
+        transition: all 0.2s ease;
+        .active {
+          transform: scale(0.6);
+          transition: all 0.2s ease;
+        }
+      }
+    }
+  }
+}
+
+@keyframes moveIcons {
+  0% {
+    transform: translateY(0%);
+  }
+  50% {
+    transform: translateY(50%);
+  }
+  100% {
+    transform: translateY(-50%);
+  }
+}

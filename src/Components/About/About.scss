@@ -1,0 +1,181 @@
+#about-container {
+  padding-top: 15%;
+  box-sizing: border-box;
+  width: 100%;
+  height: auto;
+  position: relative;
+  padding-bottom: 200px;
+  .top-square {
+    position: relative;
+    overflow: hidden;
+    left: 50%;
+    transform: translateX(-50%) translateY(20%);
+    width: 35%;
+    height: 180px;
+    background-color: #202020;
+    border: 15px solid #202020;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-shadow: inset 0 5px 10px #262626, inset 5px 0 10px #262626,
+      0 -5px 10px #141414, -5px 0 10px #141414, 0 5px 10px #141414,
+      5px 0 10px #141414, inset 0 -5px 10px #262626, inset -5px 0 10px #262626;
+    .name {
+      width: 150px;
+      color: #ffffff;
+      font-weight: bold;
+      font-size: 40px;
+      margin: 0;
+      letter-spacing: 8px;
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      .name-line {
+        z-index: 10;
+        position: absolute;
+        height: 3px;
+        background: linear-gradient(to right, #00ffff 50%, #00b2ff);
+        box-shadow: 0 2px 5px #a3fff4, 0 -2px 5px #a3fff4;
+        animation: lineColor 1s linear infinite alternate;
+        &.kl {
+          width: 135%;
+          transform: translateX(-80%);
+        }
+        &.kr {
+          width: 240%;
+          transform: translateX(65%);
+        }
+        &.gl {
+          width: 176%;
+          transform: translateX(-78%);
+        }
+        &.gr {
+          width: 183%;
+          transform: translateX(74%);
+        }
+      }
+    }
+    .name:nth-last-child(2) {
+      transform: translateX(-50%);
+    }
+  }
+  .about-desc {
+    margin: 0;
+    color: #ffffff;
+    transform: translateY(30%);
+    position: relative;
+    text-align: center;
+    left: 50%;
+    width: 33%;
+    font-size: 32px;
+    font-weight: lighter;
+    letter-spacing: 3px;
+    .desc-bold {
+      font-weight: bold;
+      font-size: 36px;
+    }
+  }
+  .arrows1 {
+    display: flex;
+    width: 100%;
+    .arrows {
+      margin-left: 3%;
+    }
+  }
+  .desc2 {
+    display: flex;
+    column-gap: 20%;
+    align-items: center;
+    transform: translateY(30%);
+    .about-desc2 {
+      margin: 0;
+      color: #ffffff;
+      position: relative;
+      text-align: center;
+      left: 10%;
+      width: 40%;
+      font-size: 32px;
+      font-weight: lighter;
+      letter-spacing: 3px;
+      display: flex;
+      flex-direction: column;
+      .desc-line {
+        z-index: 10;
+        height: 3px;
+        width: 30%;
+        background: linear-gradient(to right, #00ffff 50%, #00b2ff);
+        box-shadow: 0 2px 5px #a3fff4, 0 -2px 5px #a3fff4;
+        animation: lineColor 1s linear infinite alternate;
+        transform: translateX(115%) translateY(10px);
+      }
+    }
+    .techs {
+      transform: translateY(-20%) translateX(-10%);
+      display: flex;
+      column-gap: 50px;
+      .tech {
+        &.tech:nth-child(1) {
+          margin-top: -10%;
+          // filter: drop-shadow(45px 90px 5px black);
+          animation: moveTech 3s linear 1s infinite alternate;
+        }
+        &.tech:nth-child(2) {
+          margin-left: 10%;
+          // filter: drop-shadow(45px 90px 5px black);
+          animation: moveTech 4s linear 1.4s infinite alternate;
+        }
+        &.tech:nth-child(3) {
+          margin-top: 70%;
+          // filter: drop-shadow(45px 90px 5px black);
+          animation: moveTech 3s linear 1.2s infinite alternate;
+        }
+        &.tech:nth-child(4) {
+          margin-top: -40%;
+          // filter: drop-shadow(45px 90px 5px black);
+          animation: moveTech 2s linear 2.2s infinite alternate;
+        }
+      }
+    }
+  }
+  .arrows2 {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+    .arrows {
+      margin-right: 3%;
+    }
+  }
+  .logical-think-cont {
+    width: 100%;
+    margin-top: 10%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    row-gap: 50px;
+    .logic-think {
+      width: 100%;
+      text-align: center;
+      color: #ffffff;
+      font-weight: bold;
+      font-size: 40px;
+      margin: 0;
+      margin-bottom: 50px;
+      letter-spacing: 8px;
+      position: relative;
+    }
+  }
+}
+
+@keyframes moveTech {
+  0% {
+    transform: scale(0.6);
+    filter: drop-shadow(10px 10px 5px black);
+  }
+  100% {
+    transform: scale(1);
+    filter: drop-shadow(45px 50px 5px black);
+  }
+}

@@ -1,0 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Khand:wght@300;400;500;600;700&display=swap');
+body {
+    margin: 0;
+    height: 100vh;
+    font-family: 'khand';
+}
+body, #root {
+    height: 100vh;
+    background: #202020;
+}

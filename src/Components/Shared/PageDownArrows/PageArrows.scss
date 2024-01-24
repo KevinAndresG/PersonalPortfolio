@@ -1,0 +1,39 @@
+.arrows {
+  margin-top: 1%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  .arrow {
+    &.arrow:nth-child(1) {
+      width: 40px;
+      animation: moveArrows 2s linear 1s infinite alternate;
+    }
+    &.arrow:nth-child(2) {
+      width: 45px;
+      animation: moveArrows 2s linear 1.2s infinite alternate;
+    }
+    &.arrow:nth-child(3) {
+      width: 50px;
+      animation: moveArrows 2s linear 1.4s infinite alternate;
+    }
+  }
+}
+@keyframes moveArrows {
+  0% {
+    transform: scale(0);
+  }
+  25% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1);
+  }
+  75% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(1.5);
+  }
+}

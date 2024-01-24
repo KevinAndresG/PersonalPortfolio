@@ -1,0 +1,96 @@
+header {
+  display: flex;
+  align-items: center;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  padding-left: 30px;
+  font-weight: bold;
+  position: fixed;
+  width: 100%;
+  z-index: 1000;
+  background-color: #202020;
+  box-shadow: 0 2px 10px #181818;
+  .header-name {
+    margin: 0;
+    overflow: hidden;
+    height: 60px;
+    font-size: 32px;
+    color: white;
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: black;
+    text-shadow: 0 0 5px #ffffff;
+    animation: titleShadow 10s linear infinite;
+  }
+  #Header {
+    position: absolute;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    column-gap: 37px;
+    list-style: none;
+    width: 95%;
+    li {
+      font-size: 28px;
+      color: #101010;
+      letter-spacing: 4px;
+      transform: scale(1);
+      transition: all 0.2s ease;
+      -webkit-text-stroke-width: 1px;
+      -webkit-text-stroke-color: #101010;
+      &.active {
+        transform: scale(1.1);
+        color: #ffffff;
+        text-shadow: 0 10px 3px rgba(0, 0, 0, 0.5);
+        -webkit-text-stroke-width: 0;
+        &:hover {
+          cursor: pointer;
+          color: #ffffff;
+          transform: scale(1.1);
+          transition: all 0.2s ease;
+        }
+      }
+
+      span {
+        display: block;
+        width: 100%;
+        height: 2px;
+        background: #000000;
+        box-shadow: 0 0 3px #0085ff;
+        transition: all 0.2s ease;
+        overflow: hidden;
+        &.active {
+          opacity: 1;
+          transition: all 0.3s ease;
+          color: #ffffff;
+        }
+        &.inactive {
+          opacity: 0;
+          transition: all 0.3s ease;
+          width: 10%;
+        }
+      }
+      &:hover {
+        cursor: pointer;
+        color: #ffffff;
+        transform: scale(1.1);
+        text-shadow: 0 10px 3px rgba(0, 0, 0, 0.5);
+        transition: all 0.2s ease;
+        -webkit-text-stroke-width: 0;
+      }
+    }
+  }
+}
+
+@keyframes titleShadow {
+  0% {
+    text-shadow: 0 -60px 5px #ffffff;
+  }
+  50% {
+    text-shadow: none;
+  }
+  100% {
+    text-shadow: 0 60px 5px #ffffff;
+  }
+}
