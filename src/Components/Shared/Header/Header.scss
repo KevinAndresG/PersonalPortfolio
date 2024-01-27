@@ -18,8 +18,7 @@ header {
     color: white;
     -webkit-text-stroke-width: 1px;
     -webkit-text-stroke-color: black;
-    text-shadow: 0 0 5px #ffffff;
-    animation: titleShadow 10s linear infinite;
+    text-shadow: 0 5px 3px #101010;
   }
   #Header {
     position: absolute;
@@ -80,17 +79,5 @@ header {
         -webkit-text-stroke-width: 0;
       }
     }
-  }
-}
-
-@keyframes titleShadow {
-  0% {
-    text-shadow: 0 -60px 5px #ffffff;
-  }
-  50% {
-    text-shadow: none;
-  }
-  100% {
-    text-shadow: 0 60px 5px #ffffff;
   }
 }
