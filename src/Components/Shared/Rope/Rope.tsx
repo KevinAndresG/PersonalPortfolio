@@ -16,7 +16,7 @@ const Rope = () => {
         const objectY = objectRect.top + objectRect.height;
 
         const distance = objectY - mouseY;
-        const deltaY = (mouseY - objectY) / distance;
+        const deltaY = ((mouseY - objectY) / distance) * 2;
         if (distance <= 100 && distance > 0) {
           setPosition(position + deltaY);
         } else if (distance >= -100 && distance < 0) {
