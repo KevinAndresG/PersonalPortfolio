@@ -1,4 +1,5 @@
 import "./About.scss";
+import { useEffect } from "react";
 import TypeScript from "../../assets/technologiesIcons/TypeScript.svg";
 import React from "../../assets/technologiesIcons/React.svg";
 import Angular from "../../assets/technologiesIcons/Angular.svg";
@@ -6,6 +7,7 @@ import JavaScript from "../../assets/technologiesIcons/JavaScript.svg";
 import PageArrows from "../Shared/PageDownArrows/PageArrows";
 import LogicCard from "../Shared/LogicCard/LogicCard";
 import { LogicItem } from "../../models/LogicItems/LogicItems";
+import ScrollReveal from "scrollreveal";
 const About = () => {
   const logicItems: LogicItem[] = [
     { title: "ANALYZE", text: "Analyze the problem or new functionality" },
@@ -19,6 +21,28 @@ const About = () => {
       text: "Join the solutions or functionalities to test their performance and correct operation",
     },
   ];
+  useEffect(() => {
+    ScrollReveal().reveal(".tech", {
+      duration: 1000,
+      origin: "right",
+      distance: "200px",
+      easing: "ease-in",
+      reset: true,
+      viewFactor: 0,
+      opacity: 0.2,
+    });
+    for (let i = 0; i < logicItems.length; i++) {
+      ScrollReveal().reveal(`.card-${i}`, {
+        duration: 1000,
+        origin: i % 2 !== 0 ? "right" : "left",
+        distance: "500px",
+        easing: "ease-in",
+        reset: true,
+        viewFactor: 0.2,
+      });
+    }
+  }, []);
+
   return (
     <div id="about-container">
       <div className="top-square">
@@ -60,7 +84,7 @@ const About = () => {
       <div className="logical-think-cont">
         <h2 className="logic-think">My Logical Thinking</h2>
         {logicItems.map((item, i) => (
-          <div key={i} id="card-container">
+          <div key={i} className={`card-${i}`} id={`card-container`}>
             <span className="logic-line"></span>
             <LogicCard item={item} />
           </div>

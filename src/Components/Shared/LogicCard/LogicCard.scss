@@ -15,7 +15,7 @@
   .logic-line {
     z-index: -100;
     height: 3px;
-    width: 90%;
+    width: 400%;
     background: linear-gradient(to right, #00ffff 50%, #00b2ff);
     box-shadow: 0 2px 5px #a3fff4, 0 -2px 5px #a3fff4;
     animation: lineColor 1s linear infinite alternate;
@@ -37,25 +37,27 @@
     text-align: center;
   }
   &#card-container:nth-child(2) {
+    // transform: translateX(100%);
     .logic-line {
-      transform: translateY(50%) translateX(-105%);
+      transform: translateY(50%) translateX(-62.5%);
     }
   }
   &#card-container:nth-child(3) {
-    transform: translateX(-100%);
+    // transform: translateX(-100%);
     .logic-line {
-      transform: translateY(50%) translateX(105%);
+      transform: translateY(50%) translateX(62.5%);
     }
   }
   &#card-container:nth-child(4) {
+    // transform: translateX(100%);
     .logic-line {
-      transform: translateY(50%) translateX(105%);
+      transform: translateY(50%) translateX(-62.5%);
     }
   }
   &#card-container:nth-child(5) {
-    transform: translateX(100%);
+    // transform: translateX(-100%);
     .logic-line {
-      transform: translateY(50%) translateX(-105%);
+      transform: translateY(50%) translateX(62.5%);
     }
   }
 }
