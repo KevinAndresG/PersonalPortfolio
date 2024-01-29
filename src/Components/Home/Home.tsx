@@ -6,6 +6,7 @@ import { Link, useNavigate } from "react-router-dom";
 import Rope from "../Shared/Rope/Rope";
 import ScrollReveal from "scrollreveal";
 import { useEffect } from "react";
+import { motion } from "framer-motion";
 
 const Home = () => {
   let socialIcons = [
@@ -25,7 +26,10 @@ const Home = () => {
     });
   }, []);
   return (
-    <div id="home-container">
+    <motion.div
+      id="home-container"
+      animate={{ width: ["0%", "100%"], transition: { duration: 0.5 } }}
+    >
       <Rope />
       <div className="info-cont">
         <h2 className="front-d">
@@ -49,13 +53,19 @@ const Home = () => {
           </Link>
         ))}
       </div>
-      <div className="see-more-cont">
-        <h3 className="see-more" onClick={seeMoreRedirect}>
-          SEE MORE...
-          <span className="active"></span>
-        </h3>
-      </div>
-    </div>
+      <motion.div
+        className="hide-content"
+        exit={{ top: -window.innerHeight / 2, transition: { duration: 1 } }}
+      >
+        <span className="hover-panel"></span>
+        <div className="see-more-cont">
+          <h3 className="see-more" onClick={seeMoreRedirect}>
+            SEE MORE...
+            <span className="active"></span>
+          </h3>
+        </div>
+      </motion.div>
+    </motion.div>
   );
 };
 

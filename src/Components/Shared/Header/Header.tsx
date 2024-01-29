@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./Header.scss";
 import arrow from "../../../assets/icons/Polygon 1.svg";
 
@@ -17,7 +17,9 @@ const Header = () => {
   };
   return (
     <header>
-      <h1 className="header-name">Kevin Garcia</h1>
+      <Link to={"/"}>
+        <h1 className="header-name">Kevin Garcia</h1>
+      </Link>
       <ul id="Header">
         {navItems.map((item) => (
           <li

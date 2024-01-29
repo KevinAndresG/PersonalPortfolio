@@ -1,0 +1,42 @@
+.not-found-cont {
+  padding-top: 20%;
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  .not-found-title {
+    margin: 0;
+    font-size: 200px;
+    display: flex;
+    height: 150px;
+    justify-content: center;
+    align-items: center;
+    color: #7c7c7c;
+    text-shadow: 0 5px 15px rgb(0, 0, 0), 0 -5px 15px rgb(0, 0, 0);
+  }
+  .not-found {
+    background-color: rgb(46, 46, 46);
+    margin: 0;
+    font-size: 40px;
+    color: rgb(121, 121, 121);
+    border-radius: 10px;
+    padding: 0 10px;
+    border-bottom: 2px solid rgb(85, 85, 85);
+    box-shadow: 0px 15px 30px -20px rgb(85, 85, 85),
+      inset 0 0 10px rgb(85, 85, 85);
+    animation: NotFound 1s linear infinite alternate;
+  }
+}
+
+@keyframes NotFound {
+  0% {
+    box-shadow: 0px 15px 20px -20px rgb(85, 85, 85),
+      inset 0 0 1px rgb(85, 85, 85);
+  }
+  100% {
+    box-shadow: 0px 15px 30px -20px rgb(85, 85, 85),
+      inset 0 0 20px rgb(85, 85, 85);
+  }
+}

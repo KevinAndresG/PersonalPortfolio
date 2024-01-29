@@ -8,6 +8,7 @@ import PageArrows from "../Shared/PageDownArrows/PageArrows";
 import LogicCard from "../Shared/LogicCard/LogicCard";
 import { LogicItem } from "../../models/LogicItems/LogicItems";
 import ScrollReveal from "scrollreveal";
+import { motion } from "framer-motion";
 const About = () => {
   const logicItems: LogicItem[] = [
     { title: "ANALYZE", text: "Analyze the problem or new functionality" },
@@ -38,13 +39,16 @@ const About = () => {
         distance: "500px",
         easing: "ease-in",
         reset: true,
-        viewFactor: 0.2,
+        viewFactor: 0,
       });
     }
   }, []);
 
   return (
-    <div id="about-container">
+    <motion.div
+      id="about-container"
+      animate={{ width: ["0%", "100%"], transition: { duration: 1.5 } }}
+    >
       <div className="top-square">
         <h2 className="name">
           <span className="name-line kl"></span>KEVIN
@@ -90,7 +94,7 @@ const About = () => {
           </div>
         ))}
       </div>
-    </div>
+    </motion.div>
   );
 };
 
