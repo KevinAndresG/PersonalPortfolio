@@ -1,5 +1,11 @@
+import "./Work.scss";
+
 const Work = () => {
-  return <div>Work</div>;
+  return (
+    <div id="work-container">
+      <h1>Comming Soon...</h1>
+    </div>
+  );
 };
 
 export default Work;
