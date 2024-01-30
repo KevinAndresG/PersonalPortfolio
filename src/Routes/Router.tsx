@@ -8,7 +8,7 @@ import Knowledge from "../Components/Knowledge/Knowledge";
 import Language from "../Components/Language/Language";
 import NotFound from "../Components/Shared/NotFound/NotFound";
 import { AnimatePresence } from "framer-motion";
-// import Footer from "../Components/Shared/Footer/Footer";
+import Footer from "../Components/Shared/Footer/Footer";
 
 const Router = () => {
   const location = useLocation();
@@ -27,7 +27,7 @@ const Router = () => {
           <Route path="/*" element={<NotFound />} />
         </Routes>
       </AnimatePresence>
-      {/* <Footer /> */}
+      <Footer />
     </>
   );
 };

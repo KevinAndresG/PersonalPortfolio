@@ -5,14 +5,14 @@ footer {
   justify-content: center;
   align-items: flex-start;
   padding-left: 50px;
-  position: static;
+  position: absolute;
   bottom: 0;
   p {
     margin: 0;
     text-align: center;
   }
   .name {
-    font-size: 20px;
+    font-size: 15px;
     color: #101010;
     letter-spacing: 4px;
     transform: scale(1);
@@ -21,7 +21,7 @@ footer {
     -webkit-text-stroke-color: #101010;
   }
   .front {
-    font-size: 15px;
+    font-size: 10px;
     color: #101010;
     letter-spacing: 4px;
     transform: scale(1);

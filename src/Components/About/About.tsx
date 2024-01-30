@@ -1,5 +1,4 @@
 import "./About.scss";
-import { useEffect } from "react";
 import TypeScript from "../../assets/technologiesIcons/TypeScript.svg";
 import React from "../../assets/technologiesIcons/React.svg";
 import Angular from "../../assets/technologiesIcons/Angular.svg";
@@ -7,7 +6,6 @@ import JavaScript from "../../assets/technologiesIcons/JavaScript.svg";
 import PageArrows from "../Shared/PageDownArrows/PageArrows";
 import LogicCard from "../Shared/LogicCard/LogicCard";
 import { LogicItem } from "../../models/LogicItems/LogicItems";
-import ScrollReveal from "scrollreveal";
 import { motion } from "framer-motion";
 const About = () => {
   const logicItems: LogicItem[] = [
@@ -22,32 +20,14 @@ const About = () => {
       text: "Join the solutions or functionalities to test their performance and correct operation",
     },
   ];
-  useEffect(() => {
-    ScrollReveal().reveal(".tech", {
-      duration: 1000,
-      origin: "right",
-      distance: "200px",
-      easing: "ease-in",
-      reset: true,
-      viewFactor: 0,
-      opacity: 0.2,
-    });
-    for (let i = 0; i < logicItems.length; i++) {
-      ScrollReveal().reveal(`.card-${i}`, {
-        duration: 1000,
-        origin: i % 2 !== 0 ? "right" : "left",
-        distance: "500px",
-        easing: "ease-in",
-        reset: true,
-        viewFactor: 0,
-      });
-    }
-  }, []);
 
   return (
     <motion.div
       id="about-container"
-      animate={{ width: ["0%", "100%"], transition: { duration: 1.5 } }}
+      animate={{
+        width: ["0%", "100%"],
+        transition: { duration: 1.5 },
+      }}
     >
       <div className="top-square">
         <h2 className="name">

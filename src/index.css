@@ -5,6 +5,7 @@ body {
     font-family: 'khand';
 }
 body, #root {
-    height: 100vh;
+    height: auto;
+    position: relative;
     background: #202020;
 }

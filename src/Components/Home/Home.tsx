@@ -4,8 +4,6 @@ import twitter from "../../assets/SocialIcons/Twitter.svg";
 import whatsapp from "../../assets/SocialIcons/Whatsapp.svg";
 import { Link, useNavigate } from "react-router-dom";
 import Rope from "../Shared/Rope/Rope";
-import ScrollReveal from "scrollreveal";
-import { useEffect } from "react";
 import { motion } from "framer-motion";
 
 const Home = () => {
@@ -19,17 +17,8 @@ const Home = () => {
   const seeMoreRedirect = () => {
     navigate("/about");
   };
-  useEffect(() => {
-    ScrollReveal().reveal(".see-more-cont", {
-      duration: 2000,
-      distance: "100px",
-    });
-  }, []);
   return (
-    <motion.div
-      id="home-container"
-      animate={{ width: ["0%", "100%"], transition: { duration: 0.5 } }}
-    >
+    <motion.div id="home-container">
       <Rope />
       <div className="info-cont">
         <h2 className="front-d">
@@ -55,7 +44,9 @@ const Home = () => {
       </div>
       <motion.div
         className="hide-content"
-        exit={{ top: -window.innerHeight / 2, transition: { duration: 1 } }}
+        initial={{ top: -window.innerHeight / 4.5 }}
+        animate={{ top: window.innerHeight, transition: { duration: 1 } }}
+        exit={{ top: -window.innerHeight / 4.5, transition: { duration: 1 } }}
       >
         <span className="hover-panel"></span>
         <div className="see-more-cont">
