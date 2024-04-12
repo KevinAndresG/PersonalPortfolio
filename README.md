@@ -5,14 +5,7 @@
 <p align='center'>
 </p>
 <div size='30px' align='center'> 🔵 You has been arrived to my profile, you going to enjoy it 🔵 </div>
-  <h1 align='center'> <img src = "https://media3.giphy.com/media/4wQq4Une7h7nOVuaS1/giphy.gif" width = 200px> </h1>
-<div>
-  <p>
-    
- ![visitors](https://visitor-badge.glitch.me/badge?page_id=KevinAndresG.KevinAndresG&left_color=black&right_color=Darkcyan)
-  
-  </p>
-</div>
+<h1 align='center'> <img src = "https://media3.giphy.com/media/4wQq4Une7h7nOVuaS1/giphy.gif" width = 200px> </h1>
 
 <h2> About Me </h2>
   
@@ -34,12 +27,8 @@
 <a href = 'https://twitter.com/KevinAndresG22'> <img width = '32px' align= 'center' src="https://raw.githubusercontent.com/rahulbanerjee26/githubAboutMeGenerator/main/icons/twitter.svg"/></a> 
 <a href = 'https://www.github.com/KevinAndresG'> <img width = '32px' align= 'center' src="https://raw.githubusercontent.com/rahulbanerjee26/githubAboutMeGenerator/main/icons/github.svg"/></a> 
 
-
  <h2> My GitHub Stats </h2>
  <h3 align="center">
-
-![Anurag's GitHub stats](https://github-readme-stats.vercel.app/api?username=KevinAndresG&show_icons=true&theme=blue-green&icon_color=fff&title_color=000000&border_color=fff&bg_color=DEG,003EFF,0067FF,008DFF,00AFFF&text_color=000000)
-</h3>
 
 <h3 align="center">
 
