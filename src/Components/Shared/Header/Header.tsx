@@ -1,16 +1,8 @@
 import { Link, useNavigate } from "react-router-dom";
 import "./Header.scss";
-import arrow from "../../../assets/icons/Polygon 1.svg";
 
 const Header = () => {
-  const navItems = [
-    "HOME",
-    "ABOUT",
-    "WORK",
-    "CONTACT",
-    "KNOWLEDGE",
-    "LANGUAGE",
-  ];
+  const navItems = ["HOME", "ABOUT", "WORK", "CONTACT", "KNOWLEDGE"];
   const navigate = useNavigate();
   const navigationMenu = (item: String) => {
     navigate(`/${item.toLowerCase()}`);
@@ -33,14 +25,7 @@ const Header = () => {
               navigationMenu(item);
             }}
           >
-            <>
-              {item}
-              {item === "LANGUAGE" && (
-                <>
-                  <img src={arrow} alt="arrow" />
-                </>
-              )}
-            </>
+            <>{item}</>
             <span
               className={
                 window.location.href.toLowerCase().includes(item.toLowerCase())

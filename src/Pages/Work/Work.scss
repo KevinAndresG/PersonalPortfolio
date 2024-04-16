@@ -1,0 +1,17 @@
+#work-container {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-top: 20%;
+  width: 100%;
+  h1 {
+    color: rgb(143, 143, 143);
+  }
+  .project-item {
+    color: rgb(143, 143, 143);
+    margin: 10px;
+    font-size: 20px;
+  }
+}

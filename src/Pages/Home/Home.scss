@@ -40,35 +40,48 @@
     }
   }
   .social-icons {
-    z-index: 100;
-    position: absolute;
     display: flex;
-    column-gap: 30%;
-    right: 9%;
-    a {
-      .social-icon {
-        width: 40px;
-      }
+    flex-direction: column;
+    align-items: flex-end;
+
+    .contact {
+      transform: translateX(-100%) translateY(100%);
+      color: white;
+      text-shadow: 0 8px 5px rgba(0, 0, 0, 0.5);
+      -webkit-text-stroke-width: 0;
     }
-    a:nth-child(1) {
-      animation: moveIcons 5s linear infinite alternate;
-      &:hover {
-        cursor: pointer;
-        animation-play-state: paused;
+    .icons-container {
+      z-index: 100;
+      display: flex;
+      position: absolute;
+      column-gap: 30%;
+      right: 9%;
+
+      a {
+        .social-icon {
+          width: 40px;
+        }
       }
-    }
-    a:nth-child(2) {
-      animation: moveIcons 4s linear infinite alternate;
-      &:hover {
-        cursor: pointer;
-        animation-play-state: paused;
+      a:nth-child(1) {
+        animation: moveIcons 5s linear infinite alternate;
+        &:hover {
+          cursor: pointer;
+          animation-play-state: paused;
+        }
       }
-    }
-    a:nth-child(3) {
-      animation: moveIcons 3s linear infinite alternate;
-      &:hover {
-        cursor: pointer;
-        animation-play-state: paused;
+      a:nth-child(2) {
+        animation: moveIcons 4s linear infinite alternate;
+        &:hover {
+          cursor: pointer;
+          animation-play-state: paused;
+        }
+      }
+      a:nth-child(3) {
+        animation: moveIcons 3s linear infinite alternate;
+        &:hover {
+          cursor: pointer;
+          animation-play-state: paused;
+        }
       }
     }
   }

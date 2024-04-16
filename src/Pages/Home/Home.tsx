@@ -3,7 +3,7 @@ import linkedin from "../../assets/SocialIcons/Linkedin.svg";
 import twitter from "../../assets/SocialIcons/Twitter.svg";
 import whatsapp from "../../assets/SocialIcons/Whatsapp.svg";
 import { Link, useNavigate } from "react-router-dom";
-import Rope from "../Shared/Rope/Rope";
+import Rope from "../../Components/Rope/Rope";
 import { motion } from "framer-motion";
 
 const Home = () => {
@@ -31,16 +31,19 @@ const Home = () => {
         </p>
       </div>
       <div className="social-icons">
-        {socialIcons.map((icons) => (
-          <Link target="_blank" to={icons.link}>
-            <img
-              key={icons.link}
-              src={icons.icon}
-              alt="social"
-              className="social-icon"
-            />
-          </Link>
-        ))}
+        <div className="icons-container">
+          {socialIcons.map((icons) => (
+            <Link target="_blank" to={icons.link}>
+              <img
+                key={icons.link}
+                src={icons.icon}
+                alt="social"
+                className="social-icon"
+              />
+            </Link>
+          ))}
+        </div>
+        <h1 className="contact">Contact ME</h1>
       </div>
       <motion.div
         className="hide-content"

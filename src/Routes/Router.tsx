@@ -1,14 +1,13 @@
 import { Navigate, Route, Routes, useLocation } from "react-router-dom";
-import Header from "../Components/Shared/Header/Header";
-import Home from "../Components/Home/Home";
-import About from "../Components/About/About";
-import Work from "../Components/Work/Work";
-import Contact from "../Components/Contact/Contact";
-import Knowledge from "../Components/Knowledge/Knowledge";
-import Language from "../Components/Language/Language";
-import NotFound from "../Components/Shared/NotFound/NotFound";
+import Home from "../Pages/Home/Home";
+import About from "../Pages/About/About";
+import Work from "../Pages/Work/Work";
+import Contact from "../Pages/Contact/Contact";
+import Knowledge from "../Pages/Knowledge/Knowledge";
+import NotFound from "../Components/NotFound/NotFound";
 import { AnimatePresence } from "framer-motion";
 import Footer from "../Components/Shared/Footer/Footer";
+import Header from "../Components/Shared/Header/Header";
 
 const Router = () => {
   const location = useLocation();
@@ -23,7 +22,6 @@ const Router = () => {
           <Route path="/work" element={<Work />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/knowledge" element={<Knowledge />} />
-          <Route path="/language" element={<Language />} />
           <Route path="/*" element={<NotFound />} />
         </Routes>
       </AnimatePresence>

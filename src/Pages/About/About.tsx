@@ -3,8 +3,8 @@ import TypeScript from "../../assets/technologiesIcons/TypeScript.svg";
 import React from "../../assets/technologiesIcons/React.svg";
 import Angular from "../../assets/technologiesIcons/Angular.svg";
 import JavaScript from "../../assets/technologiesIcons/JavaScript.svg";
-import PageArrows from "../Shared/PageDownArrows/PageArrows";
-import LogicCard from "../Shared/LogicCard/LogicCard";
+import PageArrows from "../../Components/PageDownArrows/PageArrows";
+import LogicCard from "../../Components/LogicCard/LogicCard";
 import { LogicItem } from "../../models/LogicItems/LogicItems";
 import { motion } from "framer-motion";
 const About = () => {

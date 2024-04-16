@@ -1,5 +1,5 @@
 import "./PageArrows.scss";
-import arrow from "../../../assets/icons/Triangle.svg";
+import arrow from "../../assets/icons/Triangle.svg";
 
 const PageArrows = () => {
   return (
