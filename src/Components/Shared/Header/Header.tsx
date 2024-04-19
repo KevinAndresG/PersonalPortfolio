@@ -2,7 +2,7 @@ import { Link, useNavigate } from "react-router-dom";
 import "./Header.scss";
 
 const Header = () => {
-  const navItems = ["HOME", "ABOUT", "WORK", "CONTACT", "KNOWLEDGE"];
+  const navItems = ["HOME", "ABOUT", "WORK", "KNOWLEDGE"];
   const navigate = useNavigate();
   const navigationMenu = (item: String) => {
     navigate(`/${item.toLowerCase()}`);

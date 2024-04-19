@@ -26,14 +26,14 @@ const Home = () => {
           <span className="developer">DEVELOPER</span>
         </h2>
         <p className="desc">
-          Look At My Profile, My Mrojects, My History And My Desire To Improve
-          Myself More And More Every Day...
+          Welcome To My Profile, My Mrojects, My History And My Desire To
+          Improve Myself.
         </p>
       </div>
       <div className="social-icons">
         <div className="icons-container">
           {socialIcons.map((icons) => (
-            <Link target="_blank" to={icons.link}>
+            <Link key={icons.link} target="_blank" to={icons.link}>
               <img
                 key={icons.link}
                 src={icons.icon}

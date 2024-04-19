@@ -2,11 +2,11 @@
   width: 400px;
   min-height: 250px;
   height: auto;
-  border-radius: 100px;
-  background-color: #202020;
-  box-shadow: 0 -5px 20px #141414, -5px 0 20px #141414, 0 5px 20px #202020,
-    5px 0 20px #202020;
-  padding: 30px 50px;
+  border: 2px solid #1f1f1f;
+  border-radius: 50px;
+  background: #202020;
+  box-shadow: 20px 20px 20px #1b1b1b, -20px -20px 20px #252525;
+  padding: 10px 30px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -14,7 +14,7 @@
   position: relative;
   .logic-line {
     height: 3px;
-    width: 400%;
+    width: 200%;
     background: linear-gradient(to right, #00ffff 50%, #00b2ff);
     box-shadow: 0 2px 5px #a3fff4, 0 -2px 5px #a3fff4;
     animation: lineColor 1s linear infinite alternate;
@@ -23,40 +23,26 @@
   }
   .title {
     margin: 0;
-    font-size: 40px;
+    font-size: 30px;
     letter-spacing: 5px;
     color: #ffffff;
     text-align: center;
   }
   .text {
     margin: 0;
-    font-size: 31px;
+    font-size: 20px;
     letter-spacing: 5px;
     color: #ffffff;
     text-align: center;
   }
-  &#card-container:nth-child(2) {
-    // transform: translateX(100%);
+  &#card-container:nth-child(odd) {
     .logic-line {
-      transform: translateY(50%) translateX(-62.5%);
+      transform: translateY(50%) translateX(75.3%);
     }
   }
-  &#card-container:nth-child(3) {
-    // transform: translateX(-100%);
+  &#card-container:nth-child(even) {
     .logic-line {
-      transform: translateY(50%) translateX(62.5%);
-    }
-  }
-  &#card-container:nth-child(4) {
-    // transform: translateX(100%);
-    .logic-line {
-      transform: translateY(50%) translateX(-62.5%);
-    }
-  }
-  &#card-container:nth-child(5) {
-    // transform: translateX(-100%);
-    .logic-line {
-      transform: translateY(50%) translateX(62.5%);
+      transform: translateY(50%) translateX(-75.3%);
     }
   }
 }

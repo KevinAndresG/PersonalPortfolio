@@ -1,12 +1,13 @@
 import "./About.scss";
-import TypeScript from "../../assets/technologiesIcons/TypeScript.svg";
-import React from "../../assets/technologiesIcons/React.svg";
-import Angular from "../../assets/technologiesIcons/Angular.svg";
-import JavaScript from "../../assets/technologiesIcons/JavaScript.svg";
+import TypeScript from "../../assets/TechnologiesIcons/TypeScript.svg";
+import React from "../../assets/TechnologiesIcons/React.svg";
+import Angular from "../../assets/TechnologiesIcons/Angular.svg";
+import JavaScript from "../../assets/TechnologiesIcons/JavaScript.svg";
 import PageArrows from "../../Components/PageDownArrows/PageArrows";
 import LogicCard from "../../Components/LogicCard/LogicCard";
 import { LogicItem } from "../../models/LogicItems/LogicItems";
 import { motion } from "framer-motion";
+import Clock from "../../Components/Clock/Clock";
 const About = () => {
   const logicItems: LogicItem[] = [
     { title: "ANALYZE", text: "Analyze the problem or new functionality" },
@@ -29,7 +30,8 @@ const About = () => {
         transition: { duration: 1.5 },
       }}
     >
-      <div className="top-square">
+      <Clock />
+      {/* <div className="top-square">
         <h2 className="name">
           <span className="name-line kl"></span>KEVIN
           <span className="name-line kr"></span>
@@ -38,7 +40,7 @@ const About = () => {
           <span className="name-line gl"></span>GARCIA
           <span className="name-line gr"></span>
         </h2>
-      </div>
+      </div> */}
       <p className="about-desc">
         <span className="desc-bold">I’m A Front End Developer</span>, I have
         worked on various projects applying efficient and good code optimization
