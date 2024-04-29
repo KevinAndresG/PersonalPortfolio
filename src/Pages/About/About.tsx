@@ -1,8 +1,8 @@
 import "./About.scss";
 import TypeScript from "./TypeScript.svg";
-import React from "../../assets/TechnologiesIcons/React.svg";
-import Angular from "../../assets/TechnologiesIcons/Angular.svg";
-import JavaScript from "../../assets/TechnologiesIcons/JavaScript.svg";
+import React from "./React.svg";
+import Angular from "./Angular.svg";
+import JavaScript from "./JavaScript.svg";
 import PageArrows from "../../Components/PageDownArrows/PageArrows";
 import LogicCard from "../../Components/LogicCard/LogicCard";
 import { LogicItem } from "../../models/LogicItems/LogicItems";
