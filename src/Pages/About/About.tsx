@@ -1,5 +1,5 @@
 import "./About.scss";
-import TypeScript from "../../assets/TechnologiesIcons/TypeScript.svg";
+import TypeScript from "./TypeScript.svg";
 import React from "../../assets/TechnologiesIcons/React.svg";
 import Angular from "../../assets/TechnologiesIcons/Angular.svg";
 import JavaScript from "../../assets/TechnologiesIcons/JavaScript.svg";
