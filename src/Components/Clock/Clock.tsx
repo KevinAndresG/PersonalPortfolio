@@ -13,33 +13,24 @@ const Clock = () => {
   const [hour, setHour] = useState(time[0]);
   const [minute, setMinute] = useState(time[1]);
   const [second, setSecond] = useState(now.split(":")[2].split(" ")[0]);
-  const [defTime, setDefTime] = useState("");
+  let amPm = time.pop()!.split(" ").pop();
+  const [defTime, setDefTime] = useState(time.join(" : ") + " " + amPm);
   const [secondGrades, setSecondGrades] = useState(6 * parseInt(second));
   const [minuteGrades, setMinuteGrades] = useState(6 * parseInt(minute));
   const [hourGrades, setHourGrades] = useState(30 * parseInt(hour));
   useEffect(() => {
-    time.map((x) => {
-      if (x.split(" ").length >= 2) {
-        setSecond(x.split(" ").shift()!);
-      }
-    });
-    let amPm = time.pop();
-    setDefTime(time.join(" : ") + " " + amPm!.split(" ").pop());
     const myTimeout = setTimeout(() => {
-      setSecondGrades(6 * parseInt(second));
-      setSecond((parseInt(second) + 1).toString());
-      if (parseInt(second) >= 60) {
-        // setSecond("0");
-        // setSecondGrades(0);
-        setMinute((parseInt(minute) + 1).toString());
+      if (parseInt(second) % 60 === 2) {
         setMinuteGrades(6 * (parseInt(minute) + 1));
+        setMinute((parseInt(minute) + 1).toString());
+        setDefTime(time.join(" : ") + " " + amPm);
       }
       if (parseInt(minute) >= 60) {
-        setMinute("0");
-        // setMinuteGrades(0);
         setHour((parseInt(hour) + 1).toString());
         setHourGrades(30 * (parseInt(hour) + 1));
       }
+      setSecondGrades(6 * parseInt(second));
+      setSecond((parseInt(second) + 1).toString());
       clearTimeout(myTimeout);
     }, 1000);
     return;

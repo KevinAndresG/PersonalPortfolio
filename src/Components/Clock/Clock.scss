@@ -51,6 +51,7 @@
             position: absolute;
             background-color: white;
             box-shadow: 0 0 5px rgb(255, 255, 255);
+            transition: transform 0.8s ease-in-out;
           }
 
           .m {
@@ -60,6 +61,7 @@
             position: absolute;
             background-color: white;
             box-shadow: 0 0 5px rgb(255, 255, 255);
+            transition: transform 0.8s ease-in-out;
           }
 
           .s {
@@ -69,7 +71,7 @@
             box-shadow: 0 0 10px rgb(0, 174, 255);
             transform-origin: bottom;
             position: absolute;
-            transition: all 0.8s ease-in-out;
+            transition: transform 0.8s ease-in-out;
             color: white;
           }
         }
