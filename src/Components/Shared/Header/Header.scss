@@ -32,56 +32,45 @@ header {
     display: flex;
     align-items: center;
     justify-content: flex-end;
-    column-gap: 37px;
     list-style: none;
     width: 95%;
-    li {
-      font-size: 28px;
+
+    .button {
+      --border-right: 3px;
+      --animation-color: rgb(0, 174, 255);
+      background: transparent;
+      border: none;
+      position: relative;
+      font-size: 20px;
+      font-weight: bolder;
       color: #101010;
       letter-spacing: 4px;
       transform: scale(1);
       transition: all 0.2s ease;
-      -webkit-text-stroke-width: 1px;
-      -webkit-text-stroke-color: #101010;
-      &.active {
-        transform: scale(1.1);
-        color: #ffffff;
-        text-shadow: 0 10px 3px rgba(0, 0, 0, 0.5);
-        -webkit-text-stroke-width: 0;
-        &:hover {
-          cursor: pointer;
-          color: #ffffff;
-          transform: scale(1.1);
-          transition: all 0.2s ease;
-        }
-      }
+    }
+    .button.inactive .hover-text {
+      border-right: var(--border-right) solid transparent;
+    }
 
-      span {
-        display: block;
-        width: 100%;
-        height: 2px;
-        background: #000000;
-        box-shadow: 0 0 3px #0085ff;
-        transition: all 0.2s ease;
-        overflow: hidden;
-        &.active {
-          opacity: 1;
-          transition: all 0.3s ease;
-          color: #ffffff;
-        }
-        &.inactive {
-          opacity: 0;
-          transition: all 0.3s ease;
-          width: 10%;
-        }
-      }
-      &:hover {
-        cursor: pointer;
-        color: #ffffff;
-        transform: scale(1.1);
-        text-shadow: 0 10px 3px rgba(0, 0, 0, 0.5);
-        transition: all 0.2s ease;
-        -webkit-text-stroke-width: 0;
+    .hover-text {
+      position: absolute;
+      box-sizing: border-box;
+      content: attr(data-text);
+      color: var(--animation-color);
+      width: 0%;
+      inset: 0 3%;
+      overflow: hidden;
+      transition: 0.5s;
+      -webkit-text-stroke-width: 1px;
+    }
+
+    .button:hover,
+    .button.button.active {
+      cursor: pointer;
+      .hover-text {
+        border-right: var(--border-right) solid var(--animation-color);
+        width: 90%;
+        filter: drop-shadow(0 0 5px var(--animation-color));
       }
     }
   }

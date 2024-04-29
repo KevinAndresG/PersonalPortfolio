@@ -35,7 +35,7 @@ const Clock = () => {
         setMinuteGrades(6 * (parseInt(minute) + 1));
       }
       if (parseInt(minute) >= 60) {
-        // setMinute("0");
+        setMinute("0");
         // setMinuteGrades(0);
         setHour((parseInt(hour) + 1).toString());
         setHourGrades(30 * (parseInt(hour) + 1));
@@ -80,8 +80,8 @@ const Clock = () => {
               <div className="digit">{defTime}</div>
             </div>
             <div className="date">
-              <div className="day">{day}</div>
               <div className="month">{month}</div>
+              <div className="day">{day}</div>
               <div className="dayN">{dayNumber}</div>
             </div>
           </div>

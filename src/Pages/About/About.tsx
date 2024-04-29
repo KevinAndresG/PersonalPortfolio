@@ -13,7 +13,7 @@ const About = () => {
     { title: "ANALYZE", text: "Analyze the problem or new functionality" },
     {
       title: "DESTRUCTURE",
-      text: "Divide the problem into smaller problems to solve them more easily.",
+      text: "Divide the problem into smaller problems to solve them easily.",
     },
     { title: "SOLVE", text: "Solve each small previously unstructured task" },
     {
@@ -31,16 +31,6 @@ const About = () => {
       }}
     >
       <Clock />
-      {/* <div className="top-square">
-        <h2 className="name">
-          <span className="name-line kl"></span>KEVIN
-          <span className="name-line kr"></span>
-        </h2>
-        <h2 className="name">
-          <span className="name-line gl"></span>GARCIA
-          <span className="name-line gr"></span>
-        </h2>
-      </div> */}
       <p className="about-desc">
         <span className="desc-bold">I’m A Front End Developer</span>, I have
         worked on various projects applying efficient and good code optimization
@@ -51,10 +41,10 @@ const About = () => {
       </span>
       <div className="desc2">
         <p className="about-desc2">
-          I have participated in projects using different frameworks for the
-          front, in addition to a good implementation of appropriate libraries
-          to speed up times. I have also created solutions for applications with
-          agility without the need to use or implement an external library...
+          I have participated in projects using different Front End Frameworks,
+          in addition to a good implementation of appropriate libraries to speed
+          up times. I have also created solutions for applications with agility
+          without the need to use or implement an external library...
           <span className="desc-line"></span>
         </p>
         <div className="techs">

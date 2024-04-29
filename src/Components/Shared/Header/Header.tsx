@@ -12,30 +12,26 @@ const Header = () => {
       <Link to={"/"}>
         <h1 className="header-name">Kevin Garcia</h1>
       </Link>
-      <ul id="Header">
+      <div id="Header">
         {navItems.map((item) => (
-          <li
+          <button
             key={item}
-            className={
+            className={`button ${
               window.location.href.toLowerCase().includes(item.toLowerCase())
                 ? "active"
                 : "inactive"
-            }
+            }`}
             onClick={() => {
               navigationMenu(item);
             }}
           >
-            <>{item}</>
-            <span
-              className={
-                window.location.href.toLowerCase().includes(item.toLowerCase())
-                  ? "active"
-                  : "inactive"
-              }
-            ></span>
-          </li>
+            <span className="actual-text">&nbsp;{item}&nbsp;</span>
+            <span aria-hidden="true" className="hover-text">
+              &nbsp;{item}&nbsp;
+            </span>
+          </button>
         ))}
-      </ul>
+      </div>
     </header>
   );
 };

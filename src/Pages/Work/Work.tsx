@@ -4,6 +4,7 @@ import CincuentaP from "../../assets/ProjectsAssets/CincuentaProjects.png";
 import PetAppointments from "../../assets/ProjectsAssets/PetAppointmen.png";
 import SpaceTravel from "../../assets/ProjectsAssets/SpaceTravel.png";
 import TravelAgency from "../../assets/ProjectsAssets/TravelAgency.png";
+import { motion } from "framer-motion";
 
 const Work = () => {
   const worksToShow = [
@@ -29,14 +30,20 @@ const Work = () => {
     },
   ];
   return (
-    <div id="work-container">
+    <motion.div
+      id="work-container"
+      animate={{
+        opacity: ["0", "100%"],
+        transition: { duration: 2 },
+      }}
+    >
       <h1 className="personal-projects">My Personal Projects</h1>
       {worksToShow.map((proyect) => (
         <div key={proyect.url} className="father-card-container">
           <WorkCard proyect={proyect} />
         </div>
       ))}
-    </div>
+    </motion.div>
   );
 };
 
