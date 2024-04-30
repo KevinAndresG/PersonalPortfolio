@@ -58,7 +58,7 @@ const WorkCard = () => {
           {worksToShow.map((item: any) => (
             <div
               className="item"
-              key={item.title}
+              key={item.img}
               tabIndex={0}
               style={{ backgroundImage: `url(${item.img})` }}
             >

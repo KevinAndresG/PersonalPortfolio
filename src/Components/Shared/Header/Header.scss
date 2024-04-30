@@ -10,19 +10,20 @@ header {
   z-index: 10000;
   background-color: #202020;
   box-shadow: 0 2px 10px #181818;
-  a {
+  min-height: 60px;
+  .go-home {
     cursor: pointer;
     text-decoration: none;
-    z-index: 100;
     .header-name {
       margin: 0;
       overflow: hidden;
       height: 60px;
       font-size: 32px;
       color: white;
-      -webkit-text-stroke-width: 1px;
-      -webkit-text-stroke-color: black;
       text-shadow: 0 5px 3px #101010;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
   }
   #Header {
@@ -33,7 +34,7 @@ header {
     align-items: center;
     justify-content: flex-end;
     list-style: none;
-    width: 95%;
+    right: 5%;
 
     .button {
       --border-right: 3px;
@@ -73,5 +74,17 @@ header {
         filter: drop-shadow(0 0 5px var(--animation-color));
       }
     }
+  }
+}
+
+@media screen and (max-width: 760px) {
+  header {
+    box-shadow: none;
+  }
+  .go-home {
+    display: none;
+  }
+  #Header {
+    display: none !important;
   }
 }

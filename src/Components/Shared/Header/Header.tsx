@@ -9,7 +9,7 @@ const Header = () => {
   };
   return (
     <header>
-      <Link to={"/"}>
+      <Link to={"/"} className="go-home">
         <h1 className="header-name">Kevin Garcia</h1>
       </Link>
       <div id="Header">

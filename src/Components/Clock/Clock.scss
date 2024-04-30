@@ -3,8 +3,8 @@
   height: 600px;
   display: flex;
   align-items: center;
-  padding-top: 0%;
-  padding-left: 35%;
+  margin-bottom: 100px;
+  translate: 45% 0;
   scale: 2;
   .ThemeClock--box {
     .clock {
@@ -125,5 +125,22 @@
         }
       }
     }
+  }
+}
+@media screen and (max-width: 900px) {
+  .ThemeClock--container {
+    translate: 40% 0;
+  }
+}
+@media screen and (max-width: 760px) {
+  .ThemeClock--container {
+    translate: 10% 0;
+    scale: 1.5;
+  }
+}
+@media screen and (max-width: 570px) {
+  .ThemeClock--container {
+    translate: -14% 0;
+    scale: 1;
   }
 }
