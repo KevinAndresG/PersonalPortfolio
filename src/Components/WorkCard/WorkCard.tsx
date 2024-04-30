@@ -69,7 +69,7 @@ const WorkCard = () => {
                   window.open(item.url, "_blank");
                 }}
               >
-                Enter
+                Click To Join
               </button>
             </div>
           ))}
