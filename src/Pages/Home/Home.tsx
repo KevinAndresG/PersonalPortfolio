@@ -1,7 +1,7 @@
 import "./Home.scss";
-import linkedin from "../../assets/SocialIcons/Linkedin.svg";
-import twitter from "../../assets/SocialIcons/Twitter.svg";
-import whatsapp from "../../assets/SocialIcons/Whatsapp.svg";
+import linkedin from "../../assets/Linkedin.svg";
+import twitter from "../../assets/Twitter.svg";
+import whatsapp from "../../assets/Whatsapp.svg";
 import { Link, useNavigate } from "react-router-dom";
 import Rope from "../../Components/Rope/Rope";
 import { motion } from "framer-motion";

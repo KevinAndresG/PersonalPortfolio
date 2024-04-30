@@ -1,12 +1,12 @@
 import "./WorkCard.scss";
-import CincuentaP from "../../assets/ProjectsAssets/CincuentaProjects.png";
-import PetAppointments from "../../assets/ProjectsAssets/PetAppointmen.png";
-import SpaceTravel from "../../assets/ProjectsAssets/SpaceTravel.png";
-import TravelAgency from "../../assets/ProjectsAssets/TravelAgency.png";
-import CincuentaP2 from "../../assets/ProjectsAssets/CincuentaProjects2.png";
-import PetAppointments2 from "../../assets/ProjectsAssets/PetAppointmen2.png";
-import SpaceTravel2 from "../../assets/ProjectsAssets/SpaceTravel2.png";
-import TravelAgency2 from "../../assets/ProjectsAssets/TravelAgency2.png";
+import CincuentaP from "../../assets/CincuentaProjects.png";
+import PetAppointments from "../../assets/PetAppointmen.png";
+import SpaceTravel from "../../assets/SpaceTravel.png";
+import TravelAgency from "../../assets/TravelAgency.png";
+import CincuentaP2 from "../../assets/CincuentaProjects2.png";
+import PetAppointments2 from "../../assets/PetAppointmen2.png";
+import SpaceTravel2 from "../../assets/SpaceTravel2.png";
+import TravelAgency2 from "../../assets/TravelAgency2.png";
 
 const WorkCard = () => {
   const worksToShow: any = [
