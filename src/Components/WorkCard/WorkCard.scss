@@ -1,12 +1,14 @@
 #work-card-container {
   --index: calc(1vw + 1vh);
   --transition: cubic-bezier(0.1, 0.7, 0, 1);
-  height: 50vh;
+  height: 60vh;
   padding-top: 6%;
   .wrapper {
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-direction: column;
+    row-gap: 50px;
   }
   .items {
     display: flex;
@@ -21,16 +23,18 @@
     cursor: pointer;
     display: flex;
     justify-content: center;
+    box-shadow: 0 5px 15px black;
     filter: brightness(0.3);
     transition: transform 1.25s var(--transition), filter 3s var(--transition),
       width 1.25s var(--transition);
     will-change: transform, filter, rotateY, width;
     .project-title {
+      display: none;
       color: white;
       position: absolute;
-      top: -10%;
+      top: -15%;
       margin: 0;
-      width: 100%;
+      width: 150%;
       text-align: center;
     }
     .project-enter {
@@ -122,6 +126,9 @@
   }
   .items .item:active,
   .items .item:focus {
+    .project-title {
+      display: block;
+    }
     .project-enter {
       display: block;
     }
@@ -130,5 +137,22 @@
     z-index: 100;
     transform: translateZ(calc(var(--index) * 10));
     margin: 0 0.45vw;
+  }
+}
+
+@media screen and (max-width: 760px) {
+  #work-card-container {
+    .items {
+      perspective: calc(var(--index) * 35);
+      .item {
+        width: calc(var(--index) * 5);
+        height: calc(var(--index) * 15);
+      }
+    }
+    .project-enter {
+      width: 90% !important;
+      padding: 5px 0 !important;
+      font-size: 10px !important;
+    }
   }
 }

@@ -14,7 +14,7 @@ const MobileHeader = ({ navItems }: any) => {
   return (
     <div id="mobile-menu">
       <div className={`items-panel ${isOpen && "open"}`}>
-        <div id="Header">
+        <div id="Header-mobile">
           {navItems.map((item: string) => (
             <button
               key={item}

@@ -1,8 +1,9 @@
 #work-container {
   flex-direction: column;
-  padding-top: 150px;
+  padding-top: 100px;
   padding-bottom: 10%;
   width: 100%;
+  overflow: hidden;
 
   .personal-projects {
     color: rgb(143, 143, 143);
