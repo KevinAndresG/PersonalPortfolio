@@ -129,7 +129,7 @@
 }
 @media screen and (max-width: 900px) {
   .ThemeClock--container {
-    translate: 40% 0;
+    translate: 35% 0;
   }
 }
 @media screen and (max-width: 760px) {
@@ -142,5 +142,8 @@
   .ThemeClock--container {
     translate: -14% 0;
     scale: 1;
+    .date {
+      scale: 1.3;
+    }
   }
 }

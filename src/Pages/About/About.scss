@@ -3,7 +3,7 @@
   width: 100%;
   height: auto;
   position: relative;
-  padding-bottom: 200px;
+  padding-bottom: 5%;
   overflow: hidden;
 
   .about-desc {
@@ -90,9 +90,6 @@
     }
   }
   .logical-think-cont {
-    opacity: 1;
-    width: 100%;
-    margin-top: 0%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -124,9 +121,9 @@
 @media screen and (max-width: 900px) {
   #about-container {
     .about-desc {
-      transform: translateY(150%);
-      left: 30%;
-      width: 60%;
+      transform: translateY(200%);
+      left: 5%;
+      width: 90%;
     }
     .desc2 {
       flex-direction: column;
@@ -136,7 +133,7 @@
         width: 90%;
       }
       .techs {
-        transform: translateY(20%) translateX(0%);
+        transform: translateY(5%) translateX(0%);
         scale: 0.8;
       }
     }
@@ -177,6 +174,7 @@
 @media screen and (max-width: 570px) {
   #about-container {
     .logical-think-cont {
+      translate: 0 -30%;
       .logic-think {
         font-size: 20px;
         letter-spacing: 6px;
@@ -186,12 +184,17 @@
       }
     }
     .about-desc {
-      transform: translateY(0);
+      transform: translateY(0) translateX(-5%);
+      width: 90%;
     }
     .desc2 {
       transform: translateY(0%);
+      .about-desc2 {
+        width: 90%;
+      }
       .techs {
-        transform: translateX(-5%);
+        transform: translateY(-40%) translateX(-5%);
+        scale: 0.5;
       }
     }
   }

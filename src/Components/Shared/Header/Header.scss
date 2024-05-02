@@ -33,9 +33,7 @@ header {
     display: flex;
     align-items: center;
     justify-content: flex-end;
-    list-style: none;
     right: 5%;
-
     .button {
       --border-right: 3px;
       --animation-color: rgb(0, 174, 255);
@@ -79,12 +77,8 @@ header {
 
 @media screen and (max-width: 760px) {
   header {
+    background: transparent;
     box-shadow: none;
-  }
-  .go-home {
-    display: none;
-  }
-  #Header {
-    display: none !important;
+    padding: 0;
   }
 }

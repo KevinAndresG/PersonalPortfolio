@@ -20,17 +20,19 @@ const Clock = () => {
   const [hourGrades, setHourGrades] = useState(30 * parseInt(hour));
   useEffect(() => {
     const myTimeout = setTimeout(() => {
+      setSecondGrades(6 * parseInt(second));
+      setSecond((parseInt(second) + 1).toString());
+      if (parseInt(minute) === 60) {
+        setMinute("0");
+        setHourGrades(30 * (parseInt(hour) + 1));
+        setHour((parseInt(hour) + 1).toString());
+        setDefTime(time.join(" : ") + " " + amPm);
+      }
       if (parseInt(second) % 60 === 2) {
         setMinuteGrades(6 * (parseInt(minute) + 1));
         setMinute((parseInt(minute) + 1).toString());
         setDefTime(time.join(" : ") + " " + amPm);
       }
-      if (parseInt(minute) >= 60) {
-        setHour((parseInt(hour) + 1).toString());
-        setHourGrades(30 * (parseInt(hour) + 1));
-      }
-      setSecondGrades(6 * parseInt(second));
-      setSecond((parseInt(second) + 1).toString());
       clearTimeout(myTimeout);
     }, 1000);
     return;
