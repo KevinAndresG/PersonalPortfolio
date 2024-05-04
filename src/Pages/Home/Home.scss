@@ -194,6 +194,7 @@
     .social-icons {
       align-items: center;
       justify-content: center;
+      transform: translateY(50%);
 
       .contact {
         transform: translateY(100%);
@@ -205,6 +206,14 @@
         translate: -25% 0;
         right: inherit;
       }
+    }
+  }
+  .see-more-cont {
+    width: 200px !important;
+    height: 200px !important;
+    .see-more {
+      margin-top: 15px !important;
+      font-size: 18px !important;
     }
   }
 }

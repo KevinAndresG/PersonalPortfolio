@@ -42,10 +42,11 @@ header {
       position: relative;
       font-size: 20px;
       font-weight: bolder;
-      color: #080808;
+      color: #bdbdbd;
       letter-spacing: 4px;
       transform: scale(1);
       transition: all 0.2s ease;
+      padding: 0;
     }
     .button.inactive .hover-text {
       border-right: var(--border-right) solid transparent;
@@ -53,11 +54,9 @@ header {
 
     .hover-text {
       position: absolute;
-      box-sizing: border-box;
-      content: attr(data-text);
       color: var(--animation-color);
       width: 0%;
-      inset: 0 3%;
+      inset: 0 0;
       overflow: hidden;
       transition: 0.5s;
       -webkit-text-stroke-width: 1px;
@@ -68,7 +67,7 @@ header {
       cursor: pointer;
       .hover-text {
         border-right: var(--border-right) solid var(--animation-color);
-        width: 90%;
+        width: 95%;
         filter: drop-shadow(0 0 5px var(--animation-color));
       }
     }

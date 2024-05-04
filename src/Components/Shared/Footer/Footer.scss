@@ -12,20 +12,40 @@ footer {
   }
   .name {
     font-size: 17px;
-    color: #101010;
+    font-weight: bold;
+    color: #999999;
     letter-spacing: 2px;
     transform: scale(1);
     transition: all 0.2s ease;
-    -webkit-text-stroke-width: 1px;
-    -webkit-text-stroke-color: #101010;
   }
   .front {
     font-size: 12px;
-    color: #101010;
+    font-weight: bold;
+    color: #999999;
     letter-spacing: 2px;
     transform: scale(1);
     transition: all 0.2s ease;
-    -webkit-text-stroke-width: 1px;
-    -webkit-text-stroke-color: #101010;
+  }
+}
+
+@media screen and (max-width: 760px) {
+  footer {
+    padding-left: 10px;
+    padding-bottom: 10px;
+    bottom: 0%;
+    .name {
+      font-size: 15px;
+      font-weight: bold;
+      color: #999999;
+      letter-spacing: 1px;
+      transform: scale(1);
+      transition: all 0.2s ease;
+    }
+    .front {
+      font-size: 10px;
+      letter-spacing: 1px;
+      transform: scale(1);
+      transition: all 0.2s ease;
+    }
   }
 }
