@@ -10,41 +10,50 @@
   height: 100vh;
   .tech-details {
     position: absolute;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
     top: 15%;
-    img {
-      filter: drop-shadow(0 10px 5px rgb(14, 14, 14));
-      width: 200px;
-    }
-    .side-info {
+    .det-cont {
       display: flex;
-      flex-direction: column;
+      display: flex;
+      flex-wrap: wrap;
       justify-content: center;
-      align-items: center;
-      margin-left: 25px;
-      h2 {
-        margin: 0;
-        width: 100%;
-        text-align: left;
-        color: #bdbdbd;
+      scale: 0;
+      transition: opacity 0.6s ease, scale 0.6s ease;
+      img {
+        filter: drop-shadow(0 10px 5px rgb(14, 14, 14));
+        width: 200px;
       }
-      input {
-        background: #ddd;
-        border-radius: 5px;
-        outline: none;
-      }
-
-      .level-group {
+      .side-info {
         display: flex;
+        flex-direction: column;
         justify-content: center;
         align-items: center;
-        column-gap: 15px;
-        label {
-          font-size: 20px;
+        margin-left: 25px;
+        h2 {
+          margin: 0;
+          width: 100%;
+          text-align: left;
           color: #bdbdbd;
         }
+        input {
+          background: #ddd;
+          border-radius: 5px;
+          outline: none;
+        }
+
+        .level-group {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          column-gap: 15px;
+          label {
+            font-size: 20px;
+            color: #bdbdbd;
+          }
+        }
+      }
+      &.show {
+        scale: 1;
+        opacity: 1;
       }
     }
     .no-hovered {
@@ -86,18 +95,21 @@
       border-radius: 100%;
       img {
         width: 100px;
-        height: 100px;
+        transition: filter 0.6s ease, width 0.6s ease, opacity 0.6s ease,
+          scale 0.5s ease;
       }
       &:hover {
         cursor: pointer;
         scale: 1.1;
         z-index: 100;
         background-color: rgba(41, 41, 41);
-        box-shadow: 0 0 10px rgb(0, 174, 255);
-        animation: moveArrows 13s linear infinite forwards;
-      }
-      &:not(:hover) {
-        animation-play-state: paused;
+        box-shadow: 0 0 5px rgb(0, 174, 255), inset 0 0 10px rgb(0, 174, 255);
+        animation: moveArrows 15s linear infinite forwards;
+        img {
+          scale: 0.6;
+          filter: drop-shadow(0 10px 5px rgb(14, 14, 14));
+          transition: scale 1s ease;
+        }
       }
     }
   }

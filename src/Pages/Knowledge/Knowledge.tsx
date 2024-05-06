@@ -25,45 +25,48 @@ const Knowledge = () => {
     { level: "60", title: "GIT", img: git },
     { level: "50", title: "AZURE", img: azure },
   ];
-  const [show, setShow] = useState<any>({
-    isHover: false,
-    tech: null,
-  });
+  const [show, setShow] = useState<any>({});
   const hoverTech = (techInfo: any) => {
     setShow(techInfo);
   };
-  const showTech = () => {
-    return show.tech ? (
-      <>
-        <img src={show.tech.img} alt="" />
-        <div className="side-info">
-          <h2>{show.tech.title}</h2>
-          <div className="level-group">
-            <progress
-              max={100}
-              value={show.tech.level}
-              id={show.tech.title}
-            ></progress>
-            <label htmlFor={show.tech.title}>{show.tech.level}%</label>
+  const showTech = () => (
+    <div className={`det-cont ${show.title && "show"}`}>
+      {show && (
+        <>
+          <img src={show.img} alt="" />
+          <div className="side-info">
+            <h2>{show.title}</h2>
+            <div className="level-group">
+              <progress max={100} value={show.level} id={show.title}></progress>
+              <label htmlFor={show.title}>{show.level}%</label>
+            </div>
           </div>
-        </div>
-      </>
-    ) : (
-      <div className="no-hovered">
-        <h5>Hover on any of the technologies to see the info</h5>
-      </div>
-    );
-  };
+        </>
+      )}
+    </div>
+  );
   return (
     <div id="knowledge-container">
-      {show && <div className="tech-details">{showTech()}</div>}
+      {show && (
+        <div className="tech-details">
+          {
+            <>
+              {showTech()}
+              {!show.title && (
+                <div className="no-hovered">
+                  <h5>Hover on any of the technologies to see the info</h5>
+                </div>
+              )}
+            </>
+          }
+        </div>
+      )}
       <ul className="techs-list">
         {techs.map((tech) => (
           <li
             key={tech.img}
             className="tech-item"
-            onMouseEnter={() => hoverTech({ isHover: true, tech: tech })}
-            onMouseLeave={() => hoverTech({ isHover: false, tech: null })}
+            onMouseEnter={() => hoverTech(tech)}
           >
             <img src={tech.img} />
           </li>
