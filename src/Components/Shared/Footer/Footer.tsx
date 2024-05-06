@@ -1,10 +1,6 @@
 import "./Footer.scss";
 
 const Footer = () => {
-  console.log(
-    "This Is  window.location.href:",
-    window.location.href.toLowerCase().includes("home")
-  );
   return (
     !window.location.href.toLowerCase().includes("home") && (
       <footer>

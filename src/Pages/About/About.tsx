@@ -60,7 +60,7 @@ const About = () => {
       <div className="logical-think-cont">
         <h2 className="logic-think">My Logical Thinking</h2>
         {logicItems.map((item, i) => (
-          <div key={i} className={`card-${i}`} id={`card-container`}>
+          <div key={i} className="each-card" id={`card-container`}>
             <span className="logic-line"></span>
             <LogicCard item={item} />
           </div>

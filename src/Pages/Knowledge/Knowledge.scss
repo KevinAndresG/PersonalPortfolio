@@ -1,10 +1,128 @@
 #knowledge-container {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-top: 10%;
+  box-sizing: border-box;
+  width: 100%;
+  height: 100vh;
+  .tech-details {
     position: absolute;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    top: 15%;
+    img {
+      filter: drop-shadow(0 10px 5px rgb(14, 14, 14));
+      width: 200px;
+    }
+    .side-info {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      margin-left: 25px;
+      h2 {
+        margin: 0;
+        width: 100%;
+        text-align: left;
+        color: #bdbdbd;
+      }
+      input {
+        background: #ddd;
+        border-radius: 5px;
+        outline: none;
+      }
+
+      .level-group {
         display: flex;
         justify-content: center;
-        padding-top: 20%;
-        width: 100%;
-        h1 {
-            color: rgb(143, 143, 143);
+        align-items: center;
+        column-gap: 15px;
+        label {
+          font-size: 20px;
+          color: #bdbdbd;
         }
+      }
+    }
+    .no-hovered {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      h5 {
+        color: #bdbdbd;
+        font-size: 30px;
+        margin: 0;
+        margin-top: 20%;
+        width: 70%;
+        text-align: center;
+        letter-spacing: 3px;
+      }
+    }
+  }
+  .techs-list {
+    position: absolute;
+    top: 45%;
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    width: 50%;
+    gap: 0px;
+    padding: 0;
+    margin: 0;
+    .tech-item {
+      width: 150px;
+      height: 150px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 5%;
+      transition: scale 0.3s ease, box-shadow 0.3s ease,
+        background-color 0.3s ease;
+      border-radius: 100%;
+      img {
+        width: 100px;
+        height: 100px;
+      }
+      &:hover {
+        cursor: pointer;
+        scale: 1.1;
+        z-index: 100;
+        background-color: rgba(41, 41, 41);
+        box-shadow: 0 0 10px rgb(0, 174, 255);
+        animation: moveArrows 13s linear infinite forwards;
+      }
+      &:not(:hover) {
+        animation-play-state: paused;
+      }
+    }
+  }
+}
+
+@keyframes moveArrows {
+  0% {
+    transform: rotateY(0deg);
+  }
+  100% {
+    transform: rotateZ(360deg);
+  }
+}
+@media screen and (max-width: 760px) {
+  #knowledge-container {
+    .techs-list {
+      width: 80%;
+    }
+  }
+}
+@media screen and (max-width: 423px) {
+  #knowledge-container {
+    .techs-list {
+      top: 50%;
+      width: 80%;
+    }
+  }
 }
