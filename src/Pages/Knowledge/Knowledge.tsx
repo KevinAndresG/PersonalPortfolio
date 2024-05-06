@@ -27,7 +27,7 @@ const Knowledge = () => {
   ];
   const [show, setShow] = useState<any>({
     isHover: false,
-    tech: { level: "70", title: "JAVASCRIPT", img: javaScript },
+    tech: null,
   });
   const hoverTech = (techInfo: any) => {
     setShow(techInfo);
