@@ -6,10 +6,29 @@ import MobileHeader from "../MobileHeader/MobileHeader";
 const Header = () => {
   const navItems = ["HOME", "ABOUT", "WORK", "KNOWLEDGE"];
   const [screenWidth, setScreenWidth] = useState(window.screen.width);
+  const [y, setY] = useState(window.scrollY);
+  const scrollStyles = {
+    backgroundColor: "#3131313d",
+    backdropFilter: "blur(10px)",
+    padding: "0 0 0 30px",
+  };
   const navigate = useNavigate();
   const navigationMenu = (item: String) => {
     navigate(`/${item.toLowerCase()}`);
   };
+
+  const handleScroll = () => {
+    setY(window.scrollY);
+  };
+
+  useEffect(() => {
+    window.addEventListener("scroll", () => handleScroll());
+
+    return () => {
+      // return a cleanup function to unregister our function since it will run multiple times
+      window.removeEventListener("scroll", () => handleScroll());
+    };
+  }, [y]);
 
   useEffect(() => {
     const handleResize = () => {
@@ -21,7 +40,7 @@ const Header = () => {
     };
   }, []);
   return (
-    <header>
+    <header style={y > 100 ? scrollStyles : {}}>
       {screenWidth <= 760 ? (
         <MobileHeader navItems={navItems} />
       ) : (

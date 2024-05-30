@@ -93,7 +93,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    row-gap: 50px;
+    // row-gap: 50px;
     .logic-think {
       opacity: 1;
       width: 100%;
@@ -104,6 +104,25 @@
       margin: 0;
       letter-spacing: 8px;
       position: relative;
+    }
+    .cards-cont {
+      position: relative;
+      overflow-y: scroll;
+      overflow-x: hidden;
+      width: 100vw;
+      translate: 20px 0;
+      height: 50vh;
+      scroll-snap-type: y mandatory;
+      .each-card {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        width: 100vw;
+        height: 50vh;
+        scroll-snap-align: start;
+      }
     }
   }
 }
