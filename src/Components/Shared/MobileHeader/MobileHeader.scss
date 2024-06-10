@@ -24,6 +24,18 @@
       transform: scale(1);
       transition: all 0.2s ease;
       padding: 0;
+      a {
+        color: #bdbdbd;
+        text-decoration: none;
+        &.active {
+          cursor: pointer;
+          .hover-text {
+            border-right: var(--border-right) solid var(--animation-color);
+            width: 95%;
+            filter: drop-shadow(0 0 5px var(--animation-color));
+          }
+        }
+      }
     }
     .button.inactive .hover-text {
       border-right: var(--border-right) solid transparent;
@@ -95,6 +107,14 @@
           z-index: -100;
         }
       }
+    }
+  }
+}
+
+@media screen and (max-width: 760px) {
+  #mobile-menu {
+    .hamburguer-button {
+      margin-right: 5%;
     }
   }
 }
