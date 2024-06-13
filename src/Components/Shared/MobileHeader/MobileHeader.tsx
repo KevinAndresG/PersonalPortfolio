@@ -2,6 +2,7 @@ import { useState } from "react";
 import "./MobileHeader.scss";
 import { NavLink } from "react-router-dom";
 import { FormattedMessage } from "react-intl";
+import LanguageSelector from "../LanguageSelector/LanguageSelector";
 
 const MobileHeader = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -53,6 +54,7 @@ const MobileHeader = () => {
               </span>
             </NavLink>
           </button>
+          <LanguageSelector />
         </div>
       </div>
       <div className="hamburguer-button" onClick={openMenu}>

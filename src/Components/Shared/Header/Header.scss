@@ -83,32 +83,6 @@ header {
         filter: drop-shadow(0 0 5px var(--animation-color));
       }
     }
-    .lang-cont {
-      display: flex;
-      flex-direction: column;
-      row-gap: 5px;
-      margin-right: 15px;
-      margin-left: 15px;
-      align-items: center;
-      justify-content: center;
-      .lang-button {
-        border: none;
-        padding: 0;
-        background: transparent;
-        color: #bdbdbd;
-        font-weight: bolder;
-        transition: color 0.1s ease, scale 0.1s ease;
-        &:hover {
-          cursor: pointer;
-          scale: 1.2;
-          color: rgb(95, 204, 255);
-        }
-        &.active {
-          scale: 1.2;
-          color: rgb(0, 174, 255);
-        }
-      }
-    }
   }
 }
 

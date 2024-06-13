@@ -10,7 +10,9 @@ import bootsTrap from "../../assets/BootstrapTechs.svg";
 import tailWind from "../../assets/TailWindTechs.svg";
 import git from "../../assets/GitTechs.svg";
 import azure from "../../assets/AzureTechs.png";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { FormattedMessage, IntlProvider } from "react-intl";
+import { LanguageContext } from "../../Contexts/LanguageSelector/Context";
 const Knowledge = () => {
   const techs = [
     { level: "70", title: "JAVASCRIPT", img: javaScript },
@@ -26,9 +28,12 @@ const Knowledge = () => {
     { level: "50", title: "AZURE", img: azure },
   ];
   const [show, setShow] = useState<any>({});
+  const { state } = useContext(LanguageContext);
+
   const hoverTech = (techInfo: any) => {
     setShow(techInfo);
   };
+
   const showTech = () => (
     <div className={`det-cont ${show.title && "show"}`}>
       {show && (
@@ -45,34 +50,41 @@ const Knowledge = () => {
       )}
     </div>
   );
+
   return (
-    <div id="knowledge-container">
-      {show && (
-        <div className="tech-details">
-          {
-            <>
-              {showTech()}
-              {!show.title && (
-                <div className="no-hovered">
-                  <h5>Hover on any of the technologies to see the info</h5>
-                </div>
-              )}
-            </>
-          }
+    <IntlProvider locale="En" messages={state.messages}>
+      {state.text && (
+        <div id="knowledge-container">
+          {show && (
+            <div className="tech-details">
+              {
+                <>
+                  {showTech()}
+                  {!show.title && (
+                    <div className="no-hovered">
+                      <h5>
+                        <FormattedMessage id="knowledge.title" />
+                      </h5>
+                    </div>
+                  )}
+                </>
+              }
+            </div>
+          )}
+          <ul className="techs-list">
+            {techs.map((tech) => (
+              <li
+                key={tech.img}
+                className="tech-item"
+                onMouseEnter={() => hoverTech(tech)}
+              >
+                <img src={tech.img} />
+              </li>
+            ))}
+          </ul>
         </div>
       )}
-      <ul className="techs-list">
-        {techs.map((tech) => (
-          <li
-            key={tech.img}
-            className="tech-item"
-            onMouseEnter={() => hoverTech(tech)}
-          >
-            <img src={tech.img} />
-          </li>
-        ))}
-      </ul>
-    </div>
+    </IntlProvider>
   );
 };
 

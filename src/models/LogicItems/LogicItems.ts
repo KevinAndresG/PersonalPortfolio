@@ -1,4 +1,6 @@
+import { ReactElement } from "react";
+
 export interface LogicItem {
-    title: String;
-    text: string
+  title: ReactElement;
+  text: ReactElement;
 }

@@ -1,4 +1,28 @@
 {
+  "general.front.end": "Front End",
+  "general.developer": "Desarrollador",
+
+  "home.description": "Bienvenido a mi perfil, mis proyectos, mi historia y mi deseo de mejorar.",
+  "home.see.more": "Ver Más",
+  "home.contact": "Contáctame",
+
+  "about.im": "Como Desarrollador Front End ",
+  "about.description": "He trabajado en varios proyectos aplicando eficientes y buenas técnicas de optimización, siempre intentando aplicar las mejores prácticas.",
+  "about.description.two": "He participado en proyectos usando diferentes Frameworks para el front, además de una buena implementación de bibliotecas adecuadas para mejorar la velocidad de tiempo. También he creado soluciones para aplicaciones con facilidad sin la necesidad de utilizar o implementar una biblioteca externa.",
+  "about.logical.think": "Mi pensamiento lógico",
+  "about.card.title.analyze": "Analizar",
+  "about.card.text.analyze": "Analizar el problema o nueva funcionalidad",
+  "about.card.title.destructure": "Desestructurar",
+  "about.card.text.destructure": "Dividir el problema en problemas menores para resolverlos de forma eficiente",
+  "about.card.title.solve": "Resolver",
+  "about.card.text.solve": "Resolver cada pequeño problema previamente desestructurado",
+  "about.card.title.bind": "Unir",
+  "about.card.text.bind": "Unir las soluciones o funcionalidades para probar su rendimiento y operación de forma correcta",
+
+  "work.title": "Mis Proyectos Personales",
+
+  "knowledge.title": "Posate sobre cualquiera de las tecnologías para ver la información.",
+
   "navBar.home": "INICIO",
   "navBar.about": "ACERCA",
   "navBar.work": "PROYECTOS",

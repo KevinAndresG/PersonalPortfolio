@@ -1,4 +1,28 @@
 {
+  "general.front.end": "Front End",
+  "general.developer": "Developer",
+
+  "home.description": "Welcome to my profile, my mrojects, my history and my desire to improve.",
+  "home.see.more": "See More",
+  "home.contact": "Contact Me",
+
+  "about.im": "Like a Front End Developer ",
+  "about.description": "I have worked on various projects applying efficient and good code optimization techniques, always trying to apply the best practices.",
+  "about.description.two": "I have participated in projects using different Front End Frameworks, in addition to a good implementation of appropriate libraries to speed up times. I have also created solutions for applications with agility without the need to use or implement an external library.",
+  "about.logical.think": "My logical thinking",
+  "about.card.title.analyze": "Analyze",
+  "about.card.text.analyze": "Analyze the problem or new functionality",
+  "about.card.title.destructure": "Destructure",
+  "about.card.text.destructure": "Divide the problem into smaller problems to solve them easily.",
+  "about.card.title.solve": "Solve",
+  "about.card.text.solve": "Solve each small previously unstructured task",
+  "about.card.title.bind": "Bind",
+  "about.card.text.bind": "Join the solutions or functionalities to test their performance and correct operation",
+
+  "work.title": "My Personal Projects",
+
+  "knowledge.title": "Hover on any of the technologies to see the info",
+
   "navBar.home": "HOME",
   "navBar.about": "ABOUT",
   "navBar.work": "WORK",

@@ -4,6 +4,7 @@ import { useContext, useEffect, useState } from "react";
 import MobileHeader from "../MobileHeader/MobileHeader";
 import { LanguageContext } from "../../../Contexts/LanguageSelector/Context";
 import { FormattedMessage, IntlProvider } from "react-intl";
+import LanguageSelector from "../LanguageSelector/LanguageSelector";
 
 const Header = () => {
   const scrollStyles = {
@@ -11,23 +12,13 @@ const Header = () => {
     backdropFilter: "blur(10px)",
     padding: "0 0 0 30px",
   };
-  const { state, changeLanguage } = useContext(LanguageContext);
+  const { state } = useContext(LanguageContext);
   const [screenWidth, setScreenWidth] = useState(window.screen.width);
   const [y, setY] = useState(window.scrollY);
-  const [activelanguage, setActivelanguage] = useState<string>(state.text);
 
   const handleScroll = () => {
     setY(window.scrollY);
   };
-
-  const handleLanguage = (language: string) => {
-    changeLanguage(language);
-    setActivelanguage(language);
-  };
-
-  useEffect(() => {
-    setActivelanguage(state.text);
-  }, [state]);
 
   useEffect(() => {
     window.addEventListener("scroll", () => handleScroll());
@@ -98,24 +89,7 @@ const Header = () => {
                     </span>
                   </NavLink>
                 </button>
-                <div className="lang-cont">
-                  <button
-                    className={`lang-button ${
-                      activelanguage === "Es" && "active"
-                    }`}
-                    onClick={() => handleLanguage("Es")}
-                  >
-                    Es
-                  </button>
-                  <button
-                    className={`lang-button ${
-                      activelanguage === "En" && "active"
-                    }`}
-                    onClick={() => handleLanguage("En")}
-                  >
-                    En
-                  </button>
-                </div>
+                <LanguageSelector />
               </div>
             </>
           )}
