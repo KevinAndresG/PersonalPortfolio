@@ -8,16 +8,16 @@
 
   .about-desc {
     margin: 0;
-    color: #ffffff;
+    color: #04b2d1;
     transform: translateY(100%);
     position: relative;
     text-align: center;
     left: 50%;
     width: 33%;
     font-size: 22px;
-    font-weight: lighter;
     letter-spacing: 3px;
     .desc-bold {
+      color: #ffffff;
       font-weight: bold;
       font-size: 26px;
     }
@@ -36,13 +36,12 @@
     transform: translateY(20%);
     .about-desc2 {
       margin: 0;
-      color: #ffffff;
+      color: #04b2d1;
       position: relative;
       text-align: center;
       left: 10%;
       width: 40%;
       font-size: 22px;
-      font-weight: lighter;
       letter-spacing: 3px;
       display: flex;
       flex-direction: column;
