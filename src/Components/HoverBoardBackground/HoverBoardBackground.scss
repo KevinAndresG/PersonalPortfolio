@@ -1,0 +1,30 @@
+.Hoverboard--box {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  transform: rotateZ(60deg) rotateX(50deg) rotateY(-50deg);
+  bottom: 0%;
+  right: 0%;
+
+  .hover-cont {
+    position: absolute;
+    display: grid;
+    grid-template-columns: repeat(20, 1fr);
+    gap: 40px;
+
+    .each {
+      width: 100px;
+      height: 100px;
+      position: relative;
+    }
+  }
+
+  .fade-dur {
+    position: absolute;
+    top: 90%;
+  }
+}

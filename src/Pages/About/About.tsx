@@ -11,6 +11,7 @@ import Clock from "../../Components/Clock/Clock";
 import { FormattedMessage, IntlProvider } from "react-intl";
 import { useContext } from "react";
 import { LanguageContext } from "../../Contexts/LanguageSelector/Context";
+import HoverBoardBackground from "../../Components/HoverBoardBackground/HoverBoardBackground";
 const About = () => {
   const logicItems: LogicItem[] = [
     {
@@ -42,6 +43,7 @@ const About = () => {
             transition: { duration: 1.5 },
           }}
         >
+          <HoverBoardBackground />
           <Clock />
           <p className="about-desc">
             <span className="desc-bold">

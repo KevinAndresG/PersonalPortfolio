@@ -13,6 +13,7 @@ import azure from "../../assets/AzureTechs.png";
 import { useContext, useState } from "react";
 import { FormattedMessage, IntlProvider } from "react-intl";
 import { LanguageContext } from "../../Contexts/LanguageSelector/Context";
+import HoverBoardBackground from "../../Components/HoverBoardBackground/HoverBoardBackground";
 const Knowledge = () => {
   const techs = [
     { level: "70", title: "JAVASCRIPT", img: javaScript },
@@ -55,6 +56,7 @@ const Knowledge = () => {
     <IntlProvider locale="En" messages={state.messages}>
       {state.text && (
         <div id="knowledge-container">
+          <HoverBoardBackground />
           {show && (
             <div className="tech-details">
               {

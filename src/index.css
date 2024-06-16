@@ -1,25 +1,28 @@
 @import url('https://fonts.googleapis.com/css2?family=Khand:wght@300;400;500;600;700&display=swap');
+
 body {
-    margin: 0;
-    height: 100vh;
-    font-family: 'khand';
+  margin: 0;
+  height: 100vh;
+  font-family: 'khand';
 }
-body, #root {
-    height: auto;
-    position: relative;
-    background: #202020;
+
+body,
+#root {
+  height: auto;
+  position: relative;
+  background: #202020;
 }
 
 body::-webkit-scrollbar {
-    width: 10px;
-  }
-  
-  body::-webkit-scrollbar-track {
-    background: transparent;
-  }
-  
-  body::-webkit-scrollbar-thumb {
-    background-color: rgb(0, 174, 255);
-    border-radius: 5px;
-    border: 3px solid #202020;
-  }
+  width: 10px;
+}
+
+body::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+body::-webkit-scrollbar-thumb {
+  background-color: rgb(0, 174, 255);
+  border-radius: 5px;
+  border: 3px solid #202020;
+}

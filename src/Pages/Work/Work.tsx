@@ -4,6 +4,7 @@ import "./Work.scss";
 import { motion } from "framer-motion";
 import { LanguageContext } from "../../Contexts/LanguageSelector/Context";
 import { useContext } from "react";
+import HoverBoardBackground from "../../Components/HoverBoardBackground/HoverBoardBackground";
 
 const Work = () => {
   const { state } = useContext(LanguageContext);
@@ -18,6 +19,7 @@ const Work = () => {
             transition: { duration: 2 },
           }}
         >
+          <HoverBoardBackground />
           <h1 className="personal-projects">
             <FormattedMessage id="work.title" />
           </h1>

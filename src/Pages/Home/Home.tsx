@@ -8,6 +8,7 @@ import { motion } from "framer-motion";
 import { FormattedMessage, IntlProvider } from "react-intl";
 import { useContext } from "react";
 import { LanguageContext } from "../../Contexts/LanguageSelector/Context";
+import HoverBoardBackground from "../../Components/HoverBoardBackground/HoverBoardBackground";
 
 const Home = () => {
   let socialIcons = [
@@ -25,6 +26,7 @@ const Home = () => {
     <IntlProvider locale="En" messages={state.messages}>
       {state.text && (
         <motion.div id="home-container">
+          <HoverBoardBackground />
           <Rope />
           <div className="info-cont">
             <h2 className="front-d">

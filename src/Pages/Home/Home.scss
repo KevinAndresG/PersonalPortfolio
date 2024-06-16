@@ -6,7 +6,6 @@
   box-sizing: border-box;
   overflow: hidden;
   .info-cont {
-    z-index: 100;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -14,7 +13,6 @@
     padding-left: 15%;
     width: 50%;
     .front-d {
-      z-index: 100;
       font-weight: bold;
       width: 100%;
       font-size: 60px;
@@ -24,6 +22,7 @@
       display: flex;
       flex-direction: column;
       align-items: center;
+      z-index: 1000;
       .developer {
         letter-spacing: 30px;
       }
@@ -31,26 +30,30 @@
     .desc {
       margin: 0;
       font-size: 30px;
-      width: 48%;
+      width: 100%;
       display: flex;
       justify-content: center;
       text-align: center;
       font-weight: lighter;
       color: rgba(255, 255, 255, 0.625);
+      z-index: 1000;
     }
   }
   .social-icons {
     display: flex;
     flex-direction: column;
     align-items: flex-end;
+    z-index: 1000;
+    position: absolute;
+    width: auto;
+    right: 10%;
 
     .contact {
-      transform: translateX(-100%) translateY(100%);
+      transform: translateY(100%);
       color: white;
       filter: drop-shadow(0px 8px 2px rgba(0, 0, 0, 0.7));
     }
     .icons-container {
-      z-index: 100;
       display: flex;
       position: absolute;
       column-gap: 30%;

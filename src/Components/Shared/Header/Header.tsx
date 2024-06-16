@@ -40,7 +40,7 @@ const Header = () => {
   return (
     <IntlProvider locale="En" messages={state.messages}>
       {state.text && (
-        <header style={y > 100 ? scrollStyles : {}}>
+        <header style={y >= 100 ? scrollStyles : {}}>
           {screenWidth <= 760 ? (
             <MobileHeader />
           ) : (
