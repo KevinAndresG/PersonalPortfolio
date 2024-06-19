@@ -7,8 +7,8 @@
   "home.contact": "Contáctame",
 
   "about.im": "Como Desarrollador Front End ",
-  "about.description": "He trabajado en varios proyectos aplicando eficientes y buenas técnicas de optimización, siempre intentando aplicar las mejores prácticas.",
-  "about.description.two": "He participado en proyectos usando diferentes Frameworks para el front, además de una buena implementación de bibliotecas adecuadas para mejorar la velocidad de tiempo. También he creado soluciones para aplicaciones con facilidad sin la necesidad de utilizar o implementar una biblioteca externa.",
+  "about.description": "He trabajado en varios proyectos aplicando buenas técnicas de optimización y siempre aplicando las mejores prácticas.",
+  "about.description.two": "Usando diferentes Frameworks, y también he creado aplicaciones sin la necesidad de utilizar una biblioteca externa o Framework.",
   "about.logical.think": "Mi pensamiento lógico",
   "about.card.title.analyze": "Analizar",
   "about.card.text.analyze": "Analizar el problema o nueva funcionalidad",
@@ -19,7 +19,8 @@
   "about.card.title.bind": "Unir",
   "about.card.text.bind": "Unir las soluciones o funcionalidades para probar su rendimiento y operación de forma correcta",
 
-  "work.title": "Mis Proyectos Personales",
+  "work.title": "Proyectos",
+  "work.enter.button": "Entrar",
 
   "knowledge.title": "Posate sobre cualquiera de las tecnologías para ver la información.",
 

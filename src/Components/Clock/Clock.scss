@@ -128,10 +128,16 @@
     }
   }
 }
+@media screen and (max-width: 1200px) {
+  .ThemeClock--container {
+    translate: 40% 0;
+    margin-top: 30%;
+  }
+}
 @media screen and (max-width: 900px) {
   .ThemeClock--container {
-    translate: 45% 0;
-    margin-top: 30%;
+    translate: 35% 0;
+    margin-top: 35%;
   }
 }
 @media screen and (max-width: 760px) {

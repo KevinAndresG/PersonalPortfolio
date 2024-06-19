@@ -7,8 +7,8 @@
   "home.contact": "Contact Me",
 
   "about.im": "Like a Front End Developer ",
-  "about.description": "I have worked on various projects applying efficient and good code optimization techniques, always trying to apply the best practices.",
-  "about.description.two": "I have participated in projects using different Front End Frameworks, in addition to a good implementation of appropriate libraries to speed up times. I have also created solutions for applications with agility without the need to use or implement an external library.",
+  "about.description": "I have worked on several projects applying good optimization techniques and always applying best practices.",
+  "about.description.two": "Using different Frameworks, and I have also created applications without the need to use an external library or Framework.",
   "about.logical.think": "My logical thinking",
   "about.card.title.analyze": "Analyze",
   "about.card.text.analyze": "Analyze the problem or new functionality",
@@ -19,12 +19,13 @@
   "about.card.title.bind": "Bind",
   "about.card.text.bind": "Join the solutions or functionalities to test their performance and correct operation",
 
-  "work.title": "My Personal Projects",
+  "work.title": "Projects",
+  "work.enter.button": "Enter",
 
   "knowledge.title": "Hover on any of the technologies to see the info",
 
   "navBar.home": "HOME",
   "navBar.about": "ABOUT",
-  "navBar.work": "WORK",
+  "navBar.work": "PROJECTS",
   "navBar.knowledge": "KNOWLEDGE"
 }

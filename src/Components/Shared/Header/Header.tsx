@@ -10,7 +10,6 @@ const Header = () => {
   const scrollStyles = {
     backgroundColor: "#3131313d",
     backdropFilter: "blur(10px)",
-    padding: "0 0 0 30px",
   };
   const { state } = useContext(LanguageContext);
   const [screenWidth, setScreenWidth] = useState(window.screen.width);
@@ -41,7 +40,7 @@ const Header = () => {
     <IntlProvider locale="En" messages={state.messages}>
       {state.text && (
         <header style={y >= 100 ? scrollStyles : {}}>
-          {screenWidth <= 760 ? (
+          {screenWidth <= 900 ? (
             <MobileHeader />
           ) : (
             <>
