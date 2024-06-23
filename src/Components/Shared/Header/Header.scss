@@ -13,7 +13,7 @@ header {
   min-height: 60px;
   transition: padding 0.2s ease, background-color 0.2s ease;
   .go-home {
-    cursor: pointer;
+    cursor: none;
     text-decoration: none;
     .header-name {
       margin: 0;
@@ -48,10 +48,10 @@ header {
       transition: all 0.2s ease;
       padding: 0;
       a {
+        cursor: none;
         color: #bdbdbd;
         text-decoration: none;
         &.active {
-          cursor: pointer;
           .hover-text {
             border-right: var(--border-right) solid var(--animation-color);
             width: 95%;
@@ -76,7 +76,6 @@ header {
 
     .button:hover,
     .button.button.active {
-      cursor: pointer;
       .hover-text {
         border-right: var(--border-right) solid var(--animation-color);
         width: 95%;

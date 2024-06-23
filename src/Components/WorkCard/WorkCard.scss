@@ -2,7 +2,7 @@
   position: relative;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 10px;
+  gap: 20px;
   place-items: center;
   min-height: 70vh;
   height: auto;
@@ -51,7 +51,7 @@
         box-shadow 0.2s ease, color 0.2s ease;
 
       &:hover {
-        cursor: pointer;
+        cursor: none;
         background-color: rgb(0, 174, 255);
         box-shadow: 0 5px 5px rgba(0, 174, 255, 0.4);
         color: white;

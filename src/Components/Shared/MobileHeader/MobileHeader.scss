@@ -28,7 +28,7 @@
         color: #bdbdbd;
         text-decoration: none;
         &.active {
-          cursor: pointer;
+          cursor: none;
           .hover-text {
             border-right: var(--border-right) solid var(--animation-color);
             width: 95%;
@@ -55,7 +55,7 @@
 
     .button:hover,
     .button.button.active {
-      cursor: pointer;
+      cursor: none;
       .hover-text {
         border-right: var(--border-right) solid var(--animation-color);
         width: 95%;

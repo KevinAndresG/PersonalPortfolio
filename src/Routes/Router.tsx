@@ -11,6 +11,7 @@ import { useContext } from "react";
 import { LanguageContext } from "../Contexts/LanguageSelector/Context";
 import { IntlProvider } from "react-intl";
 import LanguageProvider from "../Contexts/LanguageSelector/Index";
+import CustomCursor from "../Components/Shared/CustomCursor/CustomCursor";
 
 const Router = () => {
   const location = useLocation();
@@ -19,6 +20,7 @@ const Router = () => {
     <>
       {state && (
         <IntlProvider locale="En" messages={state.messages}>
+          <CustomCursor />
           <LanguageProvider>
             <Header />
             <AnimatePresence>

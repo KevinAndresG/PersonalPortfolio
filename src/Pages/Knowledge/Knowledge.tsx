@@ -16,15 +16,15 @@ import { LanguageContext } from "../../Contexts/LanguageSelector/Context";
 import HoverBoardBackground from "../../Components/HoverBoardBackground/HoverBoardBackground";
 const Knowledge = () => {
   const techs = [
-    { level: "70", title: "JAVASCRIPT", img: javaScript },
-    { level: "50", title: "ANGULAR", img: angular },
-    { level: "80", title: "REACT", img: react },
+    { level: "60", title: "JAVASCRIPT", img: javaScript },
+    { level: "60", title: "ANGULAR", img: angular },
+    { level: "60", title: "REACT", img: react },
     { level: "50", title: "TYPESCRIPT", img: typeScript },
-    { level: "70", title: "HTML", img: html },
-    { level: "80", title: "CSS", img: css },
+    { level: "60", title: "HTML", img: html },
+    { level: "70", title: "CSS", img: css },
     { level: "60", title: "SASS", img: sass },
     { level: "40", title: "BOOTSTRAP", img: bootsTrap },
-    { level: "40", title: "TAILWIND", img: tailWind },
+    { level: "50", title: "TAILWIND", img: tailWind },
     { level: "60", title: "GIT", img: git },
     { level: "50", title: "AZURE", img: azure },
   ];
@@ -79,6 +79,7 @@ const Knowledge = () => {
                 key={tech.img}
                 className="tech-item"
                 onMouseEnter={() => hoverTech(tech)}
+                onMouseLeave={() => hoverTech({})}
               >
                 <img src={tech.img} />
               </li>

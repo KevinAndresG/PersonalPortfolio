@@ -3,6 +3,8 @@ import CincuentaP from "../../assets/CincuentaProjects.png";
 import PetAppointments from "../../assets/PetAppointmen.png";
 import SpaceTravel from "../../assets/SpaceTravel.png";
 import TravelAgency from "../../assets/TravelAgency.png";
+import TypeGenerator from "../../assets/TypeGenerator.png";
+import ImageMatch from "../../assets/ImageMatch.png";
 import { WorkInfo } from "../../models/LogicItems/Workinfo";
 import { FormattedMessage } from "react-intl";
 
@@ -34,6 +36,18 @@ const worksToShowAll: WorkInfo[] = [
     url: "https://kevin-garcia-travel-agency.netlify.app",
     techs: ["HTML", "CSS", "JavaScript", "TypeScript", "React"],
   },
+  {
+    title: "Interface/Model Generator",
+    img: TypeGenerator,
+    url: "https://kevin-garcia-typegenerator.netlify.app/",
+    techs: ["HTML", "CSS", "JavaScript", "TypeScript", "React"],
+  },
+  {
+    title: "Image Matching",
+    img: ImageMatch,
+    url: "https://playgreen-sports-kevin.netlify.app/home",
+    techs: ["HTML", "Syled Components", "JavaScript", "TypeScript", "React"],
+  },
 ];
 
 const WorkCard = () => {
@@ -42,7 +56,6 @@ const WorkCard = () => {
       {worksToShowAll.map((item) => (
         <div
           className="item"
-          key={item.url}
           tabIndex={0}
           style={{ backgroundImage: `url(${item.img})` }}
         >
