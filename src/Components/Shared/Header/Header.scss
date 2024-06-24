@@ -15,16 +15,14 @@ header {
   .go-home {
     cursor: none;
     text-decoration: none;
-    .header-name {
-      margin: 0;
-      overflow: hidden;
-      height: 60px;
-      font-size: 32px;
-      color: white;
-      text-shadow: 0 5px 3px #101010;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+    display: flex;
+
+    .logo {
+      width: 80px;
+      transition: scale 0.1s ease;
+      &:hover {
+        scale: 1.1;
+      }
     }
   }
   #Header {

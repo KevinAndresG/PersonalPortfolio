@@ -39,8 +39,8 @@ const About = () => {
         <motion.div
           id="about-container"
           animate={{
-            width: ["0%", "100%"],
-            transition: { duration: 1.5 },
+            opacity: ["0", "100%"],
+            transition: { duration: 1 },
           }}
         >
           <HoverBoardBackground />

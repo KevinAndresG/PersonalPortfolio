@@ -5,6 +5,7 @@ import MobileHeader from "../MobileHeader/MobileHeader";
 import { LanguageContext } from "../../../Contexts/LanguageSelector/Context";
 import { FormattedMessage, IntlProvider } from "react-intl";
 import LanguageSelector from "../LanguageSelector/LanguageSelector";
+import KG from "../../../assets/kgLogo.png";
 
 const Header = () => {
   const scrollStyles = {
@@ -45,7 +46,7 @@ const Header = () => {
           ) : (
             <>
               <Link to={"/"} className="go-home">
-                <h1 className="header-name">Kevin Garcia</h1>
+                <img src={KG} alt="logo" className="logo" />
               </Link>
               <div id="Header">
                 <button className={`button`}>

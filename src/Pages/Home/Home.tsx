@@ -29,20 +29,21 @@ const Home = () => {
           <HoverBoardBackground />
           <Rope />
           <div className="info-cont">
+            <h1 className="header-name">Kevin Garcia</h1>
             <h2 className="front-d">
               {state.text === "Es" ? (
-                <span style={{ letterSpacing: "15px" }}>
+                <span style={{ letterSpacing: "5px" }}>
                   <FormattedMessage id="general.developer" />
                 </span>
               ) : (
                 <FormattedMessage id="general.front.end" />
               )}
               {state.text === "Es" ? (
-                <span className="developer" style={{ letterSpacing: "0" }}>
+                <span className="developer" style={{ letterSpacing: "5px" }}>
                   <FormattedMessage id="general.front.end" />
                 </span>
               ) : (
-                <span className="developer" style={{ letterSpacing: "30px" }}>
+                <span className="developer" style={{ letterSpacing: "5px" }}>
                   <FormattedMessage id="general.developer" />
                 </span>
               )}
@@ -71,10 +72,10 @@ const Home = () => {
           <motion.div
             className="hide-content"
             initial={{ top: -window.innerHeight / 4.5 }}
-            animate={{ top: window.innerHeight, transition: { duration: 1 } }}
+            animate={{ top: window.innerHeight, transition: { duration: 0.5 } }}
             exit={{
               top: -window.innerHeight / 4.5,
-              transition: { duration: 1 },
+              transition: { duration: 0.5 },
             }}
           >
             <span className="hover-panel"></span>

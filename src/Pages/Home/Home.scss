@@ -5,6 +5,7 @@
   position: relative;
   box-sizing: border-box;
   overflow: hidden;
+
   .info-cont {
     display: flex;
     flex-direction: column;
@@ -12,18 +13,29 @@
     align-items: center;
     padding-left: 15%;
     width: 50%;
+
+    .header-name {
+      z-index: 10;
+      margin: 0;
+      font-size: 60px;
+      color: white;
+      text-shadow: 0 5px 4px #101010;
+    }
+
     .front-d {
       font-weight: bold;
       width: 100%;
-      font-size: 60px;
-      letter-spacing: 10px;
+      font-size: 40px;
+      letter-spacing: 5px;
       margin: 0;
-      color: #ffffff;
+      color: #dbdbdb;
       display: flex;
-      flex-direction: column;
-      align-items: center;
+      // flex-direction: column;
+      //       align-items: center;
+      justify-content: center;
       z-index: 1000;
       .developer {
+        margin-left: 10px;
         letter-spacing: 30px;
       }
     }
@@ -35,8 +47,9 @@
       justify-content: center;
       text-align: center;
       font-weight: lighter;
-      color: rgba(255, 255, 255, 0.625);
+      color: rgba(219, 219, 219, 0.733);
       z-index: 1000;
+      letter-spacing: 2px;
     }
   }
   .social-icons {

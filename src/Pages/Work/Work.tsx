@@ -16,7 +16,7 @@ const Work = () => {
           id="work-container"
           animate={{
             opacity: ["0", "100%"],
-            transition: { duration: 2 },
+            transition: { duration: 1 },
           }}
         >
           <HoverBoardBackground />

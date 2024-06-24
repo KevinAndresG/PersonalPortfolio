@@ -14,6 +14,7 @@ import { useContext, useState } from "react";
 import { FormattedMessage, IntlProvider } from "react-intl";
 import { LanguageContext } from "../../Contexts/LanguageSelector/Context";
 import HoverBoardBackground from "../../Components/HoverBoardBackground/HoverBoardBackground";
+import { motion } from "framer-motion";
 const Knowledge = () => {
   const techs = [
     { level: "60", title: "JAVASCRIPT", img: javaScript },
@@ -55,7 +56,13 @@ const Knowledge = () => {
   return (
     <IntlProvider locale="En" messages={state.messages}>
       {state.text && (
-        <div id="knowledge-container">
+        <motion.div
+          id="knowledge-container"
+          animate={{
+            opacity: ["0", "100%"],
+            transition: { duration: 1 },
+          }}
+        >
           <HoverBoardBackground />
           {show && (
             <div className="tech-details">
@@ -85,7 +92,7 @@ const Knowledge = () => {
               </li>
             ))}
           </ul>
-        </div>
+        </motion.div>
       )}
     </IntlProvider>
   );

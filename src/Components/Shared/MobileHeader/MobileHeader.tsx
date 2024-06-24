@@ -14,7 +14,7 @@ const MobileHeader = () => {
     <div id="mobile-menu">
       <div className={`items-panel ${isOpen && "open"}`}>
         <div id="Header-mobile">
-          <button className={`button`}>
+          <button className={`button`} onClick={openMenu}>
             <NavLink to={"/home"}>
               <span className="actual-text">
                 &nbsp;{<FormattedMessage id="navBar.home" />}&nbsp;
@@ -24,7 +24,7 @@ const MobileHeader = () => {
               </span>
             </NavLink>
           </button>
-          <button className={`button`}>
+          <button className={`button`} onClick={openMenu}>
             <NavLink to={"/about"}>
               <span className="actual-text">
                 &nbsp;{<FormattedMessage id="navBar.about" />}&nbsp;
@@ -34,7 +34,7 @@ const MobileHeader = () => {
               </span>
             </NavLink>
           </button>
-          <button className={`button`}>
+          <button className={`button`} onClick={openMenu}>
             <NavLink to={"/work"}>
               <span className="actual-text">
                 &nbsp;{<FormattedMessage id="navBar.work" />}&nbsp;
@@ -44,7 +44,7 @@ const MobileHeader = () => {
               </span>
             </NavLink>
           </button>
-          <button className={`button`}>
+          <button className={`button`} onClick={openMenu}>
             <NavLink to={"/knowledge"}>
               <span className="actual-text">
                 &nbsp;{<FormattedMessage id="navBar.knowledge" />}&nbsp;

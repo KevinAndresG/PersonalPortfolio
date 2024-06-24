@@ -6,6 +6,7 @@
   margin-top: 20%;
   translate: 50% 0;
   scale: 2;
+  pointer-events: none;
   .ThemeClock--box {
     .clock {
       z-index: 100;

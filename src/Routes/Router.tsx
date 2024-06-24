@@ -7,7 +7,7 @@ import NotFound from "../Components/NotFound/NotFound";
 import { AnimatePresence } from "framer-motion";
 import Footer from "../Components/Shared/Footer/Footer";
 import Header from "../Components/Shared/Header/Header";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { LanguageContext } from "../Contexts/LanguageSelector/Context";
 import { IntlProvider } from "react-intl";
 import LanguageProvider from "../Contexts/LanguageSelector/Index";
@@ -16,11 +16,23 @@ import CustomCursor from "../Components/Shared/CustomCursor/CustomCursor";
 const Router = () => {
   const location = useLocation();
   const { state } = useContext(LanguageContext);
+  const [screenWidth, setScreenWidth] = useState(window.screen.width);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setScreenWidth(window.screen.width);
+    };
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
   return (
     <>
       {state && (
         <IntlProvider locale="En" messages={state.messages}>
-          <CustomCursor />
+          {screenWidth > 768 && <CustomCursor />}
+          {/* <CustomCursor /> */}
           <LanguageProvider>
             <Header />
             <AnimatePresence>

@@ -3,7 +3,6 @@
   display: flex;
   justify-content: end;
   align-items: center;
-  // padding-right: 5%;
   position: relative;
   #Header-mobile {
     width: 100%;
@@ -76,8 +75,9 @@
     justify-content: center;
     align-items: center;
     padding-top: 50vh;
-    transition: transform 0.6s ease-in-out;
+    transition: transform 0.4s 0.3s ease;
     &.open {
+      transition: transform 0.4s ease;
       transform: translateX(11%);
     }
   }
