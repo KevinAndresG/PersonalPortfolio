@@ -10,6 +10,18 @@ import { FormattedMessage } from "react-intl";
 
 const worksToShowAll: WorkInfo[] = [
   {
+    title: "Image Matching",
+    img: ImageMatch,
+    url: "https://playgreen-sports-kevin.netlify.app/home",
+    techs: ["HTML", "Syled Components", "JavaScript", "TypeScript", "React"],
+  },
+  {
+    title: "Interface/Model Generator",
+    img: TypeGenerator,
+    url: "https://kevin-garcia-typegenerator.netlify.app/",
+    techs: ["HTML", "CSS", "JavaScript", "TypeScript", "React"],
+  },
+  {
     title: "50 Projects 50 Days",
     img: CincuentaP,
     url: "https://kevin-garcia-50projects.netlify.app/home/ExpandingCards",
@@ -35,18 +47,6 @@ const worksToShowAll: WorkInfo[] = [
     img: TravelAgency,
     url: "https://kevin-garcia-travel-agency.netlify.app",
     techs: ["HTML", "CSS", "JavaScript", "TypeScript", "React"],
-  },
-  {
-    title: "Interface/Model Generator",
-    img: TypeGenerator,
-    url: "https://kevin-garcia-typegenerator.netlify.app/",
-    techs: ["HTML", "CSS", "JavaScript", "TypeScript", "React"],
-  },
-  {
-    title: "Image Matching",
-    img: ImageMatch,
-    url: "https://playgreen-sports-kevin.netlify.app/home",
-    techs: ["HTML", "Syled Components", "JavaScript", "TypeScript", "React"],
   },
 ];
 
