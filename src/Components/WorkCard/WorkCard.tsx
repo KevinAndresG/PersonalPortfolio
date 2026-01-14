@@ -2,19 +2,21 @@ import "./WorkCard.scss";
 import CincuentaP from "../../assets/CincuentaProjects.png";
 import PetAppointments from "../../assets/PetAppointmen.png";
 import SpaceTravel from "../../assets/SpaceTravel.png";
+import Paac from "../../assets/Paac.png";
+import Slotty from "../../assets/Slotty.png";
 import TravelAgency from "../../assets/TravelAgency.png";
 import TypeGenerator from "../../assets/TypeGenerator.png";
-import ImageMatch from "../../assets/ImageMatch.png";
+// import ImageMatch from "../../assets/ImageMatch.png";
 import { WorkInfo } from "../../models/LogicItems/Workinfo";
 import { FormattedMessage } from "react-intl";
 
 const worksToShowAll: WorkInfo[] = [
-  {
-    title: "Image Matching",
-    img: ImageMatch,
-    url: "https://image-matching-kevin.netlify.app/login",
-    techs: ["HTML", "Syled Components", "JavaScript", "TypeScript", "React"],
-  },
+  // {
+  //   title: "Image Matching",
+  //   img: ImageMatch,
+  //   url: "https://image-matching-kevin.netlify.app/login",
+  //   techs: ["HTML", "Syled Components", "JavaScript", "TypeScript", "React"],
+  // },
   {
     title: "Interface/Model Generator",
     img: TypeGenerator,
@@ -27,7 +29,18 @@ const worksToShowAll: WorkInfo[] = [
     url: "https://kevin-garcia-50projects.netlify.app/home/ExpandingCards",
     techs: ["HTML", "CSS", "JavaScript", "TypeScript", "Angular"],
   },
-
+  {
+    title: "Slotty",
+    img: Slotty,
+    url: "https://v0-barber-booking-app-plum.vercel.app/",
+    techs: ["HTML", "Tailwind", "TypeScript", "React", "NextJS"],
+  },
+  {
+    title: "Paac",
+    img: Paac,
+    url: "https://v0-youth-protection-app.vercel.app/",
+    techs: ["HTML", "Tailwind", "TypeScript", "React", "NextJS"],
+  },
   {
     title: "Pet Appointments",
     img: PetAppointments,
