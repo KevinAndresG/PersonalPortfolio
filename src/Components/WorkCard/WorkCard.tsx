@@ -6,11 +6,18 @@ import Paac from "../../assets/Paac.png";
 import Slotty from "../../assets/Slotty.png";
 import TravelAgency from "../../assets/TravelAgency.png";
 import TypeGenerator from "../../assets/TypeGenerator.png";
+import ModerTask from "../../assets/ModernTask.png";
 import { WorkInfo } from "../../models/LogicItems/Workinfo";
 import { FormattedMessage } from "react-intl";
 import { useRef, useState } from "react";
 
 const worksToShowAll: WorkInfo[] = [
+  {
+    title: "Modern Task Manager",
+    img: ModerTask,
+    url: "https://modern-task-app-prueba.netlify.app/",
+    techs: ["HTML", "CSS", "JavaScript", "TypeScript", "Angular"],
+  },
   {
     title: "Interface/Model Generator",
     img: TypeGenerator,
