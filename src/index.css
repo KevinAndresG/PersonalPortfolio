@@ -1,29 +1,83 @@
-@import url('https://fonts.googleapis.com/css2?family=Khand:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap');
+
+:root {
+  --bg: rgb(12, 12, 12);
+  --bg-surface: #0f0f1a;
+  --bg-card: #0f273ba4;
+  --bg-card2: #1a1f2e;
+  --primary: #00d4ff;
+  --primary-dim: rgba(0, 212, 255, 0.15);
+  --secondary: #8b5cf6;
+  --secondary-dim: rgba(139, 92, 246, 0.15);
+  --accent: #10b981;
+  --text: #f1f5f9;
+  --text-muted: #8892a4;
+  --border: rgba(255, 255, 255, 0.07);
+  --border-glow: rgba(0, 212, 255, 0.3);
+  --gradient-primary: linear-gradient(135deg, #00d4ff, #8b5cf6);
+  --gradient-card: linear-gradient(135deg, rgba(0, 212, 255, 0.05), rgba(139, 92, 246, 0.05));
+  --shadow-glow: 0 0 30px rgba(0, 212, 255, 0.15), 0 0 60px rgba(139, 92, 246, 0.1);
+  --radius: 12px;
+  --radius-lg: 20px;
+  --transition: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
 
 body {
   margin: 0;
   height: 100vh;
-  font-family: 'khand';
+  font-family: 'Inter', sans-serif;
   cursor: none;
+  background: var(--bg);
+  color: var(--text);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'Space Grotesk', sans-serif;
 }
 
 body,
 #root {
   height: auto;
   position: relative;
-  background: #202020;
 }
 
+/* Custom scrollbar */
 body::-webkit-scrollbar {
-  width: 10px;
+  width: 6px;
 }
 
 body::-webkit-scrollbar-track {
-  background: transparent;
+  background: var(--bg);
 }
 
 body::-webkit-scrollbar-thumb {
-  background-color: rgb(0, 174, 255);
-  border-radius: 5px;
-  border: 3px solid #202020;
+  background: linear-gradient(to bottom, var(--primary), var(--secondary));
+  border-radius: 6px;
+}
+
+body::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(to bottom, #33ddff, #a78bfa);
+}
+
+/* Selection */
+::selection {
+  background: rgba(0, 212, 255, 0.25);
+  color: var(--text);
 }

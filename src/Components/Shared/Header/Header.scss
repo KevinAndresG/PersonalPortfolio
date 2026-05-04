@@ -1,83 +1,99 @@
 header {
   display: flex;
   align-items: center;
-  padding-top: 20px;
-  padding-bottom: 20px;
-  padding-left: 30px;
+  padding: 16px 40px;
   font-weight: bold;
   position: fixed;
   width: 100%;
   z-index: 10000;
-  background-color: #202020;
-  box-shadow: 0 2px 10px #181818;
-  min-height: 60px;
-  transition: padding 0.2s ease, background-color 0.2s ease;
+  transition:
+    background var(--transition),
+    backdrop-filter var(--transition),
+    border-color var(--transition);
+  background: transparent;
+
+  &.scrolled {
+    background: rgba(8, 8, 17, 0.5);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--border);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.4);
+  }
+
   .go-home {
     cursor: none;
     text-decoration: none;
     display: flex;
+    transition: opacity var(--transition);
+
+    &:hover {
+      opacity: 0.8;
+    }
 
     .logo {
-      width: 80px;
-      transition: scale 0.1s ease;
-      &:hover {
-        scale: 1.1;
-      }
+      width: 70px;
+      filter: drop-shadow(0 0 8px rgba(0, 212, 255, 0.4));
     }
   }
+
   #Header {
     position: absolute;
     margin: 0;
     padding: 0;
     display: flex;
     align-items: center;
-    justify-content: flex-end;
+    gap: 4px;
     right: 5%;
+
     .button {
-      --border-right: 3px;
-      --animation-color: rgb(0, 174, 255);
       background: transparent;
       border: none;
       position: relative;
-      font-size: 20px;
-      font-weight: bolder;
-      letter-spacing: 4px;
-      transform: scale(1);
-      transition: all 0.2s ease;
-      padding: 0;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 2.5px;
+      padding: 8px 14px;
+      font-family: "Space Grotesk", sans-serif;
+
       a {
         cursor: none;
-        color: #bdbdbd;
+        color: var(--text-muted);
         text-decoration: none;
+        position: relative;
+        transition: color var(--transition);
+
+        &::after {
+          content: "";
+          position: absolute;
+          bottom: -4px;
+          left: 0;
+          width: 0;
+          height: 2px;
+          background: var(--gradient-primary);
+          border-radius: 2px;
+          transition: width var(--transition);
+        }
+
         &.active {
-          .hover-text {
-            border-right: var(--border-right) solid var(--animation-color);
-            width: 95%;
-            filter: drop-shadow(0 0 5px var(--animation-color));
+          color: var(--primary);
+          &::after {
+            width: 100%;
           }
         }
+
+        .hover-text {
+          display: none;
+        }
+        .actual-text {
+          display: block;
+        }
       }
-    }
-    .button.inactive .hover-text {
-      border-right: var(--border-right) solid transparent;
-    }
 
-    .hover-text {
-      position: absolute;
-      color: var(--animation-color);
-      width: 0%;
-      inset: 0 0;
-      overflow: hidden;
-      transition: 0.5s;
-      -webkit-text-stroke-width: 1px;
-    }
-
-    .button:hover,
-    .button.button.active {
-      .hover-text {
-        border-right: var(--border-right) solid var(--animation-color);
-        width: 95%;
-        filter: drop-shadow(0 0 5px var(--animation-color));
+      &:hover a {
+        color: var(--text);
+        &::after {
+          width: 100%;
+        }
       }
     }
   }

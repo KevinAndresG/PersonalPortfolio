@@ -1,129 +1,136 @@
 #work-card-container {
   position: relative;
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 20px;
-  place-items: center;
-  min-height: 70vh;
-  height: auto;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 24px;
   width: 90%;
-  margin-bottom: 50px;
-  .item {
-    width: 100%;
-    min-height: 200px;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background-position: top;
-    background-repeat: no-repeat;
-    background-size: cover;
-    border-radius: 10px;
-    box-shadow: inset 0 80px 40px -50px rgb(0, 0, 0),
-      0 30px 10px -20px rgba(0, 0, 0, 0.7);
-    position: relative;
-    overflow: hidden;
-    transition: scale 0.2s ease, background-size 0.2s ease;
+  max-width: 1200px;
+  margin-bottom: 60px;
+  padding: 0 4px;
+  pointer-events: none;
+}
 
-    .project-title {
-      margin-top: 5px;
-      font-size: 20px;
-      letter-spacing: 3px;
-      color: white;
-      font-weight: bold;
-      text-align: center;
-      transition: color 0.2s ease;
+.work-item {
+  position: relative;
+  height: 260px;
+  border-radius: var(--radius-lg);
+  background-size: cover;
+  background-position: center top;
+  overflow: hidden;
+  cursor: none;
+  pointer-events: auto;
+  transition: box-shadow var(--transition), transform 0.08s ease;
+  transform-style: preserve-3d;
+  border: 1px solid var(--border);
+
+  &.hovered {
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6), 0 0 0 1px var(--border-glow),
+      var(--shadow-glow);
+    z-index: 10;
+
+    .card-overlay {
+      background: linear-gradient(to top, rgba(8, 8, 17, 0.95) 30%, rgba(8, 8, 17, 0.4) 100%);
     }
 
-    .project-button {
-      position: absolute;
-      width: 50%;
-      top: 50%;
-      transform: translateY(-50%);
-      display: none;
-      color: rgb(0, 174, 255);
-      font-weight: bold;
-      border: none;
-      border-radius: 5px;
-      box-shadow: 0 5px 5px rgba(255, 255, 255, 0.4);
-      padding: 10px;
-      letter-spacing: 2px;
-      transition: top 0.2s ease, background-color 0.2s ease,
-        box-shadow 0.2s ease, color 0.2s ease;
-
-      &:hover {
-        cursor: none;
-        background-color: rgb(0, 174, 255);
-        box-shadow: 0 5px 5px rgba(0, 174, 255, 0.4);
-        color: white;
-      }
+    .card-body {
+      transform: translateY(0);
+      opacity: 1;
     }
 
-    .project-detail {
-      width: 100%;
-      min-height: 25%;
-      height: auto;
-      position: absolute;
-      bottom: -100%;
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      flex-wrap: wrap;
-      place-items: center;
-      place-content: center;
-      box-sizing: border-box;
-      column-gap: 5px;
-      background-color: rgba(0, 0, 0, 0.4);
-      backdrop-filter: blur(10px);
-      transition: bottom 0.2s ease;
-      p {
-        margin: 0;
-        color: rgb(0, 174, 255);
-        font-weight: bold;
-        font-size: 15px;
-        letter-spacing: 1px;
-      }
-    }
-    &::before {
-      content: "";
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      background-color: transparent;
-      backdrop-filter: blur(0px);
-      border-radius: 10px;
-      z-index: -1;
-      transition: backdrop-filter 0.2s ease, background-color 0.2s ease;
-    }
+    .card-cta { opacity: 1; transform: translateY(0); }
+  }
+}
 
-    &:hover {
-      scale: 1.2;
-      z-index: 100;
+.shine {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  z-index: 3;
+  mix-blend-mode: overlay;
+}
 
-      .project-button {
-        display: block;
-      }
+.card-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(8, 8, 17, 0.85) 20%, rgba(8, 8, 17, 0.1) 80%);
+  transition: background var(--transition);
+  z-index: 1;
+}
 
-      .project-detail {
-        bottom: 0;
-      }
+.card-body {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 20px;
+  z-index: 2;
+  transform: translateY(8px);
+  opacity: 0.85;
+  transition: transform var(--transition), opacity var(--transition);
+}
 
-      &::before {
-        background-color: rgba(0, 0, 0, 0.6);
-        backdrop-filter: blur(5px);
-      }
-    }
+.card-title {
+  margin: 0 0 10px;
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--text);
+  letter-spacing: 0.5px;
+}
+
+.card-techs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 14px;
+}
+
+.tech-badge {
+  padding: 3px 10px;
+  background: rgba(0, 212, 255, 0.1);
+  border: 1px solid rgba(0, 212, 255, 0.2);
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--primary);
+  letter-spacing: 0.5px;
+  font-family: 'Space Grotesk', sans-serif;
+}
+
+.card-cta {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 18px;
+  background: var(--gradient-primary);
+  border: none;
+  border-radius: 6px;
+  color: var(--bg);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  cursor: none;
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity var(--transition), transform var(--transition),
+    box-shadow var(--transition);
+  font-family: 'Space Grotesk', sans-serif;
+
+  &:hover {
+    box-shadow: 0 4px 16px rgba(0, 212, 255, 0.4);
   }
 }
 
 @media (max-width: 600px) {
   #work-card-container {
-    place-items: center;
     grid-template-columns: 1fr;
+    width: 95%;
   }
 }
-@media (min-width: 900px) {
+
+@media (min-width: 1100px) {
   #work-card-container {
-    place-items: center;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: repeat(3, 1fr);
   }
 }

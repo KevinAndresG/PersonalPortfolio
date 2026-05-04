@@ -8,10 +8,6 @@ import LanguageSelector from "../LanguageSelector/LanguageSelector";
 import KG from "../../../assets/kgLogo.png";
 
 const Header = () => {
-  const scrollStyles = {
-    backgroundColor: "#3131313d",
-    backdropFilter: "blur(10px)",
-  };
   const { state } = useContext(LanguageContext);
   const [screenWidth, setScreenWidth] = useState(window.screen.width);
   const [y, setY] = useState(window.scrollY);
@@ -40,7 +36,7 @@ const Header = () => {
   return (
     <IntlProvider locale="En" messages={state.messages}>
       {state.text && (
-        <header style={y >= 100 ? scrollStyles : {}}>
+        <header className={y >= 60 ? "scrolled" : ""}>
           {screenWidth <= 900 ? (
             <MobileHeader />
           ) : (

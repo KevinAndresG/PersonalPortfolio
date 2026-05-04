@@ -1,163 +1,127 @@
-.ThemeClock--container {
-  width: 100%;
+.hud-clock {
+  display: inline-flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 18px 22px;
+  background: rgba(10, 10, 20, 0.7);
+  border: 1px solid rgba(0, 212, 255, 0.18);
+  border-radius: 14px;
+  backdrop-filter: blur(12px);
+  box-shadow:
+    0 0 30px rgba(0, 212, 255, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  min-width: 200px;
+}
+
+.hud-top {
   display: flex;
   align-items: center;
-  margin-bottom: 100px;
-  margin-top: 20%;
-  translate: 50% 0;
-  scale: 2;
-  pointer-events: none;
-  .ThemeClock--box {
-    .clock {
-      z-index: 100;
-      position: absolute;
+  justify-content: space-between;
+}
 
-      .visualClock {
-        position: absolute;
-        left: 50%;
-        transform: translate(-50%);
+.hud-label {
+  font-family: "Space Grotesk", monospace;
+  font-size: 9px;
+  letter-spacing: 3px;
+  color: var(--primary);
+  font-weight: 600;
+}
 
-        .lines {
-          border: 15px solid #202020;
-          border-radius: 100%;
-          background-color: #202020;
-          width: 300px;
-          height: 300px;
-          position: relative;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          bottom: 60px;
-          box-shadow: inset 0 10px 10px #242424, inset 10px 0 10px #242424,
-            0 -10px 10px #191919, -10px 0 10px #191919, 0 10px 10px #191919,
-            10px 0 10px #191919, inset 0 -10px 10px #242424,
-            inset -10px 0 10px #242424;
+.hud-dot {
+  position: absolute;
+  right: 10%;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 6px var(--accent);
+  animation: hud-pulse 2s ease-in-out infinite;
+}
 
-          .center {
-            width: 5px;
-            height: 5px;
-            position: absolute;
-            border-radius: 100px;
-            left: 50%;
-            transform: translate(-50%);
-            z-index: 3;
-            border: 2px solid rgb(0, 174, 255);
-            box-shadow: 0 0 10px rgb(0, 174, 255);
-            background-color: #202020;
-          }
-
-          .h {
-            width: 3.5px;
-            height: 100px;
-            transform-origin: bottom;
-            position: absolute;
-            background-color: white;
-            box-shadow: 0 0 5px rgb(255, 255, 255);
-            transition: transform 0.8s ease-in-out;
-          }
-
-          .m {
-            width: 3.5px;
-            height: 130px;
-            transform-origin: bottom;
-            position: absolute;
-            background-color: white;
-            box-shadow: 0 0 5px rgb(255, 255, 255);
-            transition: transform 0.8s ease-in-out;
-          }
-
-          .s {
-            width: 2.5px;
-            height: 130px;
-            background-color: rgb(0, 174, 255);
-            box-shadow: 0 0 10px rgb(0, 174, 255);
-            transform-origin: bottom;
-            position: absolute;
-            transition: transform 0.8s ease-in-out;
-            color: white;
-          }
-        }
-      }
-      .dateClock {
-        width: 500px;
-        max-width: 500px;
-        height: auto;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        font-weight: normal;
-        position: relative;
-        top: 130px;
-        scale: 0.5;
-
-        .time {
-          display: flex;
-          align-items: center;
-          font-size: 60px;
-          color: white;
-          .digit {
-            max-height: 60px;
-            display: flex;
-            align-items: center;
-            -webkit-text-stroke-width: 3px;
-            font-weight: bold;
-            -webkit-text-stroke-color: #202020;
-          }
-        }
-
-        .date {
-          display: flex;
-          gap: 5px;
-          color: rgb(160, 160, 160);
-          font-weight: bold;
-          letter-spacing: 2px;
-
-          .dayN {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            width: 40px;
-            height: 25px;
-            border-radius: 5px;
-            background-color: rgb(0, 217, 255);
-            color: #202020;
-            font-weight: bold;
-          }
-        }
-      }
-    }
+@keyframes hud-pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.3;
   }
 }
-@media screen and (max-width: 1200px) {
-  .ThemeClock--container {
-    translate: 40% 0;
-    margin-top: 30%;
+
+.hud-time {
+  display: flex;
+  align-items: baseline;
+  gap: 2px;
+}
+
+.hud-seg {
+  font-family: "Space Grotesk", monospace;
+  font-size: 36px;
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: -1px;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+
+.hud-sec {
+  font-size: 22px;
+  color: var(--primary);
+  opacity: 0.9;
+}
+
+.hud-colon {
+  font-family: "Space Grotesk", monospace;
+  font-size: 28px;
+  font-weight: 700;
+  color: rgba(0, 212, 255, 0.4);
+  line-height: 1;
+  margin-bottom: 2px;
+  animation: hud-blink 1s step-end infinite;
+}
+
+@keyframes hud-blink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.2;
   }
 }
-@media screen and (max-width: 900px) {
-  .ThemeClock--container {
-    translate: 35% 0;
-    margin-top: 35%;
-  }
+
+.hud-bar-wrap {
+  height: 2px;
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 2px;
+  overflow: hidden;
 }
-@media screen and (max-width: 760px) {
-  .ThemeClock--container {
-    translate: 10% 0;
-    scale: 1.5;
-  }
+
+.hud-bar-fill {
+  height: 100%;
+  background: linear-gradient(to right, var(--primary), var(--secondary));
+  border-radius: 2px;
+  transition: width 0.9s linear;
+  box-shadow: 0 0 6px var(--primary);
 }
-@media screen and (max-width: 570px) {
-  .ThemeClock--container {
-    translate: -14% -15%;
-    scale: 1;
-    .date {
-      scale: 1.3;
-    }
-  }
+
+.hud-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
-@media screen and (max-width: 360px) {
-  .ThemeClock--container {
-    translate: -19% -15%;
-  }
+
+.hud-day {
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: var(--secondary);
+}
+
+.hud-date {
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 10px;
+  letter-spacing: 1px;
+  color: var(--text-muted);
 }

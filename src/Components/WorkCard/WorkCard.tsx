@@ -6,17 +6,11 @@ import Paac from "../../assets/Paac.png";
 import Slotty from "../../assets/Slotty.png";
 import TravelAgency from "../../assets/TravelAgency.png";
 import TypeGenerator from "../../assets/TypeGenerator.png";
-// import ImageMatch from "../../assets/ImageMatch.png";
 import { WorkInfo } from "../../models/LogicItems/Workinfo";
 import { FormattedMessage } from "react-intl";
+import { useRef, useState } from "react";
 
 const worksToShowAll: WorkInfo[] = [
-  // {
-  //   title: "Image Matching",
-  //   img: ImageMatch,
-  //   url: "https://image-matching-kevin.netlify.app/login",
-  //   techs: ["HTML", "Syled Components", "JavaScript", "TypeScript", "React"],
-  // },
   {
     title: "Interface/Model Generator",
     img: TypeGenerator,
@@ -38,7 +32,7 @@ const worksToShowAll: WorkInfo[] = [
   {
     title: "Paac",
     img: Paac,
-    url: "https://v0-youth-protection-app.vercel.app/",
+    url: "https://paacguardian.lovable.app/",
     techs: ["HTML", "Tailwind", "TypeScript", "React", "NextJS"],
   },
   {
@@ -47,14 +41,12 @@ const worksToShowAll: WorkInfo[] = [
     url: "https://kevin-garcia-pet-appointments.netlify.app",
     techs: ["HTML", "CSS", "JavaScript", "TypeScript", "React"],
   },
-
   {
     title: "Space Travel",
     img: SpaceTravel,
     url: "https://kevin-garcia-space-travel.netlify.app",
     techs: ["HTML", "CSS", "JavaScript", "TypeScript", "React"],
   },
-
   {
     title: "Travel Agency",
     img: TravelAgency,
@@ -63,33 +55,98 @@ const worksToShowAll: WorkInfo[] = [
   },
 ];
 
-const WorkCard = () => {
+interface TiltState {
+  rotX: number;
+  rotY: number;
+  shine: { x: number; y: number };
+}
+
+const WorkItem = ({ item }: { item: WorkInfo }) => {
+  const cardRef = useRef<HTMLDivElement>(null);
+  const [tilt, setTilt] = useState<TiltState>({
+    rotX: 0,
+    rotY: 0,
+    shine: { x: 50, y: 50 },
+  });
+  const [hovered, setHovered] = useState(false);
+
+  const onMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    const rect = cardRef.current!.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    const cx = rect.width / 2;
+    const cy = rect.height / 2;
+    const rotX = ((y - cy) / cy) * -10;
+    const rotY = ((x - cx) / cx) * 10;
+    setTilt({
+      rotX,
+      rotY,
+      shine: { x: (x / rect.width) * 100, y: (y / rect.height) * 100 },
+    });
+  };
+
+  const onMouseLeave = () => {
+    setTilt({ rotX: 0, rotY: 0, shine: { x: 50, y: 50 } });
+    setHovered(false);
+  };
+
   return (
-    <div id="work-card-container">
-      {worksToShowAll.map((item) => (
-        <div
-          className="item"
-          tabIndex={0}
-          style={{ backgroundImage: `url(${item.img})` }}
-        >
-          <p className="project-title">{item.title}</p>
-          <button
-            className="project-button"
-            onClick={() => window.open(item.url)}
-          >
-            <FormattedMessage id="work.enter.button" />
-          </button>
-          <section className="project-detail">
-            {item.techs
-              .sort((a: any, b: any) => b.length - a.length)
-              .map((tech: any) => (
-                <p className="tech">{tech}</p>
-              ))}
-          </section>
+    <div
+      ref={cardRef}
+      className={`work-item ${hovered ? "hovered" : ""}`}
+      style={{
+        transform: `perspective(800px) rotateX(${tilt.rotX}deg) rotateY(${tilt.rotY}deg)`,
+        backgroundImage: `url(${item.img})`,
+      }}
+      onMouseMove={onMouseMove}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={onMouseLeave}
+    >
+      <div
+        className="shine"
+        style={{
+          background: `radial-gradient(circle at ${tilt.shine.x}% ${tilt.shine.y}%, rgba(255,255,255,0.12) 0%, transparent 60%)`,
+        }}
+      />
+      <div className="card-overlay" />
+
+      <div className="card-body">
+        <h3 className="card-title">{item.title}</h3>
+        <div className="card-techs">
+          {item.techs
+            .sort((a, b) => b.length - a.length)
+            .map((tech) => (
+              <span key={tech} className="tech-badge">
+                {tech}
+              </span>
+            ))}
         </div>
-      ))}
+        <button className="card-cta" onClick={() => window.open(item.url)}>
+          <FormattedMessage id="work.enter.button" />
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2.5"
+            width="14"
+            height="14"
+          >
+            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+            <polyline points="15 3 21 3 21 9" />
+            <line x1="10" y1="14" x2="21" y2="3" />
+          </svg>
+        </button>
+      </div>
     </div>
   );
 };
+
+const WorkCard = () => (
+  <div id="work-card-container">
+    {worksToShowAll.map((item) => (
+      <WorkItem key={item.url} item={item} />
+    ))}
+  </div>
+);
 
 export default WorkCard;

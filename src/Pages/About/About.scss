@@ -3,263 +3,202 @@
   width: 100%;
   height: auto;
   position: relative;
-  padding-bottom: 5%;
-  overflow: hidden;
+  overflow-x: hidden;
+  pointer-events: none;
+}
 
-  .about-desc {
-    pointer-events: none;
-    margin: 0;
-    color: #04b2d1;
-    transform: translateY(100%);
-    position: relative;
+/* Clock widget — top right, real size, slightly faded */
+.clock-deco {
+  position: absolute;
+  top: 100px;
+  right: 40px;
+  z-index: 5;
+  pointer-events: none;
+
+  @media (max-width: 1100px) {
+    opacity: 0.35;
+    right: 20px;
+  }
+
+  @media (max-width: 900px) {
+    display: none;
+  }
+}
+
+/* ── About Hero ── */
+.about-hero {
+  display: flex;
+  align-items: center;
+  gap: 80px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 140px 60px 80px;
+  pointer-events: none;
+
+  @media (max-width: 900px) {
+    flex-direction: column;
+    padding: 120px 30px 60px;
     text-align: center;
-    left: 50%;
-    width: 33%;
-    font-size: 22px;
-    letter-spacing: 3px;
-    .desc-bold {
-      color: #ffffff;
-      font-weight: bold;
-      font-size: 26px;
-    }
-  }
-  .arrows1 {
-    .arrows {
-      margin-left: 3%;
-    }
-  }
-  .desc2 {
-    display: flex;
-    column-gap: 20%;
     align-items: center;
-    transform: translateY(20%);
-    pointer-events: none;
+  }
+}
 
-    .about-desc2 {
-      margin: 0;
-      color: #04b2d1;
-      position: relative;
-      text-align: center;
-      left: 10%;
-      width: 40%;
-      font-size: 22px;
-      letter-spacing: 3px;
-      display: flex;
-      flex-direction: column;
-      .desc-line {
-        z-index: 10;
-        height: 3px;
-        width: 30%;
-        background: linear-gradient(to right, #00ffff 50%, #00b2ff);
-        box-shadow: 0 0px 5px #0085ff, 0 0 5px #00b2ff;
-        animation: lineColor 1s linear infinite alternate;
-        transform: translateX(115%) translateY(10px);
-      }
-    }
-    .techs {
-      transform: translateY(-20%) translateX(-10%);
-      display: flex;
-      column-gap: 50px;
-      .tech {
-        filter: drop-shadow(45px 50px 5px black);
-        &.tech:nth-child(1) {
-          margin-top: -10%;
-          animation: moveTech 3s linear 1s infinite alternate;
-        }
-        &.tech:nth-child(2) {
-          margin-left: 10%;
-          animation: moveTech 4s linear 1.4s infinite alternate;
-        }
-        &.tech:nth-child(3) {
-          margin-top: 70%;
-          animation: moveTech 3s linear 1.2s infinite alternate;
-        }
-        &.tech:nth-child(4) {
-          margin-top: -40%;
-          animation: moveTech 2s linear 1.8s infinite alternate;
-        }
-      }
+.about-hero-left {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  position: relative;
+  z-index: 10;
+}
+
+.section-eyebrow {
+  font-size: 11px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--primary);
+  font-family: "Space Grotesk", sans-serif;
+  font-weight: 600;
+}
+
+.about-title {
+  margin: 0;
+  font-size: clamp(36px, 4vw, 56px);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -1px;
+}
+
+.text-gradient {
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.about-desc {
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.75;
+  color: var(--text-muted);
+  max-width: 480px;
+}
+
+.about-desc2 {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.75;
+  color: var(--text-muted);
+  max-width: 480px;
+  padding-top: 8px;
+  border-top: 1px solid var(--border);
+}
+
+/* ── Tech Cards ── */
+.about-hero-right {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 10;
+  pointer-events: auto; /* re-enable for magnetic cards */
+}
+
+.techs-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.tech-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 24px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  width: 130px;
+  /* transitions only for color/shadow — transform handled by GSAP */
+  transition:
+    border-color var(--transition),
+    box-shadow var(--transition);
+  cursor: none;
+  pointer-events: auto;
+
+  img {
+    width: 52px;
+    height: 52px;
+    object-fit: contain;
+    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.4));
+    transition: filter 0.3s ease;
+  }
+
+  span {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    font-family: "Space Grotesk", sans-serif;
+  }
+
+  &:hover {
+    border-color: var(--tech-card-color, var(--border-glow));
+    box-shadow:
+      0 0 20px rgba(255, 255, 255, 0.06),
+      0 0 0 1px var(--tech-card-color, var(--border-glow));
+
+    img {
+      filter: drop-shadow(0 0 10px var(--tech-card-color, var(--primary)));
     }
   }
-  .arrows2 {
-    display: flex;
-    justify-content: flex-end;
-    width: 100%;
-    .arrows {
-      margin-right: 3%;
-    }
+}
+
+/* ── Logic Section ── */
+.logic-section {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 60px 100px;
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+  position: relative;
+  z-index: 10;
+  pointer-events: none;
+
+  @media (max-width: 900px) {
+    padding: 0 30px 80px;
+    align-items: center;
+    text-align: center;
   }
-  .logical-think-cont {
+}
+
+.logic-title {
+  margin: 8px 0 0;
+  font-size: clamp(28px, 3vw, 42px);
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: -0.5px;
+}
+
+.logic-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 20px;
+  align-items: stretch;
+
+  .reveal-card {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    .logic-think {
-      opacity: 1;
-      width: 100%;
-      text-align: center;
-      color: #ffffff;
-      font-weight: bold;
-      font-size: 30px;
-      margin: 0;
-      letter-spacing: 8px;
-      position: relative;
-    }
-    .cards-cont {
-      position: relative;
-      overflow-y: scroll;
-      overflow-x: hidden;
-      width: 100vw;
-      translate: 20px 0;
-      height: 50vh;
-      scroll-snap-type: y mandatory;
-      transition: background 0.1s ease;
-      &:hover {
-        background: #25252557;
-        border-radius: 10px;
-      }
-      .each-card {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        position: relative;
-        width: 100vw;
-        height: 50vh;
-        scroll-snap-align: start;
-      }
-    }
-  }
-}
 
-@keyframes moveTech {
-  0% {
-    transform: scale(1);
-    filter: drop-shadow(45px 50px 5px black);
-  }
-  100% {
-    transform: scale(0.6);
-    filter: drop-shadow(10px 10px 5px black);
-  }
-}
-@media screen and (max-width: 1700px) {
-  #about-container {
-    .about-desc {
-      margin-top: 35%;
-      left: 10%;
-      width: 80%;
+    .logic-card {
+      flex: 1;
     }
+  }
 
-    .desc2 {
-      flex-direction: column;
-      .about-desc2 {
-        transform: translateX(-10%);
-        left: 10%;
-        width: 80%;
-      }
-      .techs {
-        transform: translateY(5%) translateX(0%);
-        scale: 0.8;
-      }
-    }
-  }
-}
-@media screen and (max-width: 1200px) {
-  #about-container {
-    .about-desc {
-      margin-top: 50%;
-      left: 10%;
-    }
-
-    .desc2 {
-      flex-direction: column;
-      .about-desc2 {
-        transform: translateX(-10%);
-        left: 10%;
-      }
-      .techs {
-        transform: translateY(5%) translateX(0%);
-        scale: 0.8;
-      }
-    }
-  }
-}
-@media screen and (max-width: 900px) {
-  #about-container {
-    .about-desc {
-      margin-top: 60%;
-      left: 10%;
-    }
-
-    .desc2 {
-      flex-direction: column;
-      .about-desc2 {
-        transform: translateX(-10%);
-        left: 10%;
-      }
-      .techs {
-        transform: translateY(5%) translateX(0%);
-        scale: 0.8;
-      }
-    }
-  }
-}
-@media screen and (max-width: 760px) {
-  #about-container {
-    .logical-think-cont {
-      row-gap: 0;
-      .logic-think {
-        font-size: 25px;
-        letter-spacing: 6px;
-      }
-      #card-container {
-        scale: 0.8;
-      }
-    }
-
-    .about-desc {
-      left: 15%;
-      width: 80%;
-    }
-    .desc2 {
-      flex-direction: column;
-      .about-desc2 {
-        left: 15%;
-        width: 80%;
-      }
-      .techs {
-        transform: translateY(0%) translateX(0%);
-        scale: 0.5;
-      }
-    }
-  }
-}
-@media screen and (max-width: 570px) {
-  #about-container {
-    .arrows1 {
-      .arrows {
-        transform: translateY(-100%);
-      }
-    }
-    .logical-think-cont {
-      translate: 0 -10%;
-      .logic-think {
-        font-size: 20px;
-        letter-spacing: 6px;
-      }
-      #card-container {
-        scale: 0.6;
-      }
-    }
-    .about-desc {
-      left: 10%;
-    }
-    .desc2 {
-      .about-desc2 {
-        left: 10%;
-      }
-      .techs {
-        scale: 0.5;
-      }
-    }
+  @media (max-width: 600px) {
+    grid-template-columns: 1fr;
   }
 }

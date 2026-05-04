@@ -1,27 +1,22 @@
-import { useEffect, useReducer } from "react";
+import React, { useEffect, useReducer } from "react";
 import { LanguageContext } from "./Context";
 import English from "../../lang/en.json";
 import Spanish from "../../lang/es.json";
 
-export const reducer = (state: any, action: any) => {
+type State = { text: string; messages: Record<string, string> };
+type Action = { type: string; value: { text: string; messages: Record<string, string> } };
+
+// eslint-disable-next-line react-refresh/only-export-components
+export const reducer = (state: State, action: Action): State => {
   switch (action.type) {
     case "Es":
-      return {
-        ...state,
-        text: action.value.text,
-        messages: action.value.messages,
-      };
     case "En":
-      return {
-        ...state,
-        text: action.value.text,
-        messages: action.value.messages,
-      };
+      return { ...state, text: action.value.text, messages: action.value.messages };
     default:
-      break;
+      return state;
   }
 };
-const LanguageProvider = ({ children }: any) => {
+const LanguageProvider = ({ children }: { children: React.ReactNode }) => {
   const [state, dispatch] = useReducer(reducer, {
     text: "",
     messages: {},
@@ -46,7 +41,7 @@ const LanguageProvider = ({ children }: any) => {
     }
   };
   useEffect(() => {
-    let langSel = "lang" in localStorage ? localStorage.getItem("lang")! : "En";
+    const langSel = "lang" in localStorage ? localStorage.getItem("lang")! : "En";
     changeLanguage(langSel);
   }, []);
   return (

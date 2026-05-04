@@ -14,15 +14,18 @@ const Work = () => {
       {state.text && (
         <motion.div
           id="work-container"
-          animate={{
-            opacity: ["0", "100%"],
-            transition: { duration: 1 },
-          }}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0, transition: { duration: 0.5 } }}
+          exit={{ opacity: 0, transition: { duration: 0.3 } }}
         >
           <HoverBoardBackground />
+          <span className="page-eyebrow">Portfolio</span>
           <h1 className="personal-projects">
             <FormattedMessage id="work.title" />
           </h1>
+          <p className="projects-subtitle">
+            A selection of things I&apos;ve built.
+          </p>
           <WorkCard />
         </motion.div>
       )}
