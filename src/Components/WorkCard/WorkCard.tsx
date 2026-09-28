@@ -1,10 +1,10 @@
 import "./WorkCard.scss";
 import CincuentaP from "../../assets/CincuentaProjects.png";
 import PetAppointments from "../../assets/PetAppointmen.png";
-import SpaceTravel from "../../assets/SpaceTravel.png";
+import IsiGestPOS from "../../assets/IsiGestPOS.png";
 import Paac from "../../assets/Paac.png";
-import Slotty from "../../assets/Slotty.png";
-import TravelAgency from "../../assets/TravelAgency.png";
+import Showly from "../../assets/Showly.png";
+import GoldenNumbers from "../../assets/GoldenNumbers.png";
 import TypeGenerator from "../../assets/TypeGenerator.png";
 import ModerTask from "../../assets/ModernTask.png";
 import { WorkInfo } from "../../models/LogicItems/Workinfo";
@@ -19,6 +19,24 @@ const worksToShowAll: WorkInfo[] = [
     techs: ["HTML", "CSS", "JavaScript", "TypeScript", "Angular"],
   },
   {
+    title: "IsiGest POS",
+    img: IsiGestPOS,
+    url: "https://isigest.netlify.app/",
+    techs: ["HTML", "Tailwind", "TypeScript", "NextJS"],
+  },
+  {
+    title: "Showly",
+    img: Showly,
+    url: "showly-prop.netlify.app",
+    techs: ["HTML", "Tailwind", "TypeScript", "NextJS"],
+  },
+  {
+    title: "Cifras Doradas",
+    img: GoldenNumbers,
+    url: "https://cifrasdoradas.com/",
+    techs: ["HTML", "Tailwind", "TypeScript", "NextJS"],
+  },
+  {
     title: "Interface/Model Generator",
     img: TypeGenerator,
     url: "https://kevin-garcia-typegenerator.netlify.app/",
@@ -31,12 +49,6 @@ const worksToShowAll: WorkInfo[] = [
     techs: ["HTML", "CSS", "JavaScript", "TypeScript", "Angular"],
   },
   {
-    title: "Slotty",
-    img: Slotty,
-    url: "https://v0-barber-booking-app-plum.vercel.app/",
-    techs: ["HTML", "Tailwind", "TypeScript", "React", "NextJS"],
-  },
-  {
     title: "Paac",
     img: Paac,
     url: "https://paacguardian.lovable.app/",
@@ -46,18 +58,6 @@ const worksToShowAll: WorkInfo[] = [
     title: "Pet Appointments",
     img: PetAppointments,
     url: "https://kevin-garcia-pet-appointments.netlify.app",
-    techs: ["HTML", "CSS", "JavaScript", "TypeScript", "React"],
-  },
-  {
-    title: "Space Travel",
-    img: SpaceTravel,
-    url: "https://kevin-garcia-space-travel.netlify.app",
-    techs: ["HTML", "CSS", "JavaScript", "TypeScript", "React"],
-  },
-  {
-    title: "Travel Agency",
-    img: TravelAgency,
-    url: "https://kevin-garcia-travel-agency.netlify.app",
     techs: ["HTML", "CSS", "JavaScript", "TypeScript", "React"],
   },
 ];
