@@ -27,7 +27,7 @@ const worksToShowAll: WorkInfo[] = [
   {
     title: "Showly",
     img: Showly,
-    url: "showly-prop.netlify.app",
+    url: "https://showly-prop.netlify.app",
     techs: ["HTML", "Tailwind", "TypeScript", "NextJS"],
   },
   {
@@ -99,6 +99,7 @@ const WorkItem = ({ item }: { item: WorkInfo }) => {
 
   return (
     <div
+      onClick={() => window.open(item.url)}
       ref={cardRef}
       className={`work-item ${hovered ? "hovered" : ""}`}
       style={{
