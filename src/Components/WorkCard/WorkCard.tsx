@@ -2,6 +2,7 @@ import "./WorkCard.scss";
 import CincuentaP from "../../assets/CincuentaProjects.png";
 import PetAppointments from "../../assets/PetAppointmen.png";
 import IsiGestPOS from "../../assets/IsiGestPOS.png";
+import DigiCard from "../../assets/DigiCard.png";
 import Paac from "../../assets/Paac.png";
 import Showly from "../../assets/Showly.png";
 import GoldenNumbers from "../../assets/GoldenNumbers.png";
@@ -13,16 +14,22 @@ import { useRef, useState } from "react";
 
 const worksToShowAll: WorkInfo[] = [
   {
-    title: "Modern Task Manager",
-    img: ModerTask,
-    url: "https://modern-task-app-prueba.netlify.app/",
-    techs: ["HTML", "CSS", "JavaScript", "TypeScript", "Angular"],
-  },
-  {
     title: "IsiGest POS",
     img: IsiGestPOS,
     url: "https://isigest.netlify.app/",
     techs: ["HTML", "Tailwind", "TypeScript", "NextJS"],
+  },
+  {
+    title: "Digi Card",
+    img: DigiCard,
+    url: "https://digi-isi-card.netlify.app/",
+    techs: ["HTML", "Tailwind", "TypeScript", "NextJS"],
+  },
+  {
+    title: "Modern Task Manager",
+    img: ModerTask,
+    url: "https://modern-task-app-prueba.netlify.app/",
+    techs: ["HTML", "CSS", "JavaScript", "TypeScript", "Angular"],
   },
   {
     title: "Showly",
