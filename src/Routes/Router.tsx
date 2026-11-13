@@ -7,35 +7,30 @@ import NotFound from "../Components/NotFound/NotFound";
 import { AnimatePresence } from "framer-motion";
 import Footer from "../Components/Shared/Footer/Footer";
 import Header from "../Components/Shared/Header/Header";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect } from "react";
 import { LanguageContext } from "../Contexts/LanguageSelector/Context";
 import { IntlProvider } from "react-intl";
 import LanguageProvider from "../Contexts/LanguageSelector/Index";
 import CustomCursor from "../Components/Shared/CustomCursor/CustomCursor";
+import WaterCanvas from "../Components/WaterCanvas/WaterCanvas";
 
 const Router = () => {
   const location = useLocation();
   const { state } = useContext(LanguageContext);
-  const [screenWidth, setScreenWidth] = useState(window.screen.width);
 
   useEffect(() => {
-    const handleResize = () => {
-      setScreenWidth(window.screen.width);
-    };
-    window.addEventListener("resize", handleResize);
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
+    window.scrollTo(0, 0);
+  }, [location.pathname]);
+
   return (
     <>
       {state && (
         <IntlProvider locale="En" messages={state.messages}>
-          {screenWidth > 768 && <CustomCursor />}
-          {/* <CustomCursor /> */}
+          <WaterCanvas />
+          <CustomCursor />
           <LanguageProvider>
             <Header />
-            <AnimatePresence>
+            <AnimatePresence mode="wait">
               <Routes location={location} key={location.pathname}>
                 <Route path="/" element={<Navigate to="/home" />} />
                 <Route path="/home" element={<Home />} />

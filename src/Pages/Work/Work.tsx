@@ -1,33 +1,35 @@
 import { FormattedMessage, IntlProvider } from "react-intl";
 import WorkCard from "../../Components/WorkCard/WorkCard";
-import "./Work.scss";
 import { motion } from "framer-motion";
 import { LanguageContext } from "../../Contexts/LanguageSelector/Context";
-import { useContext } from "react";
-import HoverBoardBackground from "../../Components/HoverBoardBackground/HoverBoardBackground";
+import { useContext, useRef } from "react";
+import { useRise } from "../../hooks/useRise";
 
 const Work = () => {
   const { state } = useContext(LanguageContext);
+  const ref = useRef<HTMLElement>(null);
+  useRise(ref, state.text);
 
   return (
     <IntlProvider locale="En" messages={state.messages}>
       {state.text && (
-        <motion.div
-          id="work-container"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0, transition: { duration: 0.5 } }}
-          exit={{ opacity: 0, transition: { duration: 0.3 } }}
+        <motion.main
+          ref={ref}
+          className="page"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1, transition: { duration: 0.4 } }}
+          exit={{ opacity: 0, transition: { duration: 0.25 } }}
         >
-          <HoverBoardBackground />
-          <span className="page-eyebrow">Portfolio</span>
-          <h1 className="personal-projects">
-            <FormattedMessage id="work.title" />
+          <h1 className="page-title">
+            <span data-water>
+              <FormattedMessage id="work.title" />
+            </span>
           </h1>
-          <p className="projects-subtitle">
-            A selection of things I&apos;ve built.
+          <p className="page-sub muted rise">
+            <FormattedMessage id="work.subtitle" />
           </p>
           <WorkCard />
-        </motion.div>
+        </motion.main>
       )}
     </IntlProvider>
   );

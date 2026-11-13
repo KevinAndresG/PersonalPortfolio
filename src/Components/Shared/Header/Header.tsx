@@ -1,94 +1,75 @@
 import { Link, NavLink } from "react-router-dom";
 import "./Header.scss";
 import { useContext, useEffect, useState } from "react";
-import MobileHeader from "../MobileHeader/MobileHeader";
 import { LanguageContext } from "../../../Contexts/LanguageSelector/Context";
-import { FormattedMessage, IntlProvider } from "react-intl";
+import { FormattedMessage, IntlProvider, useIntl } from "react-intl";
+import { motion } from "framer-motion";
 import LanguageSelector from "../LanguageSelector/LanguageSelector";
 import KG from "../../../assets/kgLogo.png";
 
+const LINKS = [
+  { to: "/home", id: "navBar.home" },
+  { to: "/about", id: "navBar.about" },
+  { to: "/work", id: "navBar.work" },
+  { to: "/knowledge", id: "navBar.knowledge" },
+];
+
+// Motion is the user's choice here, not the OS setting: on by default.
+const MotionToggle = () => {
+  const intl = useIntl();
+  const [on, setOn] = useState(localStorage.getItem("motion") !== "off");
+
+  useEffect(() => {
+    document.documentElement.dataset.motion = on ? "on" : "off";
+    localStorage.setItem("motion", on ? "on" : "off");
+  }, [on]);
+
+  const label = intl.formatMessage({ id: on ? "nav.motion.pause" : "nav.motion.play" });
+  return (
+    <button className="motion-toggle" onClick={() => setOn(!on)} aria-label={label} title={label}>
+      <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true">
+        {on ? <path d="M7 5h3.5v14H7zM13.5 5H17v14h-3.5z" /> : <path d="M8 5l11 7-11 7z" />}
+      </svg>
+    </button>
+  );
+};
+
 const Header = () => {
   const { state } = useContext(LanguageContext);
-  const [screenWidth, setScreenWidth] = useState(window.screen.width);
-  const [y, setY] = useState(window.scrollY);
 
-  const handleScroll = () => {
-    setY(window.scrollY);
-  };
-
-  useEffect(() => {
-    window.addEventListener("scroll", () => handleScroll());
-
-    return () => {
-      window.removeEventListener("scroll", () => handleScroll());
-    };
-  }, [y]);
-
-  useEffect(() => {
-    const handleResize = () => {
-      setScreenWidth(window.screen.width);
-    };
-    window.addEventListener("resize", handleResize);
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
   return (
     <IntlProvider locale="En" messages={state.messages}>
       {state.text && (
-        <header className={y >= 60 ? "scrolled" : ""}>
-          {screenWidth <= 900 ? (
-            <MobileHeader />
-          ) : (
-            <>
-              <Link to={"/"} className="go-home">
-                <img src={KG} alt="logo" className="logo" />
-              </Link>
-              <div id="Header">
-                <button className={`button`}>
-                  <NavLink to={"/home"}>
-                    <span className="actual-text">
-                      &nbsp;{<FormattedMessage id="navBar.home" />}&nbsp;
+        <header className="nav">
+          <Link to="/home" className="nav-logo glass" aria-label="Kevin Garcia">
+            <img src={KG} alt="" />
+          </Link>
+
+          <nav className="nav-links glass" aria-label="Main">
+            {LINKS.map((l) => (
+              <NavLink key={l.to} to={l.to}>
+                {({ isActive }) => (
+                  <>
+                    {isActive && (
+                      <motion.span
+                        layoutId="nav-lens"
+                        className="nav-lens"
+                        transition={{ type: "spring", stiffness: 340, damping: 28 }}
+                      />
+                    )}
+                    <span className="nav-label">
+                      <FormattedMessage id={l.id} />
                     </span>
-                    <span aria-hidden="true" className="hover-text">
-                      &nbsp;{<FormattedMessage id="navBar.home" />}&nbsp;
-                    </span>
-                  </NavLink>
-                </button>
-                <button className={`button`}>
-                  <NavLink to={"/about"}>
-                    <span className="actual-text">
-                      &nbsp;{<FormattedMessage id="navBar.about" />}&nbsp;
-                    </span>
-                    <span aria-hidden="true" className="hover-text">
-                      &nbsp;{<FormattedMessage id="navBar.about" />}&nbsp;
-                    </span>
-                  </NavLink>
-                </button>
-                <button className={`button`}>
-                  <NavLink to={"/work"}>
-                    <span className="actual-text">
-                      &nbsp;{<FormattedMessage id="navBar.work" />}&nbsp;
-                    </span>
-                    <span aria-hidden="true" className="hover-text">
-                      &nbsp;{<FormattedMessage id="navBar.work" />}&nbsp;
-                    </span>
-                  </NavLink>
-                </button>
-                <button className={`button`}>
-                  <NavLink to={"/knowledge"}>
-                    <span className="actual-text">
-                      &nbsp;{<FormattedMessage id="navBar.knowledge" />}&nbsp;
-                    </span>
-                    <span aria-hidden="true" className="hover-text">
-                      &nbsp;{<FormattedMessage id="navBar.knowledge" />}&nbsp;
-                    </span>
-                  </NavLink>
-                </button>
-                <LanguageSelector />
-              </div>
-            </>
-          )}
+                  </>
+                )}
+              </NavLink>
+            ))}
+          </nav>
+
+          <div className="nav-tools glass">
+            <LanguageSelector />
+            <MotionToggle />
+          </div>
         </header>
       )}
     </IntlProvider>

@@ -1,108 +1,122 @@
-header {
-  display: flex;
-  align-items: center;
-  padding: 16px 40px;
-  font-weight: bold;
+.nav {
   position: fixed;
-  width: 100%;
-  z-index: 10000;
-  transition:
-    background var(--transition),
-    backdrop-filter var(--transition),
-    border-color var(--transition);
-  background: transparent;
+  top: 20px;
+  left: 0;
+  right: 0;
+  z-index: 50;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  padding: 0 var(--gutter);
+  pointer-events: none;
 
-  &.scrolled {
-    background: rgba(8, 8, 17, 0.5);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(10px);
-    border-bottom: 1px solid var(--border);
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.4);
+  > * {
+    pointer-events: auto;
+  }
+}
+
+.nav-logo {
+  justify-self: start;
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  transition: transform 0.5s var(--ease);
+
+  img {
+    width: 26px;
+    height: 26px;
+    object-fit: contain;
   }
 
-  .go-home {
-    cursor: none;
+  &:hover {
+    transform: scale(1.1) rotate(-6deg);
+  }
+}
+
+.nav-links {
+  display: flex;
+  padding: 5px;
+  border-radius: 999px;
+
+  a {
+    position: relative;
+    padding: 11px 20px;
+    border-radius: 999px;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1;
+    color: var(--mist);
     text-decoration: none;
-    display: flex;
-    transition: opacity var(--transition);
+    white-space: nowrap;
+    transition: color 0.3s;
 
-    &:hover {
-      opacity: 0.8;
-    }
-
-    .logo {
-      width: 70px;
-      filter: drop-shadow(0 0 8px rgba(0, 212, 255, 0.4));
-    }
-  }
-
-  #Header {
-    position: absolute;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    align-items: center;
-    gap: 4px;
-    right: 5%;
-
-    .button {
-      background: transparent;
-      border: none;
-      position: relative;
-      font-size: 13px;
-      font-weight: 600;
-      letter-spacing: 2.5px;
-      padding: 8px 14px;
-      font-family: "Space Grotesk", sans-serif;
-
-      a {
-        cursor: none;
-        color: var(--text-muted);
-        text-decoration: none;
-        position: relative;
-        transition: color var(--transition);
-
-        &::after {
-          content: "";
-          position: absolute;
-          bottom: -4px;
-          left: 0;
-          width: 0;
-          height: 2px;
-          background: var(--gradient-primary);
-          border-radius: 2px;
-          transition: width var(--transition);
-        }
-
-        &.active {
-          color: var(--primary);
-          &::after {
-            width: 100%;
-          }
-        }
-
-        .hover-text {
-          display: none;
-        }
-        .actual-text {
-          display: block;
-        }
-      }
-
-      &:hover a {
-        color: var(--text);
-        &::after {
-          width: 100%;
-        }
-      }
+    &:hover,
+    &.active {
+      color: var(--foam);
     }
   }
 }
 
-@media screen and (max-width: 900px) {
-  header {
-    background: transparent;
-    box-shadow: none;
-    padding: 0;
+.nav-label {
+  position: relative;
+}
+
+/* the active marker is a small lens sliding under the labels */
+.nav-lens {
+  position: absolute;
+  inset: 0;
+  border-radius: 999px;
+  background: linear-gradient(160deg, rgba(79, 147, 255, 0.55), rgba(31, 107, 255, 0.28));
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.5),
+    inset 0 -6px 10px -6px rgba(3, 6, 13, 0.5),
+    0 4px 18px rgba(31, 107, 255, 0.4);
+}
+
+.nav-tools {
+  justify-self: end;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  padding: 5px;
+  border-radius: 999px;
+}
+
+.motion-toggle {
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border: 0;
+  border-radius: 50%;
+  background: none;
+  color: var(--mist);
+  transition: color 0.3s, background 0.3s;
+
+  &:hover {
+    color: var(--foam);
+    background: rgba(255, 255, 255, 0.08);
+  }
+}
+
+@media (max-width: 760px) {
+  .nav {
+    top: 14px;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .nav-links {
+    position: fixed;
+    left: 50%;
+    bottom: 16px;
+    transform: translateX(-50%);
+    max-width: calc(100vw - 24px);
+
+    a {
+      padding: 13px 13px;
+      font-size: 13px;
+    }
   }
 }

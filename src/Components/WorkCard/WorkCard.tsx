@@ -9,159 +9,120 @@ import GoldenNumbers from "../../assets/GoldenNumbers.png";
 import TypeGenerator from "../../assets/TypeGenerator.png";
 import ModerTask from "../../assets/ModernTask.png";
 import { WorkInfo } from "../../models/LogicItems/Workinfo";
-import { FormattedMessage } from "react-intl";
 import { useRef, useState } from "react";
 
-const worksToShowAll: WorkInfo[] = [
+const works: WorkInfo[] = [
   {
     title: "IsiGest POS",
     img: IsiGestPOS,
     url: "https://isigest.netlify.app/",
-    techs: ["HTML", "Tailwind", "TypeScript", "NextJS"],
+    techs: ["Next.js", "TypeScript", "Tailwind"],
   },
   {
     title: "Digi Card",
     img: DigiCard,
     url: "https://digi-isi-card.netlify.app/",
-    techs: ["HTML", "Tailwind", "TypeScript", "NextJS"],
+    techs: ["Next.js", "TypeScript", "Tailwind"],
   },
   {
     title: "Modern Task Manager",
     img: ModerTask,
     url: "https://modern-task-app-prueba.netlify.app/",
-    techs: ["HTML", "CSS", "JavaScript", "TypeScript", "Angular"],
+    techs: ["Angular", "TypeScript", "CSS"],
   },
   {
     title: "Showly",
     img: Showly,
     url: "https://showly-prop.netlify.app",
-    techs: ["HTML", "Tailwind", "TypeScript", "NextJS"],
+    techs: ["Next.js", "TypeScript", "Tailwind"],
   },
   {
     title: "Cifras Doradas",
     img: GoldenNumbers,
     url: "https://cifrasdoradas.com/",
-    techs: ["HTML", "Tailwind", "TypeScript", "NextJS"],
+    techs: ["Next.js", "TypeScript", "Tailwind"],
   },
   {
     title: "Interface/Model Generator",
     img: TypeGenerator,
     url: "https://kevin-garcia-typegenerator.netlify.app/",
-    techs: ["HTML", "CSS", "JavaScript", "TypeScript", "React"],
+    techs: ["React", "TypeScript", "CSS"],
   },
   {
     title: "50 Projects 50 Days",
     img: CincuentaP,
     url: "https://kevin-garcia-50projects.netlify.app/home/ExpandingCards",
-    techs: ["HTML", "CSS", "JavaScript", "TypeScript", "Angular"],
+    techs: ["Angular", "TypeScript", "CSS"],
   },
   {
     title: "Paac",
     img: Paac,
     url: "https://paacguardian.lovable.app/",
-    techs: ["HTML", "Tailwind", "TypeScript", "React", "NextJS"],
+    techs: ["React", "Next.js", "TypeScript", "Tailwind"],
   },
   {
     title: "Pet Appointments",
     img: PetAppointments,
     url: "https://kevin-garcia-pet-appointments.netlify.app",
-    techs: ["HTML", "CSS", "JavaScript", "TypeScript", "React"],
+    techs: ["React", "TypeScript", "CSS"],
   },
 ];
 
-interface TiltState {
-  rotX: number;
-  rotY: number;
-  shine: { x: number; y: number };
-}
+const LENS_W = 400;
 
-const WorkItem = ({ item }: { item: WorkInfo }) => {
-  const cardRef = useRef<HTMLDivElement>(null);
-  const [tilt, setTilt] = useState<TiltState>({
-    rotX: 0,
-    rotY: 0,
-    shine: { x: 50, y: 50 },
-  });
-  const [hovered, setHovered] = useState(false);
+/** A typographic index; the screenshot surfaces inside a drop beside the pointer. */
+const WorkCard = () => {
+  const lensRef = useRef<HTMLDivElement>(null);
+  const [img, setImg] = useState(works[0].img);
+  const [on, setOn] = useState(false);
 
-  const onMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    const rect = cardRef.current!.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-    const cx = rect.width / 2;
-    const cy = rect.height / 2;
-    const rotX = ((y - cy) / cy) * -10;
-    const rotY = ((x - cx) / cx) * 10;
-    setTilt({
-      rotX,
-      rotY,
-      shine: { x: (x / rect.width) * 100, y: (y / rect.height) * 100 },
-    });
+  const place = (x: number, y: number) => {
+    const left = x + 32 + LENS_W > window.innerWidth ? x - 32 - LENS_W : x + 32;
+    lensRef.current?.style.setProperty("--x", `${left}px`);
+    lensRef.current?.style.setProperty("--y", `${y}px`);
   };
-
-  const onMouseLeave = () => {
-    setTilt({ rotX: 0, rotY: 0, shine: { x: 50, y: 50 } });
-    setHovered(false);
+  const show = (w: WorkInfo) => {
+    setImg(w.img);
+    setOn(true);
   };
 
   return (
     <div
-      onClick={() => window.open(item.url)}
-      ref={cardRef}
-      className={`work-item ${hovered ? "hovered" : ""}`}
-      style={{
-        transform: `perspective(800px) rotateX(${tilt.rotX}deg) rotateY(${tilt.rotY}deg)`,
-        backgroundImage: `url(${item.img})`,
-      }}
-      onMouseMove={onMouseMove}
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={onMouseLeave}
+      className="projects"
+      onPointerMove={(e) => place(e.clientX, e.clientY)}
+      onPointerLeave={() => setOn(false)}
     >
-      <div
-        className="shine"
-        style={{
-          background: `radial-gradient(circle at ${tilt.shine.x}% ${tilt.shine.y}%, rgba(255,255,255,0.12) 0%, transparent 60%)`,
-        }}
-      />
-      <div className="card-overlay" />
+      <ul>
+        {works.map((w) => (
+          <li key={w.url} className="rise">
+            <a
+              href={w.url}
+              target="_blank"
+              rel="noreferrer"
+              onPointerEnter={() => show(w)}
+              onFocus={(e) => {
+                const r = e.currentTarget.getBoundingClientRect();
+                place(r.left + r.width * 0.55, r.top + r.height / 2);
+                show(w);
+              }}
+              onBlur={() => setOn(false)}
+            >
+              <img className="project-thumb" src={w.img} alt="" loading="lazy" />
+              <span className="project-title">{w.title}</span>
+              <span className="project-techs">{w.techs.join(", ")}</span>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
+                <path d="M7 17 17 7M9 7h8v8" />
+              </svg>
+            </a>
+          </li>
+        ))}
+      </ul>
 
-      <div className="card-body">
-        <h3 className="card-title">{item.title}</h3>
-        <div className="card-techs">
-          {item.techs
-            .sort((a, b) => b.length - a.length)
-            .map((tech) => (
-              <span key={tech} className="tech-badge">
-                {tech}
-              </span>
-            ))}
-        </div>
-        <button className="card-cta" onClick={() => window.open(item.url)}>
-          <FormattedMessage id="work.enter.button" />
-          <svg
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2.5"
-            width="14"
-            height="14"
-          >
-            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
-            <polyline points="15 3 21 3 21 9" />
-            <line x1="10" y1="14" x2="21" y2="3" />
-          </svg>
-        </button>
+      <div ref={lensRef} className={`project-lens ${on ? "on" : ""}`} aria-hidden="true">
+        <img src={img} alt="" />
       </div>
     </div>
   );
 };
-
-const WorkCard = () => (
-  <div id="work-card-container">
-    {worksToShowAll.map((item) => (
-      <WorkItem key={item.url} item={item} />
-    ))}
-  </div>
-);
 
 export default WorkCard;
