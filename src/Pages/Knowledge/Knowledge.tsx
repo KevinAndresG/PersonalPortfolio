@@ -24,19 +24,19 @@ import { pageFade, useRise } from "../../hooks/useRise";
 
 const TECHS: { level: number; title: string; img: string; invert?: boolean }[] =
   [
-    { level: 70, title: "JavaScript", img: javaScript },
+    { level: 90, title: "JavaScript", img: javaScript },
     { level: 70, title: "Angular", img: angular },
     { level: 90, title: "React", img: react },
     { level: 80, title: "TypeScript", img: typeScript },
     // the Next.js mark is solid black, so it is inverted for the dark water
-    { level: 60, title: "Next.js", img: next, invert: true },
+    { level: 80, title: "Next.js", img: next, invert: true },
     { level: 80, title: "HTML", img: html },
     { level: 80, title: "CSS", img: css },
     { level: 80, title: "Sass", img: sass },
     { level: 40, title: "Bootstrap", img: bootsTrap },
     { level: 70, title: "Tailwind", img: tailWind },
     { level: 80, title: "Git", img: git },
-    { level: 50, title: "Node.js", img: node },
+    { level: 60, title: "Node.js", img: node },
     { level: 50, title: "Python", img: python },
     { level: 50, title: "PostgreSQL", img: postgres },
     { level: 60, title: "AI / LLMs", img: ai },
@@ -52,11 +52,7 @@ const Knowledge = () => {
   return (
     <IntlProvider locale="En" messages={state.messages}>
       {state.text && (
-        <motion.main
-          ref={ref}
-          className="page"
-          {...pageFade}
-        >
+        <motion.main ref={ref} className="page" {...pageFade}>
           <h1 className="page-title">
             <span data-water>
               <FormattedMessage id="knowledge.heading" />
