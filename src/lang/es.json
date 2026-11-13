@@ -1,13 +1,13 @@
 {
-  "home.role": "Desarrollador Front End",
-  "home.description": "Construyo interfaces rápidas, claras y cuidadas al detalle con React, Angular y TypeScript.",
+  "home.role": "Desarrollador Full Stack · Enfoque Frontend",
+  "home.description": "Construyo aplicaciones web de punta a punta: interfaces cuidadas con React, Next.js y Angular, respaldadas por APIs en Node.js y Python.",
   "home.cta.work": "Ver proyectos",
   "home.cta.about": "Sobre mí",
   "home.hint": "Mueve el cursor y haz clic: el agua responde.",
 
   "about.title": "Sobre mí",
-  "about.im": "Como desarrollador Front End he trabajado en varios proyectos aplicando buenas técnicas de optimización y las mejores prácticas.",
-  "about.description.two": "He usado diferentes frameworks y también he creado aplicaciones sin necesidad de librerías externas.",
+  "about.im": "Soy desarrollador Full Stack con más de 4 años llevando aplicaciones web a producción. Mi enfoque es el frontend: interfaces rápidas, claras y con un ojo meticuloso para la UX.",
+  "about.description.two": "También me encargo del resto de la funcionalidad: APIs REST y capas BFF con Node.js y Python, bases de datos como PostgreSQL e integraciones de IA con LLMs, Whisper y n8n.",
   "about.logical.think": "Mi pensamiento lógico",
   "about.card.title.analyze": "Analizar",
   "about.card.text.analyze": "Analizar el problema o la nueva funcionalidad.",

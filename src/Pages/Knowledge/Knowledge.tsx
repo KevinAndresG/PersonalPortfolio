@@ -13,6 +13,9 @@ import azure from "../../assets/AzureTechs.png";
 import next from "../../assets/Next.js.svg";
 import node from "../../assets/Node.js.svg";
 import postgres from "../../assets/PostgresSQL.svg";
+import python from "../../assets/Python.svg";
+import ai from "../../assets/AI.svg";
+import n8n from "../../assets/n8n.svg";
 import { useContext, useRef } from "react";
 import { FormattedMessage, IntlProvider } from "react-intl";
 import { LanguageContext } from "../../Contexts/LanguageSelector/Context";
@@ -34,7 +37,10 @@ const TECHS: { level: number; title: string; img: string; invert?: boolean }[] =
     { level: 70, title: "Tailwind", img: tailWind },
     { level: 80, title: "Git", img: git },
     { level: 50, title: "Node.js", img: node },
+    { level: 50, title: "Python", img: python },
     { level: 50, title: "PostgreSQL", img: postgres },
+    { level: 60, title: "AI / LLMs", img: ai },
+    { level: 50, title: "n8n", img: n8n },
     { level: 50, title: "Azure", img: azure },
   ];
 

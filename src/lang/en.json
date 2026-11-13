@@ -1,13 +1,13 @@
 {
-  "home.role": "Front End Developer",
-  "home.description": "I build fast, clear, carefully detailed interfaces with React, Angular and TypeScript.",
+  "home.role": "Full Stack Developer · Frontend-focused",
+  "home.description": "I build production web apps end to end: polished interfaces with React, Next.js and Angular, backed by Node.js and Python APIs.",
   "home.cta.work": "See projects",
   "home.cta.about": "About me",
   "home.hint": "Move the cursor and click: the water answers.",
 
   "about.title": "About me",
-  "about.im": "As a Front End developer I have worked on several projects applying good optimization techniques and best practices.",
-  "about.description.two": "I have used different frameworks, and I have also built applications without any external library.",
+  "about.im": "I'm a Full Stack developer with 4+ years shipping production web apps. My focus is the frontend: fast, clear interfaces with a meticulous eye for UX.",
+  "about.description.two": "I also own the rest of the feature: REST APIs and BFF layers with Node.js and Python, databases like PostgreSQL, and AI integrations with LLMs, Whisper and n8n.",
   "about.logical.think": "My logical thinking",
   "about.card.title.analyze": "Analyze",
   "about.card.text.analyze": "Analyze the problem or the new functionality.",
