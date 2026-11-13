@@ -19,11 +19,7 @@ const Home = () => {
   return (
     <IntlProvider locale="En" messages={state.messages}>
       {state.text && (
-        <motion.main
-          ref={ref}
-          className="page home"
-          {...pageFade}
-        >
+        <motion.main ref={ref} className="page home" {...pageFade}>
           <h1 className="home-name">
             <span data-water>Kevin</span>
             <span data-water>Garcia</span>
@@ -50,7 +46,12 @@ const Home = () => {
               </div>
               <div className="home-social rise">
                 {SOCIAL.map((s) => (
-                  <a key={s.link} href={s.link} target="_blank" rel="noreferrer">
+                  <a
+                    key={s.link}
+                    href={s.link}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
                     {s.label}
                   </a>
                 ))}
@@ -58,9 +59,9 @@ const Home = () => {
             </div>
           </div>
 
-          <p className="home-hint muted rise">
+          {/* <p className="home-hint muted rise">
             <FormattedMessage id="home.hint" />
-          </p>
+          </p> */}
         </motion.main>
       )}
     </IntlProvider>
