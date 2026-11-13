@@ -40,22 +40,17 @@ float caustic(vec2 uv, float t){
   float b = 1. - abs(2. * fbm(uv * 3.4 - vec2(t * .7, t) + 3.1) - 1.);
   return pow(a * b, 5.);
 }
-// metaball field and gradient (refraction, all drops) plus the field that gets
-// shaded here (fo, go) and its copy offset down-right for the contact shadow.
-// The cursor drop (slot 0) is shaded by pass 1 on top of the UI instead.
-float field(vec2 p, out vec2 g, out float fo, out vec2 go, out float fs){
-  float f = 0.; g = vec2(0.); fo = 0.; go = vec2(0.); fs = 0.;
+// metaball field and gradient, plus the same field offset down-right for the
+// contact shadow, in one pass over the live drops only
+float field(vec2 p, out vec2 g, out float fs){
+  float f = 0.; g = vec2(0.); fs = 0.;
   for (int i = 0; i < ${MAX_DROP}; i++){
     if (i >= uNDrop) break;
     vec3 d = uDrop[i];
     vec2 v = p - d.xy; float q = dot(v, v) + 1.; float r2 = d.z * d.z;
-    float t = r2 / q; vec2 gi = -2. * r2 * v / (q * q);
-    f += t; g += gi;
-    if (i > 0 || uPass == 1){
-      fo += t; go += gi;
-      vec2 vs = v - vec2(5., 9.);
-      fs += r2 / (dot(vs, vs) + 1.);
-    }
+    f += r2 / q; g += -2. * r2 * v / (q * q);
+    vec2 vs = v - vec2(5., 9.);
+    fs += r2 / (dot(vs, vs) + 1.);
   }
   return f;
 }
@@ -80,21 +75,27 @@ void main(){
   vec2 p = vec2(gl_FragCoord.x, uView.y * uDpr - gl_FragCoord.y) / uDpr + uOrigin;
   vec2 L = normalize(vec2(-.6, -.8));
 
-  // droplets: refraction from every drop, shading from the ones drawn in this pass
-  vec2 g, go; float fo, fs; float f = field(p, g, fo, go, fs);
-  float ms = smoothstep(1., 1.12, fo);
-  float es = 1. - clamp((fo - 1.) / 1.6, 0., 1.);
-  vec2 n2 = (dot(go, go) > 0. ? -normalize(go) : vec2(0.)) * es;
+  // droplets: both layers shade the whole field, so the cursor drop merges with
+  // the others. Around the cursor (c = 1) the top layer draws it, over the UI;
+  // further out the water does, with a soft hand-over between the two.
+  vec2 g; float fs; float f = field(p, g, fs);
+  float ms = smoothstep(1., 1.12, f);
+  float es = 1. - clamp((f - 1.) / 1.6, 0., 1.);
+  vec2 n2 = (dot(g, g) > 0. ? -normalize(g) : vec2(0.)) * es;
   // contact shadow, dark rim, crisp highlight, inner glow
   float shade = (1. - .45 * smoothstep(.8, 1.1, fs) * (1. - ms)) * (1. - .38 * ms * es * es * es);
   vec3 light = ms * vec3(.02, .04, .09)
     + vec3(1.) * smoothstep(.5, .78, pow(max(dot(n2, L), 0.), 3.) * ms) * .8
     + vec3(.45, .72, 1.) * pow(max(dot(n2, -L), 0.), 2.) * ms * .5;
+  // ponytail: fade ends at 56px, inside the 120px top canvas (TOP / 2 = 60)
+  float c = uDrop[0].z > .5 ? 1. - smoothstep(34., 56., length(p - uDrop[0].xy)) : 0.;
   if (uPass == 1){
     // premultiplied: darkens what is under it by shade, then adds the light
-    gl_FragColor = vec4(light, 1. - shade);
+    gl_FragColor = vec4(light, 1. - shade) * c;
     return;
   }
+  shade = mix(1., shade, 1. - c);
+  light *= 1. - c;
 
   // ripples: expanding rings, summed as a slope field
   vec2 off = vec2(0.);
@@ -186,10 +187,9 @@ const WaterCanvas = () => {
     top.setAttribute("aria-hidden", "true");
     const tgl = top.getContext("webgl", { antialias: false, alpha: true, premultipliedAlpha: true });
     const TU = tgl && setup(tgl);
-    const tu = TU && { view: TU("uView"), origin: TU("uOrigin"), dpr: TU("uDpr"), drop: TU("uDrop") };
+    const tu = TU && { view: TU("uView"), origin: TU("uOrigin"), dpr: TU("uDpr"), drop: TU("uDrop"), nDrop: TU("uNDrop") };
     if (tgl && TU && tu) {
       tgl.uniform1i(TU("uPass"), 1);
-      tgl.uniform1i(TU("uNDrop"), 1);
       tgl.uniform2f(tu.view, TOP, TOP);
       document.body.appendChild(top);
     }
@@ -394,7 +394,9 @@ const WaterCanvas = () => {
           top.style.transform = `translate(${ox}px, ${oy}px)`;
           top.style.visibility = "visible";
           tgl.uniform2f(tu.origin, ox, oy);
-          tgl.uniform3f(tu.drop, cur.x, cur.y, cur.r);
+          // every drop, so the ones near the cursor merge with it here too
+          tgl.uniform1i(tu.nDrop, nd);
+          tgl.uniform3fv(tu.drop, dropBuf);
           tgl.drawArrays(tgl.TRIANGLES, 0, 3);
         } else top.style.visibility = "hidden";
       }
