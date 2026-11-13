@@ -1,13 +1,13 @@
 import "./WorkCard.scss";
-import CincuentaP from "../../assets/CincuentaProjects.png";
-import PetAppointments from "../../assets/PetAppointmen.png";
-import IsiGestPOS from "../../assets/IsiGestPOS.png";
-import DigiCard from "../../assets/DigiCard.png";
-import Paac from "../../assets/Paac.png";
-import Showly from "../../assets/Showly.png";
-import GoldenNumbers from "../../assets/GoldenNumbers.png";
-import TypeGenerator from "../../assets/TypeGenerator.png";
-import ModerTask from "../../assets/ModernTask.png";
+import CincuentaP from "../../assets/CincuentaProjects.webp";
+import PetAppointments from "../../assets/PetAppointmen.webp";
+import IsiGestPOS from "../../assets/IsiGestPOS.webp";
+import DigiCard from "../../assets/DigiCard.webp";
+import Paac from "../../assets/Paac.webp";
+import Showly from "../../assets/Showly.webp";
+import GoldenNumbers from "../../assets/GoldenNumbers.webp";
+import TypeGenerator from "../../assets/TypeGenerator.webp";
+import ModerTask from "../../assets/ModernTask.webp";
 import { WorkInfo } from "../../models/LogicItems/Workinfo";
 import { useRef, useState } from "react";
 

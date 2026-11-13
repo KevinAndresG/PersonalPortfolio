@@ -5,7 +5,7 @@ import { LanguageContext } from "../../../Contexts/LanguageSelector/Context";
 import { FormattedMessage, IntlProvider, useIntl } from "react-intl";
 import { motion } from "framer-motion";
 import LanguageSelector from "../LanguageSelector/LanguageSelector";
-import KG from "../../../assets/kgLogo.png";
+import KG from "../../../assets/kgLogo.webp";
 
 const LINKS = [
   { to: "/home", id: "navBar.home" },
