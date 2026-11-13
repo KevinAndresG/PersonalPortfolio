@@ -91,6 +91,18 @@ body::-webkit-scrollbar-thumb {
   pointer-events: none;
 }
 
+/* the cursor drop's meniscus, above the UI (WaterCanvas moves it) */
+.water-top {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 120px;
+  height: 120px;
+  z-index: 99;
+  pointer-events: none;
+  visibility: hidden;
+}
+
 /* titles are painted inside the water; the DOM copy stays for readers */
 html.water-on [data-water] {
   color: transparent;

@@ -14,8 +14,9 @@ const VERT = `attribute vec2 a; void main(){ gl_Position = vec4(a, 0., 1.); }`;
 
 const FRAG = `
 precision highp float;
-uniform vec2 uRes;
+uniform vec2 uRes, uView, uOrigin;
 uniform float uDpr, uTime, uScroll, uReveal;
+uniform int uPass; // 0: the water itself, 1: only the cursor drop's meniscus, over the UI
 uniform vec2 uMouse;
 uniform vec4 uRip[${MAX_RIP}];
 uniform vec3 uDrop[${MAX_DROP}];
@@ -39,17 +40,22 @@ float caustic(vec2 uv, float t){
   float b = 1. - abs(2. * fbm(uv * 3.4 - vec2(t * .7, t) + 3.1) - 1.);
   return pow(a * b, 5.);
 }
-// metaball field and gradient, plus the same field offset down-right for the
-// contact shadow, in one pass over the live drops only
-float field(vec2 p, out vec2 g, out float fs){
-  float f = 0.; g = vec2(0.); fs = 0.;
+// metaball field and gradient (refraction, all drops) plus the field that gets
+// shaded here (fo, go) and its copy offset down-right for the contact shadow.
+// The cursor drop (slot 0) is shaded by pass 1 on top of the UI instead.
+float field(vec2 p, out vec2 g, out float fo, out vec2 go, out float fs){
+  float f = 0.; g = vec2(0.); fo = 0.; go = vec2(0.); fs = 0.;
   for (int i = 0; i < ${MAX_DROP}; i++){
     if (i >= uNDrop) break;
     vec3 d = uDrop[i];
     vec2 v = p - d.xy; float q = dot(v, v) + 1.; float r2 = d.z * d.z;
-    f += r2 / q; g += -2. * r2 * v / (q * q);
-    vec2 vs = v - vec2(5., 9.);
-    fs += r2 / (dot(vs, vs) + 1.);
+    float t = r2 / q; vec2 gi = -2. * r2 * v / (q * q);
+    f += t; g += gi;
+    if (i > 0 || uPass == 1){
+      fo += t; go += gi;
+      vec2 vs = v - vec2(5., 9.);
+      fs += r2 / (dot(vs, vs) + 1.);
+    }
   }
   return f;
 }
@@ -71,7 +77,24 @@ vec3 scene(vec2 p){
   return col;
 }
 void main(){
-  vec2 p = vec2(gl_FragCoord.x, uRes.y * uDpr - gl_FragCoord.y) / uDpr;
+  vec2 p = vec2(gl_FragCoord.x, uView.y * uDpr - gl_FragCoord.y) / uDpr + uOrigin;
+  vec2 L = normalize(vec2(-.6, -.8));
+
+  // droplets: refraction from every drop, shading from the ones drawn in this pass
+  vec2 g, go; float fo, fs; float f = field(p, g, fo, go, fs);
+  float ms = smoothstep(1., 1.12, fo);
+  float es = 1. - clamp((fo - 1.) / 1.6, 0., 1.);
+  vec2 n2 = (dot(go, go) > 0. ? -normalize(go) : vec2(0.)) * es;
+  // contact shadow, dark rim, crisp highlight, inner glow
+  float shade = (1. - .45 * smoothstep(.8, 1.1, fs) * (1. - ms)) * (1. - .38 * ms * es * es * es);
+  vec3 light = ms * vec3(.02, .04, .09)
+    + vec3(1.) * smoothstep(.5, .78, pow(max(dot(n2, L), 0.), 3.) * ms) * .8
+    + vec3(.45, .72, 1.) * pow(max(dot(n2, -L), 0.), 2.) * ms * .5;
+  if (uPass == 1){
+    // premultiplied: darkens what is under it by shade, then adds the light
+    gl_FragColor = vec4(light, 1. - shade);
+    return;
+  }
 
   // ripples: expanding rings, summed as a slope field
   vec2 off = vec2(0.);
@@ -84,8 +107,6 @@ void main(){
     off += v / d * cos(x * .16) * exp(-x * x / (w * w)) * r.w * exp(-age * 1.3);
   }
 
-  // droplets
-  vec2 g; float fs; float f = field(p, g, fs);
   float m = smoothstep(1., 1.12, f);
   float hgt = clamp((f - 1.) / 1.6, 0., 1.);
   vec2 nd = dot(g, g) > 0. ? normalize(g) : vec2(0.);
@@ -103,18 +124,10 @@ void main(){
   vec3 tc = mix(vec3(.94, .97, 1.), vec3(.56, .78, 1.), clamp(p.y / uRes.y * 1.2 - .1, 0., 1.) * .6);
   col = mix(col, tc, a);
 
-  vec2 L = normalize(vec2(-.6, -.8));
   col += vec3(.35, .6, 1.) * max(dot(off, L), 0.) * .45;
   col *= 1. - .25 * max(dot(off, -L), 0.);
 
-  // droplet shading: contact shadow, dark rim, crisp highlight, inner glow
-  col *= 1. - .45 * smoothstep(.8, 1.1, fs) * (1. - m);
-  col *= 1. - .38 * m * edge * edge * edge;
-  col += m * vec3(.02, .04, .09);
-  vec2 n2 = -nd * edge;
-  float spec = pow(max(dot(n2, L), 0.), 3.) * m;
-  col += vec3(1.) * smoothstep(.5, .78, spec) * .8;
-  col += vec3(.45, .72, 1.) * pow(max(dot(n2, -L), 0.), 2.) * m * .5;
+  col = col * shade + light;
 
   col *= 1. - .35 * pow(length((p / uRes - .5) * vec2(1.1, 1.3)), 2.2);
   col += (hash(gl_FragCoord.xy + uTime) - .5) * .018;
@@ -125,6 +138,31 @@ type Drop = { x: number; y: number; vx: number; vy: number; r: number; sp: numbe
 
 const rand = (a: number, b: number) => a + Math.random() * (b - a);
 const motionOn = () => document.documentElement.dataset.motion !== "off";
+const TOP = 120; // css px of the canvas that carries the cursor drop over the UI
+
+/** Compiles FRAG on a full-screen triangle; returns a uniform lookup, or null. */
+const setup = (gl: WebGLRenderingContext) => {
+  const compile = (type: number, src: string) => {
+    const s = gl.createShader(type)!;
+    gl.shaderSource(s, src);
+    gl.compileShader(s);
+    if (!gl.getShaderParameter(s, gl.COMPILE_STATUS)) console.error(gl.getShaderInfoLog(s));
+    return s;
+  };
+  const prog = gl.createProgram()!;
+  gl.attachShader(prog, compile(gl.VERTEX_SHADER, VERT));
+  gl.attachShader(prog, compile(gl.FRAGMENT_SHADER, FRAG));
+  gl.bindAttribLocation(prog, 0, "a");
+  gl.linkProgram(prog);
+  if (!gl.getProgramParameter(prog, gl.LINK_STATUS)) return null;
+  gl.useProgram(prog);
+
+  gl.bindBuffer(gl.ARRAY_BUFFER, gl.createBuffer());
+  gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 3, -1, -1, 3]), gl.STATIC_DRAW);
+  gl.enableVertexAttribArray(0);
+  gl.vertexAttribPointer(0, 2, gl.FLOAT, false, 0, 0);
+  return (n: string) => gl.getUniformLocation(prog, n);
+};
 
 const WaterCanvas = () => {
   const ref = useRef<HTMLCanvasElement>(null);
@@ -133,32 +171,28 @@ const WaterCanvas = () => {
     const canvas = ref.current!;
     const gl = canvas.getContext("webgl", { antialias: false, alpha: false });
     if (!gl) return; // CSS fallback background stays, DOM titles stay visible
-
-    const compile = (type: number, src: string) => {
-      const s = gl.createShader(type)!;
-      gl.shaderSource(s, src);
-      gl.compileShader(s);
-      if (!gl.getShaderParameter(s, gl.COMPILE_STATUS)) console.error(gl.getShaderInfoLog(s));
-      return s;
-    };
-    const prog = gl.createProgram()!;
-    gl.attachShader(prog, compile(gl.VERTEX_SHADER, VERT));
-    gl.attachShader(prog, compile(gl.FRAGMENT_SHADER, FRAG));
-    gl.bindAttribLocation(prog, 0, "a");
-    gl.linkProgram(prog);
-    if (!gl.getProgramParameter(prog, gl.LINK_STATUS)) return;
-    gl.useProgram(prog);
-
-    gl.bindBuffer(gl.ARRAY_BUFFER, gl.createBuffer());
-    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 3, -1, -1, 3]), gl.STATIC_DRAW);
-    gl.enableVertexAttribArray(0);
-    gl.vertexAttribPointer(0, 2, gl.FLOAT, false, 0, 0);
-
-    const U = (n: string) => gl.getUniformLocation(prog, n);
+    const U = setup(gl);
+    if (!U) return;
     const u = {
-      res: U("uRes"), dpr: U("uDpr"), time: U("uTime"), scroll: U("uScroll"),
+      res: U("uRes"), view: U("uView"), dpr: U("uDpr"), time: U("uTime"), scroll: U("uScroll"),
       reveal: U("uReveal"), mouse: U("uMouse"), rip: U("uRip"), drop: U("uDrop"), nDrop: U("uNDrop"), nRip: U("uNRip"),
     };
+
+    // the cursor drop is one drop in two layers: the water above refracts what is
+    // under it, and this small transparent canvas above the UI draws its meniscus,
+    // so it reads the same over the background, the nav and the buttons
+    const top = document.createElement("canvas");
+    top.className = "water-top";
+    top.setAttribute("aria-hidden", "true");
+    const tgl = top.getContext("webgl", { antialias: false, alpha: true, premultipliedAlpha: true });
+    const TU = tgl && setup(tgl);
+    const tu = TU && { view: TU("uView"), origin: TU("uOrigin"), dpr: TU("uDpr"), drop: TU("uDrop") };
+    if (tgl && TU && tu) {
+      tgl.uniform1i(TU("uPass"), 1);
+      tgl.uniform1i(TU("uNDrop"), 1);
+      tgl.uniform2f(tu.view, TOP, TOP);
+      document.body.appendChild(top);
+    }
 
     gl.bindTexture(gl.TEXTURE_2D, gl.createTexture());
     gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
@@ -232,6 +266,12 @@ const WaterCanvas = () => {
       dpr = Math.min(window.devicePixelRatio || 1, 1.5) * quality;
       canvas.width = Math.round(W * dpr); canvas.height = Math.round(H * dpr);
       gl.viewport(0, 0, canvas.width, canvas.height);
+      gl.uniform2f(u.view, W, H);
+      if (tgl && tu) {
+        top.width = top.height = Math.round(TOP * dpr);
+        tgl.viewport(0, 0, top.width, top.height);
+        tgl.uniform1f(tu.dpr, dpr);
+      }
       base = W < 700 ? 5 : 9;
       while (drops.length < base) { const d = {} as Drop; spawn(d, false); drops.push(d); }
       queueText();
@@ -291,7 +331,8 @@ const WaterCanvas = () => {
       last = now;
       if (on) time += dt;
 
-      cur.target = !on || !cur.inside || cur.held ? 0 : cur.down ? 15 : cur.hot ? 34 : 22;
+      // like a pointer cursor, the drop tightens over anything clickable
+      cur.target = !on || !cur.inside || cur.held ? 0 : cur.down ? 11 : cur.hot ? 13 : 22;
       cur.r += (cur.target - cur.r) * (1 - Math.exp(-10 * dt));
       cur.x += (cur.tx - cur.x) * (1 - Math.exp(-14 * dt));
       cur.y += (cur.ty - cur.y) * (1 - Math.exp(-14 * dt));
@@ -299,7 +340,8 @@ const WaterCanvas = () => {
       const put = (x: number, y: number, r: number) => {
         dropBuf[nd * 3] = x; dropBuf[nd * 3 + 1] = y; dropBuf[nd * 3 + 2] = r; nd++;
       };
-      if (cur.r >= 0.5) put(cur.x, cur.y, cur.r);
+      // slot 0 is always the cursor (radius 0 when hidden): the shader shades it on top
+      put(cur.x, cur.y, cur.r >= 0.5 ? cur.r : 0);
 
       drops.forEach((d, i) => {
         if (on) {
@@ -346,6 +388,17 @@ const WaterCanvas = () => {
       gl.uniform3fv(u.drop, dropBuf);
       gl.drawArrays(gl.TRIANGLES, 0, 3);
 
+      if (tgl && tu) {
+        if (cur.r >= 0.5) {
+          const ox = Math.round(cur.x - TOP / 2), oy = Math.round(cur.y - TOP / 2);
+          top.style.transform = `translate(${ox}px, ${oy}px)`;
+          top.style.visibility = "visible";
+          tgl.uniform2f(tu.origin, ox, oy);
+          tgl.uniform3f(tu.drop, cur.x, cur.y, cur.r);
+          tgl.drawArrays(tgl.TRIANGLES, 0, 3);
+        } else top.style.visibility = "hidden";
+      }
+
       // frames over 100ms are a throttled background tab, not a slow GPU
       const ms = now - prev;
       if (ms < 100) { sampled++; if (ms > 22) slow++; }
@@ -371,6 +424,7 @@ const WaterCanvas = () => {
 
     return () => {
       cancelAnimationFrame(raf);
+      top.remove();
       mo.disconnect();
       ro.disconnect();
       window.removeEventListener("resize", resize);
