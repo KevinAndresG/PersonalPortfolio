@@ -36,10 +36,11 @@ const MotionToggle = () => {
 
 const Header = () => {
   const { state } = useContext(LanguageContext);
-  // each link is a small vessel: the cursor drop pours in from where it entered
+  // each link is a small vessel: the drop pours in from where the cursor
+  // entered and drains out where it left (origin set on enter and leave)
   const pour = (e: React.PointerEvent<HTMLAnchorElement>) => {
     const r = e.currentTarget.getBoundingClientRect();
-    // set once on entry: the fill then animates on the compositor alone
+    // set at the edges only: the fill then animates on the compositor alone
     e.currentTarget.style.setProperty("--fo", `${e.clientX - r.left}px ${e.clientY - r.top}px`);
   };
 
@@ -53,7 +54,7 @@ const Header = () => {
 
           <nav className="nav-links glass" aria-label="Main">
             {LINKS.map((l) => (
-              <NavLink key={l.to} to={l.to} data-pour onPointerEnter={pour}>
+              <NavLink key={l.to} to={l.to} data-pour onPointerEnter={pour} onPointerLeave={pour}>
                 {({ isActive }) => (
                   <>
                     {isActive && (
