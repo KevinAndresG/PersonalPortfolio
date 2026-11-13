@@ -8,7 +8,7 @@ import { useEffect, useRef } from "react";
  */
 
 const MAX_RIP = 16;
-const MAX_DROP = 18;
+const MAX_DROP = 20;
 
 const VERT = `attribute vec2 a; void main(){ gl_Position = vec4(a, 0., 1.); }`;
 
@@ -224,7 +224,8 @@ const WaterCanvas = () => {
     const spawn = (d: Drop, top: boolean) => {
       d.r = d.home = rand(11, W < 700 ? 24 : 38);
       d.x = rand(0, W);
-      d.y = top ? -d.r * 2 - rand(0, 240) : rand(0, H);
+      // respawn right at the top edge: slow drops took up to a minute to cross a deeper gap
+      d.y = top ? -d.r * 2 - rand(0, 30) : rand(0, H);
       d.vx = d.vy = d.free = 0;
       d.sp = rand(7, 20) * (d.r / 24);
       d.ph = rand(0, 6.28);
@@ -272,7 +273,7 @@ const WaterCanvas = () => {
         tgl.viewport(0, 0, top.width, top.height);
         tgl.uniform1f(tu.dpr, dpr);
       }
-      base = W < 700 ? 5 : 9;
+      base = W < 700 ? 6 : 11;
       while (drops.length < base) { const d = {} as Drop; spawn(d, false); drops.push(d); }
       queueText();
     };
