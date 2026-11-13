@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { FormattedMessage, IntlProvider } from "react-intl";
 import { useContext, useRef } from "react";
 import { LanguageContext } from "../../Contexts/LanguageSelector/Context";
-import { useRise } from "../../hooks/useRise";
+import { pageFade, useRise } from "../../hooks/useRise";
 
 const SOCIAL = [
   { label: "LinkedIn", link: "https://www.linkedin.com/in/kevinandresg/" },
@@ -22,9 +22,7 @@ const Home = () => {
         <motion.main
           ref={ref}
           className="page home"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1, transition: { duration: 0.4 } }}
-          exit={{ opacity: 0, transition: { duration: 0.25 } }}
+          {...pageFade}
         >
           <h1 className="home-name">
             <span data-water>Kevin</span>

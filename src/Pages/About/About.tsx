@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import { FormattedMessage, IntlProvider } from "react-intl";
 import { useContext, useRef } from "react";
 import { LanguageContext } from "../../Contexts/LanguageSelector/Context";
-import { useRise } from "../../hooks/useRise";
+import { pageFade, useRise } from "../../hooks/useRise";
 
 const STEPS = ["analyze", "destructure", "solve", "bind"];
 
@@ -18,9 +18,7 @@ const About = () => {
         <motion.main
           ref={ref}
           className="page about"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1, transition: { duration: 0.4 } }}
-          exit={{ opacity: 0, transition: { duration: 0.25 } }}
+          {...pageFade}
         >
           <h1 className="page-title">
             <span data-water>

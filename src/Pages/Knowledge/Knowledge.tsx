@@ -17,7 +17,7 @@ import { useContext, useRef } from "react";
 import { FormattedMessage, IntlProvider } from "react-intl";
 import { LanguageContext } from "../../Contexts/LanguageSelector/Context";
 import { motion } from "framer-motion";
-import { useRise } from "../../hooks/useRise";
+import { pageFade, useRise } from "../../hooks/useRise";
 
 const TECHS: { level: number; title: string; img: string; invert?: boolean }[] =
   [
@@ -49,9 +49,7 @@ const Knowledge = () => {
         <motion.main
           ref={ref}
           className="page"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1, transition: { duration: 0.4 } }}
-          exit={{ opacity: 0, transition: { duration: 0.25 } }}
+          {...pageFade}
         >
           <h1 className="page-title">
             <span data-water>

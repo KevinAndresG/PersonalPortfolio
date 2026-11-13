@@ -19,3 +19,15 @@ export const useRise = (scope: RefObject<HTMLElement | null>, ready: string) => 
     return () => ctx.revert();
   }, [scope, ready]);
 };
+
+/**
+ * Page fade shared by every route. The no-op onUpdate keeps framer-motion off WAAPI:
+ * its WAAPI path writes the final opacity a frame late, so the outgoing page flashed
+ * back to full opacity for one frame right before unmounting.
+ */
+export const pageFade = {
+  initial: { opacity: 0 },
+  animate: { opacity: 1, transition: { duration: 0.4 } },
+  exit: { opacity: 0, transition: { duration: 0.25 } },
+  onUpdate: () => {},
+};
