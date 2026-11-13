@@ -43,11 +43,11 @@ const Home = () => {
 
             <div className="home-actions">
               <div className="home-cta rise">
-                <Link to="/work" className="btn btn-solid">
-                  <FormattedMessage id="home.cta.work" />
-                </Link>
                 <Link to="/about" className="btn glass">
                   <FormattedMessage id="home.cta.about" />
+                </Link>
+                <Link to="/work" className="btn btn-solid">
+                  <FormattedMessage id="home.cta.work" />
                 </Link>
               </div>
               <div className="home-social rise">
