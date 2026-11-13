@@ -24,14 +24,21 @@
   border-radius: 50%;
   transition: transform 0.5s var(--ease);
 
-  img {
-    width: 26px;
-    height: 26px;
-    object-fit: contain;
+  .kg {
+    overflow: visible;
+  }
+
+  .kg-top {
+    transform: translate(2.5px, -2px);
+    transition: transform 0.5s var(--ease);
   }
 
   &:hover {
-    transform: scale(1.1) rotate(-6deg);
+    transform: scale(1.1);
+
+    .kg-top {
+      transform: none;
+    }
   }
 }
 
