@@ -36,6 +36,12 @@ const MotionToggle = () => {
 
 const Header = () => {
   const { state } = useContext(LanguageContext);
+  // each link is a small vessel: the cursor drop pours in from where it entered
+  const pour = (e: React.PointerEvent<HTMLAnchorElement>) => {
+    const r = e.currentTarget.getBoundingClientRect();
+    // set once on entry: the fill then animates on the compositor alone
+    e.currentTarget.style.setProperty("--fo", `${e.clientX - r.left}px ${e.clientY - r.top}px`);
+  };
 
   return (
     <IntlProvider locale="En" messages={state.messages}>
@@ -47,7 +53,7 @@ const Header = () => {
 
           <nav className="nav-links glass" aria-label="Main">
             {LINKS.map((l) => (
-              <NavLink key={l.to} to={l.to}>
+              <NavLink key={l.to} to={l.to} data-pour onPointerEnter={pour}>
                 {({ isActive }) => (
                   <>
                     {isActive && (
@@ -57,6 +63,7 @@ const Header = () => {
                         transition={{ type: "spring", stiffness: 340, damping: 28 }}
                       />
                     )}
+                    <span className="nav-pour" aria-hidden="true" />
                     <span className="nav-label">
                       <FormattedMessage id={l.id} />
                     </span>

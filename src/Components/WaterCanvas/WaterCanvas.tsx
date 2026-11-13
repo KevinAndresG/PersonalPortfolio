@@ -8,7 +8,7 @@ import { useEffect, useRef } from "react";
  */
 
 const MAX_RIP = 16;
-const MAX_DROP = 10;
+const MAX_DROP = 18;
 
 const VERT = `attribute vec2 a; void main(){ gl_Position = vec4(a, 0., 1.); }`;
 
@@ -20,6 +20,7 @@ uniform vec2 uMouse;
 uniform vec4 uRip[${MAX_RIP}];
 uniform vec3 uDrop[${MAX_DROP}];
 uniform sampler2D uText;
+uniform int uNDrop, uNRip;
 
 float hash(vec2 p){ return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453); }
 float noise(vec2 p){
@@ -38,13 +39,17 @@ float caustic(vec2 uv, float t){
   float b = 1. - abs(2. * fbm(uv * 3.4 - vec2(t * .7, t) + 3.1) - 1.);
   return pow(a * b, 5.);
 }
-float field(vec2 p, out vec2 g){
-  float f = 0.; g = vec2(0.);
+// metaball field and gradient, plus the same field offset down-right for the
+// contact shadow, in one pass over the live drops only
+float field(vec2 p, out vec2 g, out float fs){
+  float f = 0.; g = vec2(0.); fs = 0.;
   for (int i = 0; i < ${MAX_DROP}; i++){
+    if (i >= uNDrop) break;
     vec3 d = uDrop[i];
-    if (d.z <= 0.) continue;
     vec2 v = p - d.xy; float q = dot(v, v) + 1.; float r2 = d.z * d.z;
     f += r2 / q; g += -2. * r2 * v / (q * q);
+    vec2 vs = v - vec2(5., 9.);
+    fs += r2 / (dot(vs, vs) + 1.);
   }
   return f;
 }
@@ -71,16 +76,16 @@ void main(){
   // ripples: expanding rings, summed as a slope field
   vec2 off = vec2(0.);
   for (int i = 0; i < ${MAX_RIP}; i++){
+    if (i >= uNRip) break;
     vec4 r = uRip[i];
     float age = uTime - r.z;
-    if (r.w <= 0. || age < 0. || age > 4.) continue;
     vec2 v = p - r.xy; float d = length(v) + .001;
     float x = d - age * 240.; float w = 30. + age * 18.;
     off += v / d * cos(x * .16) * exp(-x * x / (w * w)) * r.w * exp(-age * 1.3);
   }
 
   // droplets
-  vec2 g; float f = field(p, g);
+  vec2 g; float fs; float f = field(p, g, fs);
   float m = smoothstep(1., 1.12, f);
   float hgt = clamp((f - 1.) / 1.6, 0., 1.);
   vec2 nd = dot(g, g) > 0. ? normalize(g) : vec2(0.);
@@ -103,7 +108,6 @@ void main(){
   col *= 1. - .25 * max(dot(off, -L), 0.);
 
   // droplet shading: contact shadow, dark rim, crisp highlight, inner glow
-  vec2 gs; float fs = field(p - vec2(5., 9.), gs);
   col *= 1. - .45 * smoothstep(.8, 1.1, fs) * (1. - m);
   col *= 1. - .38 * m * edge * edge * edge;
   col += m * vec3(.02, .04, .09);
@@ -117,7 +121,7 @@ void main(){
   gl_FragColor = vec4(col, 1.);
 }`;
 
-type Drop = { x: number; y: number; vx: number; vy: number; r: number; sp: number; ph: number };
+type Drop = { x: number; y: number; vx: number; vy: number; r: number; sp: number; ph: number; free: number; home: number };
 
 const rand = (a: number, b: number) => a + Math.random() * (b - a);
 const motionOn = () => document.documentElement.dataset.motion !== "off";
@@ -153,7 +157,7 @@ const WaterCanvas = () => {
     const U = (n: string) => gl.getUniformLocation(prog, n);
     const u = {
       res: U("uRes"), dpr: U("uDpr"), time: U("uTime"), scroll: U("uScroll"),
-      reveal: U("uReveal"), mouse: U("uMouse"), rip: U("uRip"), drop: U("uDrop"),
+      reveal: U("uReveal"), mouse: U("uMouse"), rip: U("uRip"), drop: U("uDrop"), nDrop: U("uNDrop"), nRip: U("uNRip"),
     };
 
     gl.bindTexture(gl.TEXTURE_2D, gl.createTexture());
@@ -168,6 +172,9 @@ const WaterCanvas = () => {
     let time = 0, last = performance.now(), raf = 0;
     let revealAt = -1e9, textKey = "", textQueued = false;
     const rip = new Float32Array(MAX_RIP * 4);
+    const ripLive = new Float32Array(MAX_RIP * 4);
+    // resolution scale: drops a step whenever frames run long, so weak GPUs stay smooth
+    let quality = 1, slow = 0, sampled = 0;
     const dropBuf = new Float32Array(MAX_DROP * 3);
     let ripIdx = 0;
 
@@ -177,13 +184,14 @@ const WaterCanvas = () => {
     };
 
     // ── droplets: slot 0 is the cursor, the rest slide down the glass ──
-    const cur = { x: -999, y: -999, tx: -999, ty: -999, r: 0, target: 0, mx: -999, my: -999, down: false, hot: false, inside: false };
+    const cur = { x: -999, y: -999, tx: -999, ty: -999, r: 0, target: 0, mx: -999, my: -999, down: false, hot: false, held: false, inside: false };
     const drops: Drop[] = [];
+    let base = 0; // resting population; splits add to it until the extras run off the glass
     const spawn = (d: Drop, top: boolean) => {
-      d.r = rand(11, W < 700 ? 24 : 38);
+      d.r = d.home = rand(11, W < 700 ? 24 : 38);
       d.x = rand(0, W);
       d.y = top ? -d.r * 2 - rand(0, 240) : rand(0, H);
-      d.vx = d.vy = 0;
+      d.vx = d.vy = d.free = 0;
       d.sp = rand(7, 20) * (d.r / 24);
       d.ph = rand(0, 6.28);
     };
@@ -221,12 +229,11 @@ const WaterCanvas = () => {
 
     const resize = () => {
       W = window.innerWidth; H = window.innerHeight;
-      dpr = Math.min(window.devicePixelRatio || 1, 1.5);
+      dpr = Math.min(window.devicePixelRatio || 1, 1.5) * quality;
       canvas.width = Math.round(W * dpr); canvas.height = Math.round(H * dpr);
       gl.viewport(0, 0, canvas.width, canvas.height);
-      const n = W < 700 ? 5 : MAX_DROP - 1;
-      while (drops.length < n) { const d = {} as Drop; spawn(d, false); drops.push(d); }
-      drops.length = n;
+      base = W < 700 ? 5 : 9;
+      while (drops.length < base) { const d = {} as Drop; spawn(d, false); drops.push(d); }
       queueText();
     };
 
@@ -240,15 +247,37 @@ const WaterCanvas = () => {
       } else { cur.mx = e.clientX; cur.my = e.clientY; cur.x = e.clientX; cur.y = e.clientY; }
       cur.tx = e.clientX; cur.ty = e.clientY;
       cur.inside = fine;
-      cur.hot = !!(e.target as Element | null)?.closest?.("a,button");
+      const el = e.target as Element | null;
+      cur.hot = !!el?.closest?.("a,button");
+      // inside a container the drop has poured into it, so it is drawn there instead
+      cur.held = !!el?.closest?.("[data-pour]");
     };
     const onDown = (e: PointerEvent) => {
       if (!motionOn()) return;
       cur.down = true;
       addRipple(e.clientX, e.clientY, 1);
-      for (const d of drops) {
+      for (const d of [...drops]) {
         const dx = d.x - e.clientX, dy = d.y - e.clientY, dist = Math.hypot(dx, dy);
-        if (dist < 260) { const k = (1 - dist / 260) * 420; d.vx += (dx / (dist + 1)) * k; d.vy += (dy / (dist + 1)) * k; }
+        if (dist < d.r * 1.4 + 14 && d.r >= 11) {
+          // a hit drop bursts into smaller ones that share its volume
+          const n = Math.min(d.r > 24 ? 4 : d.r > 16 ? 3 : 2, MAX_DROP - drops.length);
+          if (n < 2) continue;
+          const r = d.r / Math.sqrt(n), a0 = rand(0, 6.28);
+          for (let i = 0; i < n; i++) {
+            const a = a0 + (i / n) * 6.28 + rand(-0.3, 0.3), v = rand(300, 460);
+            const piece = i === 0 ? d : ({ ...d } as Drop);
+            piece.r = r * rand(0.85, 1.15);
+            piece.x = d.x + Math.cos(a) * r * 0.6; piece.y = d.y + Math.sin(a) * r * 0.6;
+            piece.vx = Math.cos(a) * v; piece.vy = Math.sin(a) * v;
+            piece.sp = rand(7, 20) * (piece.r / 24); piece.ph = rand(0, 6.28);
+            piece.free = 2.2;
+            if (i > 0) drops.push(piece);
+          }
+        } else if (dist < 260) {
+          const k = (1 - dist / 260) * 520;
+          d.vx += (dx / (dist + 1)) * k; d.vy += (dy / (dist + 1)) * k;
+          d.free = 1.2;
+        }
       }
     };
     const onUp = () => { cur.down = false; };
@@ -257,20 +286,26 @@ const WaterCanvas = () => {
     const frame = (now: number) => {
       raf = requestAnimationFrame(frame);
       const on = motionOn();
+      const prev = last;
       const dt = Math.min((now - last) / 1000, 0.05);
       last = now;
       if (on) time += dt;
 
-      cur.target = !on || !cur.inside ? 0 : cur.down ? 15 : cur.hot ? 34 : 22;
+      cur.target = !on || !cur.inside || cur.held ? 0 : cur.down ? 15 : cur.hot ? 34 : 22;
       cur.r += (cur.target - cur.r) * (1 - Math.exp(-10 * dt));
       cur.x += (cur.tx - cur.x) * (1 - Math.exp(-14 * dt));
       cur.y += (cur.ty - cur.y) * (1 - Math.exp(-14 * dt));
-      dropBuf.set([cur.x, cur.y, cur.r < 0.5 ? 0 : cur.r], 0);
+      let nd = 0;
+      const put = (x: number, y: number, r: number) => {
+        dropBuf[nd * 3] = x; dropBuf[nd * 3 + 1] = y; dropBuf[nd * 3 + 2] = r; nd++;
+      };
+      if (cur.r >= 0.5) put(cur.x, cur.y, cur.r);
 
       drops.forEach((d, i) => {
         if (on) {
           const dx = cur.x - d.x, dy = cur.y - d.y, dist = Math.hypot(dx, dy);
-          if (cur.r > 1 && dist < 190 && dist > (cur.r + d.r) * 0.6) {
+          d.free -= dt;
+          if (d.free <= 0 && cur.r > 1 && dist < 190 && dist > (cur.r + d.r) * 0.6) {
             const k = (1 - dist / 190) * 520 * dt;
             d.vx += (dx / dist) * k; d.vy += (dy / dist) * k;
           }
@@ -279,11 +314,19 @@ const WaterCanvas = () => {
           // stick-slip: drops on glass pause, then run
           const slide = d.sp * (0.3 + 0.7 * Math.max(0, Math.sin(time * 0.4 + d.ph)));
           d.x += d.vx * dt; d.y += (d.vy + slide) * dt;
-          if (d.y - d.r * 2 > H || d.x < -80 || d.x > W + 80) spawn(d, true);
+          // after a burst the original condenses back to full size; the extra
+          // pieces (always appended past `base`) evaporate
+          if (d.free <= 0) {
+            if (i >= base) { d.r -= dt * 2; if (d.r < 4) d.r = 0; }
+            else if (d.r < d.home) d.r = Math.min(d.home, d.r + dt * 5);
+          }
+          if (d.y - d.r * 2 > H || d.x < -80 || d.x > W + 80) {
+            if (drops.length > base) d.r = 0; else spawn(d, true);
+          }
         }
-        dropBuf.set([d.x, d.y, d.r], (i + 1) * 3);
+        if (d.r > 0 && d.y > -d.r * 3) put(d.x, d.y, d.r);
       });
-      dropBuf.fill(0, (drops.length + 1) * 3);
+      for (let i = drops.length - 1; i >= 0; i--) if (drops[i].r === 0) drops.splice(i, 1);
 
       const rv = Math.min((now - revealAt) / 1300, 1); // wall clock, so a slow frame rate never stalls it
       gl.uniform2f(u.res, W, H);
@@ -292,9 +335,24 @@ const WaterCanvas = () => {
       gl.uniform1f(u.scroll, window.scrollY);
       gl.uniform1f(u.reveal, 1 - Math.pow(1 - rv, 3));
       gl.uniform2f(u.mouse, cur.inside ? cur.x : W * 0.3, cur.inside ? cur.y : H * 0.4);
-      gl.uniform4fv(u.rip, rip);
+      let nr = 0;
+      for (let i = 0; i < MAX_RIP; i++) {
+        const age = time - rip[i * 4 + 2];
+        if (rip[i * 4 + 3] > 0 && age >= 0 && age < 4) ripLive.set(rip.subarray(i * 4, i * 4 + 4), nr++ * 4);
+      }
+      gl.uniform4fv(u.rip, ripLive);
+      gl.uniform1i(u.nRip, nr);
+      gl.uniform1i(u.nDrop, nd);
       gl.uniform3fv(u.drop, dropBuf);
       gl.drawArrays(gl.TRIANGLES, 0, 3);
+
+      // frames over 100ms are a throttled background tab, not a slow GPU
+      const ms = now - prev;
+      if (ms < 100) { sampled++; if (ms > 22) slow++; }
+      if (sampled >= 90) {
+        if (slow > 30 && quality > 0.5) { quality -= 0.2; resize(); }
+        sampled = slow = 0;
+      }
     };
 
     resize();

@@ -10,25 +10,33 @@ import bootsTrap from "../../assets/BootstrapTechs.svg";
 import tailWind from "../../assets/TailWindTechs.svg";
 import git from "../../assets/GitTechs.svg";
 import azure from "../../assets/AzureTechs.png";
+import next from "../../assets/Next.js.svg";
+import node from "../../assets/Node.js.svg";
+import postgres from "../../assets/PostgresSQL.svg";
 import { useContext, useRef } from "react";
 import { FormattedMessage, IntlProvider } from "react-intl";
 import { LanguageContext } from "../../Contexts/LanguageSelector/Context";
 import { motion } from "framer-motion";
 import { useRise } from "../../hooks/useRise";
 
-const TECHS = [
-  { level: 60, title: "JavaScript", img: javaScript },
-  { level: 60, title: "Angular", img: angular },
-  { level: 60, title: "React", img: react },
-  { level: 50, title: "TypeScript", img: typeScript },
-  { level: 60, title: "HTML", img: html },
-  { level: 70, title: "CSS", img: css },
-  { level: 60, title: "Sass", img: sass },
-  { level: 40, title: "Bootstrap", img: bootsTrap },
-  { level: 50, title: "Tailwind", img: tailWind },
-  { level: 60, title: "Git", img: git },
-  { level: 50, title: "Azure", img: azure },
-];
+const TECHS: { level: number; title: string; img: string; invert?: boolean }[] =
+  [
+    { level: 70, title: "JavaScript", img: javaScript },
+    { level: 70, title: "Angular", img: angular },
+    { level: 90, title: "React", img: react },
+    { level: 80, title: "TypeScript", img: typeScript },
+    // the Next.js mark is solid black, so it is inverted for the dark water
+    { level: 60, title: "Next.js", img: next, invert: true },
+    { level: 80, title: "HTML", img: html },
+    { level: 80, title: "CSS", img: css },
+    { level: 80, title: "Sass", img: sass },
+    { level: 40, title: "Bootstrap", img: bootsTrap },
+    { level: 70, title: "Tailwind", img: tailWind },
+    { level: 80, title: "Git", img: git },
+    { level: 50, title: "Node.js", img: node },
+    { level: 50, title: "PostgreSQL", img: postgres },
+    { level: 50, title: "Azure", img: azure },
+  ];
 
 const Knowledge = () => {
   const { state } = useContext(LanguageContext);
@@ -60,11 +68,17 @@ const Knowledge = () => {
               <li key={t.title} className="rise">
                 <button
                   className="bead"
-                  style={{ "--level": t.level, "--i": i } as React.CSSProperties}
+                  style={
+                    { "--level": t.level, "--i": i } as React.CSSProperties
+                  }
                   aria-label={`${t.title}, ${t.level}%`}
                 >
                   <span className="bead-drop">
-                    <img src={t.img} alt="" />
+                    <img
+                      src={t.img}
+                      alt=""
+                      className={t.invert ? "invert" : ""}
+                    />
                   </span>
                   <span className="bead-name">{t.title}</span>
                   <span className="bead-level">{t.level}%</span>

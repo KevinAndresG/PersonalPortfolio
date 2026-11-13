@@ -9,7 +9,6 @@ export const useRise = (scope: RefObject<HTMLElement | null>, ready: string) => 
       gsap.from(".rise", {
         y: 30,
         opacity: 0,
-        filter: "blur(8px)",
         duration: 0.9,
         stagger: { amount: 0.5 },
         ease: "power3.out",
