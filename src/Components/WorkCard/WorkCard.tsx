@@ -8,10 +8,31 @@ import Showly from "../../assets/Showly.webp";
 import GoldenNumbers from "../../assets/GoldenNumbers.webp";
 import TypeGenerator from "../../assets/TypeGenerator.webp";
 import ModerTask from "../../assets/ModernTask.webp";
+import VelvixStudio from "../../assets/VelvixStudio.webp";
+import BuddyAssistant from "../../assets/BuddyAssistant.webp";
+import SkillAssessment from "../../assets/SkillAssessment.webp";
 import { WorkInfo } from "../../models/LogicItems/Workinfo";
 import { useRef, useState } from "react";
 
 const works: WorkInfo[] = [
+  {
+    title: "Velvix Studio",
+    img: VelvixStudio,
+    url: "https://kevinandresg.github.io/velvix-studio-web",
+    techs: ["Electron", "React", "Vite", "FFmpeg"],
+  },
+  {
+    title: "Buddy Assistant",
+    img: BuddyAssistant,
+    url: "https://kevinandresg.github.io/BuddyWeb",
+    techs: ["Electron", "JavaScript", "Groq AI"],
+  },
+  {
+    title: "Skill Assessment",
+    img: SkillAssessment,
+    url: "https://skills-improvement.netlify.app",
+    techs: ["Next.js", "React", "TypeScript", "CodeMirror"],
+  },
   {
     title: "IsiGest POS",
     img: IsiGestPOS,
